@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'Tokped';
+  src: url('https://assets.tokopedia.net/asts/unify/fonts/OpenSauceOne-Regular.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.kontener {
+  width: 100%;
+  font-family: 'Tokped';
+}
+
+@media (min-width: 500px) {
+  .kontener {
+    max-width: 500px;
+  }
+}
+@media (min-width: 640px) {
+  .kontener {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+  .kontener {
+    max-width: 768px;
+  }
+}
+@media (min-width: 845px) {
+  .kontener {
+    max-width: 845px;
+  }
+}
+@media (min-width: 1024px) {
+  .kontener {
+    max-width: 900px;
+  }
+  .hero {
+    max-height: 100%;
+  }
+}
+@media (min-width: 1030px) {
+  .kontener {
+    max-width: 1070px;
+  }
+}
+@media (min-width: 1200px) {
+  .kontener {
+    max-width: 1200px;
+  }
+}
