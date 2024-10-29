@@ -26,7 +26,9 @@ onBeforeUnmount(() => {
     :class="{ hidden: !isVisible }"
   >
     <div class="kontener mx-auto">
-      <div class="flex justify-center items-center px-6 py-3 gap-2">
+      <div
+        class="flex justify-center items-center px-2 lg:px-6 py-1 xl:py-2 gap-2"
+      >
         <img
           src="/image/logo.png"
           alt="logo"
@@ -47,7 +49,7 @@ onBeforeUnmount(() => {
             </div>
             <input
               type="search"
-              class="block w-full p-3 ps-10 text-sm text-gray-900 border-gray-200 border outline-purple-600 focus:border-none rounded-lg bg-gray-50"
+              class="block w-full px-3 py-2 ps-10 text-sm text-gray-900 border-gray-200 border outline-purple-600 focus:border-none rounded-lg bg-gray-50"
               placeholder="Cari di waroeng sederhana"
               required
             />

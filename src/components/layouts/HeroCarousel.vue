@@ -36,7 +36,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="kontener pt-[70px] mx-auto">
+  <div class="kontener pt-[55px] xl:pt-[65px] mx-auto">
     <div class="hero-carousel h-[99px] xs:h-[170px] xl:h-[320px]">
       <!-- Carousel Items -->
       <div

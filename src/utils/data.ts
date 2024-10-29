@@ -1,3 +1,4 @@
+import { AnFilledInstagram, BsFacebook, CaPlayOutlineFilled, FaBandsSquareTwitter } from "@kalimahapps/vue-icons"
 import { ref } from "vue"
 
 interface Slide {
@@ -76,4 +77,46 @@ export const carouselData1 = [
     id: 12,
     poster_path: "https://via.placeholder.com/200x300?text=Product+12",
   },
+]
+
+export const links = [
+  "Tentang Warder",
+  "Hak Kekayaan Intelektual",
+  "Karir",
+  "Blog",
+  "Beli Lokal",
+  "Promo Hari Ini",
+  "Promo Guncang",
+  "Afiliate program",
+  "Marketing Solution"
+]
+
+export const beliLink = [
+  "Tagihan Dan Top Up",
+  "Warder COD",
+  "Bebas Ongkir"
+]
+
+export const jualLink = [
+  "Pusat Edukasi Seller",
+  "Daftar Official Store",
+]
+
+export const bantuan = [
+  "Warder Care",
+  "Syarat Dan Ketentuan",
+  "Kebijakan Privasi"
+]
+
+export const linkApps = [
+  "https://assets.tokopedia.net/asts/assets-unify/img/icon-download-android.svg",
+  "https://assets.tokopedia.net/asts/assets-unify/img/icon-download-ios.svg",
+  "https://assets.tokopedia.net/asts/assets-unify/img/icon-download-huawei.svg"
+]
+
+export const linkSocmed = [
+  { component: BsFacebook, sizeClass: 'w-7 h-7' },
+  { component: FaBandsSquareTwitter, sizeClass: 'w-7 h-7' },
+  { component: AnFilledInstagram, sizeClass: 'w-8 h-8' },
+  { component: CaPlayOutlineFilled, sizeClass: 'w-8 h-8' },
 ]

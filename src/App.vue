@@ -17,6 +17,7 @@ import { carouselData1 } from './utils/data'
   <MultipleCarousel :products="carouselData1" />
   <br />
   <FooterComp />
+  <RouterView />
 </template>
 
 <style scoped></style>
