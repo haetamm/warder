@@ -1,11 +1,7 @@
 <script setup lang="ts">
+import type { ProductCardProps } from '@/utils/interface'
 import { AnFilledStar } from '@kalimahapps/vue-icons'
 import { defineProps } from 'vue'
-
-interface ProductCardProps {
-  id: number
-  poster_path: string
-}
 
 defineProps<{
   product: ProductCardProps

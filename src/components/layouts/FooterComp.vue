@@ -56,10 +56,10 @@ import { beliLink, jualLink, linkApps, links, linkSocmed } from '@/utils/data'
           <img
             src="https://images.tokopedia.net/img/unify/il_footer_hd_v2.png"
             alt=""
-            class="w-[460px] h-[223px] hidden lg:inline-block"
+            class="w-[460px] h-[223px] hidden xl:inline-block"
           />
           <div
-            class="hidden lg:flex mt-2 justify-center items-center space-x-1"
+            class="flex mt-2 justify-center items-center space-x-0 xs:space-x-1"
           >
             <div v-for="(link, index) in linkApps" :key="index" class="">
               <img

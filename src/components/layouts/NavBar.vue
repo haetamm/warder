@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { AnOutlinedShoppingCart, BxSearch } from '@kalimahapps/vue-icons'
+import { urlPage } from '@/utils/constans'
 
 const isVisible = ref(true)
 let lastScrollTop = 0
@@ -27,13 +28,15 @@ onBeforeUnmount(() => {
   >
     <div class="kontener mx-auto">
       <div
-        class="flex justify-center items-center px-2 lg:px-6 py-1 xl:py-2 gap-2"
+        class="flex justify-center items-center px-2 lg:px-6 py-1 xl:py-1 gap-2"
       >
-        <img
-          src="/image/logo.png"
-          alt="logo"
-          class="hidden md:inline-block h-[35px] w-[160px]"
-        />
+        <RouterLink
+          :to="urlPage.HOME"
+          class="h-[35px] w-[170px] hidden md:inline-block"
+        >
+          <img src="/image/logo.png" alt="logo" class="h-[30px] w-[170px]" />
+        </RouterLink>
+
         <button
           class="hidden md:inline-block px-3 py-1 text-md hover:bg-slate-50 rounded-md"
         >
@@ -59,16 +62,15 @@ onBeforeUnmount(() => {
         <button class="px-3 py-3 hover:bg-slate-50 rounded-md items-center">
           <AnOutlinedShoppingCart class="h-6 w-6" />
         </button>
-
         <div class="border-l-2 border-purple-300 py-3 px-1"></div>
         <button
-          class="px-3 py-1 text-md hover:bg-purple-600 rounded-md border-2 border-purple-600 text-purple-600 hover:text-white"
+          class="px-3 py-0.5 text-md hover:bg-purple-600 rounded-md border-2 border-purple-600 text-purple-600 hover:text-white"
         >
           Login
         </button>
 
         <button
-          class="px-3 py-1 text-md bg-purple-600 rounded-md border-2 text-white border-purple-600"
+          class="px-3 py-0.5 text-md bg-purple-600 rounded-md border-2 text-white border-purple-600"
         >
           Register
         </button>

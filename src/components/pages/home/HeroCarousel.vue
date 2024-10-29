@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { slides } from '../../utils/data'
+import { slides } from '../../../utils/data'
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const currentSlide = ref<number>(0)
