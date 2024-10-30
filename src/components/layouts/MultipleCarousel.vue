@@ -3,6 +3,7 @@ import { ref, defineProps } from 'vue'
 import CardProduct from './CardProduct.vue'
 import { urlPage } from '@/utils/constans'
 import type { ProductCardProps } from '@/utils/interface'
+import { scrollTop } from '@/utils/helper'
 
 defineProps<{
   products: ProductCardProps[]
@@ -42,7 +43,10 @@ const scroll = (direction: 'left' | 'right') => {
           :key="index"
           class="relative group w-[165px] h-[286px] md:w-[185px] border-2 rounded-lg flex-shrink-0 overflow-hidden cursor-pointer"
         >
-          <RouterLink :to="`${urlPage.PRODUCT}/${product.id}`">
+          <RouterLink
+            :to="`${urlPage.PRODUCT}/${product.id}`"
+            :onclick="scrollTop"
+          >
             <CardProduct :product="product" />
           </RouterLink>
         </div>

@@ -3,7 +3,7 @@ import { beliLink, jualLink, linkApps, links, linkSocmed } from '@/utils/data'
 </script>
 
 <template>
-  <footer class="w-full border-t-2 py-4">
+  <footer class="w-full border-t-2 py-4 mt-1">
     <div class="kontener px-3 mx-auto mt-2">
       <div class="grid md:grid-cols-3 mx-auto">
         <div class="grid grid-cols-2">
@@ -72,7 +72,7 @@ import { beliLink, jualLink, linkApps, links, linkSocmed } from '@/utils/data'
           <div
             class="flex justify-center mt-5 mb-2 text-sm font-bold text-slate-400"
           >
-            © 2024 - PT. Warden Market
+            © 2024 - PT. Warder Market
           </div>
         </div>
       </div>

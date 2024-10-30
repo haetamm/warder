@@ -3,7 +3,7 @@ import { AkLocation, CaDeliveryTruck } from '@kalimahapps/vue-icons'
 </script>
 
 <template>
-  <div class="pb-6 mt-5 px-1">
+  <div class="pb-5 border-b-2 mt-4 px-1">
     <div class="mb-2">
       <p class="font-bold text-lg">Pengiriman</p>
       <div class="flex items-center space-x-1">

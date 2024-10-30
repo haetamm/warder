@@ -1,6 +1,6 @@
 <template>
-  <div class="pb-6 border-b-2">
-    <div class="flex mt-8 items-center font-bold space-x-4">
+  <div class="pb-5 mt-4 border-b-2">
+    <div class="flex items-center font-bold space-x-4">
       <div class="flex-shrink-0">
         <img
           src="https://images.tokopedia.net/img/cache/215-square/GAnVPX/2022/5/18/2d931baa-cb68-46f2-88a7-1e78d2adf1ba.jpg"
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div
-      class="inline-block xs:flex md:inline-block lg:flex pl-[4rem] mt-3 font-normal space-x-0 xs:space-x-2 md:space-x-0 lg:space-x-2"
+      class="inline-block xs:flex md:inline-block xl:flex pl-[4rem] mt-3 font-normal space-x-0 xs:space-x-2 md:space-x-0 xl:space-x-2"
     >
       <p>9 rata-rata ulasan |</p>
       <p>4 Jam pesanan diproses</p>
