@@ -1,6 +1,7 @@
 export const urlPage = {
   "HOME": "/",
   "PRODUCT": "/product",
-  "LOGIN": "/login",
+  "LOGIN": "/guest/login",
+  "REGISTER_USER": "/guest/register",
   "PROFILE": "/profile"
 }

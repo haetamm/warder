@@ -99,16 +99,18 @@ watch(
             <AnOutlinedShoppingCart class="h-6 w-6" />
           </button>
           <div class="border-l-2 border-purple-300 py-3 px-1"></div>
-          <button
+          <router-link
+            :to="urlPage.LOGIN"
             class="px-3 py-0.5 text-md hover:bg-purple-600 rounded-md border-2 border-purple-600 text-purple-600 hover:text-white"
           >
             Login
-          </button>
-          <button
+          </router-link>
+          <router-link
+            :to="urlPage.REGISTER_USER"
             class="px-3 py-0.5 text-md bg-purple-600 rounded-md border-2 text-white border-purple-600"
           >
             Register
-          </button>
+          </router-link>
         </div>
       </div>
     </div>
