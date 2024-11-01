@@ -4,8 +4,10 @@ export default {
   theme: {
     extend: {
       screens: {
+        xxs: '360px',
         xs: '500px',
         tab: '845px',
+        tabCs: '961px',
       },
     },
   },

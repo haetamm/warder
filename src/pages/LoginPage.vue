@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { urlPage } from '@/utils/constans'
-import { DeGoogleOriginal } from '@kalimahapps/vue-icons'
+import { backHandle } from '@/utils/helper'
+import { AkArrowLeft, DeGoogleOriginal } from '@kalimahapps/vue-icons'
+
+const back = backHandle()
 </script>
 
 <template>
-  <div class="relative mx-auto w-full md:w-[861px]">
+  <div class="relative mx-auto w-full md:w-[861px] select-none">
     <img
       src="https://images.tokopedia.net/img/oauth/background/login-bg.png"
       alt="bg-login"
@@ -12,16 +15,19 @@ import { DeGoogleOriginal } from '@kalimahapps/vue-icons'
     />
 
     <div
-      class="absolute top-0 left-0 w-full flex justify-center items-center mt-2 mb-3 md:mt-6"
+      class="absolute top-0 left-0 w-full flex justify-center items-center mt-4 mb-3 md:mt-6"
     >
       <div
         class="border-none md:border-2 w-[360px] lg:w-[370px] md:p-6 md:shadow-2xl rounded-lg bg-white"
       >
-        <div class="flex justify-between text-sm mb-8 items-center">
-          <div class="font-bold text-lg">Masuk ke Warden</div>
+        <div class="flex items-center justify-between mb-8 space-x-3 pr-1">
+          <div class="flex items-center space-x-3 md:space-x-0">
+            <AkArrowLeft @click="back" class="w-7 h-7 md:hidden" />
+            <div class="font-bold text-2xl md:text-xl">Masuk ke Warden</div>
+          </div>
           <router-link
             :to="urlPage.REGISTER_USER"
-            class="text-purple-600 cursor-pointer hover:underline"
+            class="text-purple-600 cursor-pointer hover:underline text-sm"
           >
             Daftar
           </router-link>
@@ -39,7 +45,9 @@ import { DeGoogleOriginal } from '@kalimahapps/vue-icons'
           class="w-full rounded-lg mb-6 py-2.5 px-3 border-2 outline-none"
         />
 
-        <button class="py-2.5 px-2 border-2 w-full rounded-lg mb-6 text-sm">
+        <button
+          class="py-2.5 px-2 border-2 w-full rounded-lg mb-6 text-sm font-bold md:font-normal"
+        >
           Login
         </button>
 
@@ -52,7 +60,9 @@ import { DeGoogleOriginal } from '@kalimahapps/vue-icons'
         <button class="py-2.5 px-2 border-2 w-full rounded-lg mb-6">
           <div class="flex justify-center items-center space-x-1">
             <DeGoogleOriginal class="w-5 h-5" />
-            <div class="text-slate-700 text-sm">Google</div>
+            <div class="text-slate-700 text-sm font-bold md:font-normal">
+              Google
+            </div>
           </div>
         </button>
       </div>

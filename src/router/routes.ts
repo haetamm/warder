@@ -2,9 +2,11 @@ import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import GuestLayout from "@/layouts/GuestLayout.vue";
 import HomePage from "@/pages/HomePage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
+import MerchantPage from "@/pages/MerchantPage.vue";
 import NotFoundPage from "@/pages/NotFoundPage.vue";
 import ProductDetailPage from "@/pages/ProductDetailPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
+import { urlPage } from "@/utils/constans";
 
 export const routes = [
   {
@@ -16,7 +18,12 @@ export const routes = [
         name: 'home',
         component: HomePage
       },
-      { path: '/product/:id',
+      {
+        path: '/:merchant',
+        name: 'merchant',
+        component: MerchantPage
+      },
+      { path: '/:merchant/:id',
         name: 'productDetail',
         component: ProductDetailPage
       }
@@ -28,7 +35,7 @@ export const routes = [
     children: [
       {
         path: '',
-        redirect: '/login'
+        redirect: urlPage.LOGIN
       },
       {
         path: 'login',

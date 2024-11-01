@@ -23,54 +23,56 @@ export const slides = ref<Slide[]>([
   },
 ])
 
-export const carouselData1 = [
+export const dataProduct = [
   {
     id: "1",
+    merchant_name: "jakaslot",
     poster_path: "https://via.placeholder.com/200x300?text=Product+1",
   },
   {
     id: "2",
+    merchant_name: "tangkalcau",
     poster_path: "https://via.placeholder.com/200x300?text=Product+2",
   },
   {
     id: "3",
+    merchant_name: "pancingmania",
     poster_path: "https://via.placeholder.com/200x300?text=Product+3",
   },
   {
     id: "4",
+    merchant_name: "gamingg",
     poster_path: "https://via.placeholder.com/200x300?text=Product+4",
   },
   {
     id: "5",
+    merchant_name: "jakaslot",
     poster_path: "https://via.placeholder.com/200x300?text=Product+5",
   },
   {
     id: "6",
+    merchant_name: "gamming",
     poster_path: "https://via.placeholder.com/200x300?text=Product+6",
   },
   {
     id: "7",
+    merchant_name: "ronggadal",
     poster_path: "https://via.placeholder.com/200x300?text=Product+7",
   },
   {
     id: "8",
+    merchant_name: "sokocay",
     poster_path: "https://via.placeholder.com/200x300?text=Product+8",
   },
   {
     id: "9",
+    merchant_name: "jakaslot",
     poster_path: "https://via.placeholder.com/200x300?text=Product+9",
   },
   {
     id: "10",
+    merchant_name: "jakaslot",
     poster_path: "https://via.placeholder.com/200x300?text=Product+10",
-  },
-  {
-    id: "11",
-    poster_path: "https://via.placeholder.com/200x300?text=Product+11",
-  },
-  {
-    id: "12",
-    poster_path: "https://via.placeholder.com/200x300?text=Product+12",
   },
 ]
 

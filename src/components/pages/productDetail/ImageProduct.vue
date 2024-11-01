@@ -20,7 +20,7 @@ import CartProduct from '@/components/layouts/CartProduct.vue'
 </template>
 
 <style scoped>
-@media (max-height: 500px) {
+@media (max-height: 750px) {
   .cart-product-container {
     display: none;
   }

@@ -3,7 +3,7 @@ import { beliLink, jualLink, linkApps, links, linkSocmed } from '@/utils/data'
 </script>
 
 <template>
-  <footer class="w-full border-t-2 py-4 mt-1">
+  <footer class="w-full border-t-2 py-4 mt-1 mb-10 md:mb-0">
     <div class="kontener px-3 mx-auto mt-2">
       <div class="grid md:grid-cols-3 mx-auto">
         <div class="grid grid-cols-2">
@@ -58,9 +58,7 @@ import { beliLink, jualLink, linkApps, links, linkSocmed } from '@/utils/data'
             alt=""
             class="w-[460px] h-[223px] hidden xl:inline-block"
           />
-          <div
-            class="flex mt-2 justify-center items-center space-x-0 xs:space-x-1"
-          >
+          <div class="flex mt-2 justify-center items-center space-x-1">
             <div v-for="(link, index) in linkApps" :key="index" class="">
               <img
                 :src="link"

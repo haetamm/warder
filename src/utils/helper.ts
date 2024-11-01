@@ -1,11 +1,10 @@
-import { useRouter } from "vue-router"
-
-const router = useRouter()
+import { useRouter } from 'vue-router';
 
 export const scrollTop = () => {
   window.scrollTo(0, 0)
 }
 
-export const backHandle = () => {
-  router.back()
+export function backHandle() {
+  const router = useRouter();
+  return () => router.back();
 }

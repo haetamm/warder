@@ -6,8 +6,9 @@ import {
   BxSearch,
 } from '@kalimahapps/vue-icons'
 import { urlPage } from '@/utils/constans'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useMediaQuery } from '@vueuse/core'
+import { backHandle } from '@/utils/helper'
 
 const isVisible = ref(true)
 let lastScrollTop = 0
@@ -15,11 +16,7 @@ const route = useRoute()
 const showLoginButton = ref(false)
 const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 
-const router = useRouter()
-
-const backHandle = () => {
-  router.back()
-}
+const back = backHandle()
 
 const handleScroll = () => {
   const currentScrollTop = window.scrollY
@@ -27,13 +24,15 @@ const handleScroll = () => {
   lastScrollTop = currentScrollTop
 }
 
-const isProductDetailPage = (path: string) => {
-  showLoginButton.value = path.startsWith(urlPage.PRODUCT)
+const isProductDetailPage = (route: ReturnType<typeof useRoute>) => {
+  const merchantName = route.params.merchant as string | undefined
+  showLoginButton.value =
+    !!merchantName && route.path.startsWith(`/${merchantName}`)
 }
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
-  isProductDetailPage(route.path)
+  isProductDetailPage(route)
 })
 
 onBeforeUnmount(() => {
@@ -42,8 +41,8 @@ onBeforeUnmount(() => {
 
 watch(
   () => route.path,
-  newPath => {
-    isProductDetailPage(newPath)
+  () => {
+    isProductDetailPage(route)
   },
 )
 </script>
@@ -55,7 +54,7 @@ watch(
   >
     <div class="kontener mx-auto">
       <div
-        class="flex justify-between lg:justify-center items-center px-2 lg:px-6 py-1 xl:py-1 gap-2"
+        class="flex justify-between lg:justify-center items-center px-2 lg:px-6 xl:py-1 gap-2"
       >
         <RouterLink
           :to="urlPage.HOME"
@@ -72,8 +71,8 @@ watch(
 
         <button
           v-if="showLoginButton"
-          @click="backHandle"
-          class="px-3 py-3 hover:bg-slate-50 rounded-md block lg:hidden items-center"
+          @click="back"
+          class="p-1.5 hover:bg-slate-50 rounded-md block lg:hidden items-center"
         >
           <AkArrowLeft class="h-6 w-6" />
         </button>
@@ -95,8 +94,8 @@ watch(
         </form>
 
         <div class="flex justify-center items-center space-x-1">
-          <button class="px-3 py-3 hover:bg-slate-50 rounded-md items-center">
-            <AnOutlinedShoppingCart class="h-6 w-6" />
+          <button class="p-3 rounded-md items-center">
+            <AnOutlinedShoppingCart class="h-6 w-6 hover:text-purple-600" />
           </button>
           <div class="border-l-2 border-purple-300 py-3 px-1"></div>
           <router-link
@@ -107,7 +106,7 @@ watch(
           </router-link>
           <router-link
             :to="urlPage.REGISTER_USER"
-            class="px-3 py-0.5 text-md bg-purple-600 rounded-md border-2 text-white border-purple-600"
+            class="hidden md:block px-3 py-0.5 text-md bg-purple-600 rounded-md border-2 text-white border-purple-600"
           >
             Register
           </router-link>

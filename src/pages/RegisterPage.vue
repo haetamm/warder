@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { urlPage } from '@/utils/constans'
-import { DeGoogleOriginal } from '@kalimahapps/vue-icons'
+import { backHandle } from '@/utils/helper'
+import { AkArrowLeft, DeGoogleOriginal } from '@kalimahapps/vue-icons'
+
+const back = backHandle()
 </script>
 
 <template>
   <div
-    class="flex justify-center items-center mt-2 mb-10 md:mt-8 md:gap-7 xl:gap-[80px]"
+    class="flex justify-center items-center mt-4 mb-10 md:mt-8 md:gap-7 xl:gap-[80px] select-none"
   >
     <div class="hidden md:block">
       <div class="flex justify-center item-center">
@@ -25,21 +28,29 @@ import { DeGoogleOriginal } from '@kalimahapps/vue-icons'
     <div
       class="border-none md:border-2 w-[360px] lg:w-[370px] md:p-6 md:shadow-xl"
     >
-      <div class="flex justify-center text-sm">
-        <div class="font-bold text-2xl">Daftar Sekarang</div>
+      <div
+        class="flex items-center justify-start md:justify-center space-x-3 md:space-x-0"
+      >
+        <AkArrowLeft @click="back" class="w-7 h-7 md:hidden" />
+        <div class="text-start md:text-center">
+          <div class="font-bold text-2xl">Daftar Sekarang</div>
+          <div class="text-center text-sm mt-1">
+            Sudah punya akun Warder?
+            <router-link
+              :to="urlPage.LOGIN"
+              class="text-purple-600 cursor-pointer"
+              >Login</router-link
+            >
+          </div>
+        </div>
       </div>
-      <div class="text-center text-sm mt-1">
-        Sudah punya akun Warder?
-        <router-link
-          :to="urlPage.LOGIN"
-          class="hover:text-purple-600 cursor-pointer ml-1"
-          >Login</router-link
-        >
-      </div>
-      <button class="py-2.5 px-2 border-2 w-full rounded-lg mt-7 mb-4">
+
+      <button class="py-2.5 px-2 border-2 w-full rounded-lg mt-5 mb-4">
         <div class="flex justify-center items-center space-x-1">
           <DeGoogleOriginal class="w-5 h-5" />
-          <div class="text-slate-700 text-sm">Google</div>
+          <div class="text-slate-700 text-sm font-bold md:font-normal">
+            Google
+          </div>
         </div>
       </button>
 
@@ -61,7 +72,9 @@ import { DeGoogleOriginal } from '@kalimahapps/vue-icons'
         class="w-full rounded-lg mb-4 py-2.5 px-3 border-2 outline-none"
       />
 
-      <button class="py-2.5 px-2 border-2 w-full rounded-lg mb-2 text-sm">
+      <button
+        class="py-2.5 px-2 border-2 w-full rounded-lg mb-2 text-sm font-bold md:font-normal"
+      >
         Daftar
       </button>
 

@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const merchantName = route.params.merchant
+</script>
+
 <template>
   <div class="pb-5 mt-4 border-b-2">
     <div class="flex items-center font-bold space-x-4">
@@ -9,7 +16,9 @@
         />
       </div>
       <div class="flex-1 text-md min-w-0 p-0">
-        <p>Sent Official Store</p>
+        <router-link class="hover:text-purple-600" :to="`/${merchantName}`">
+          {{ merchantName }}
+        </router-link>
         <p class="text-purple-600">Online</p>
       </div>
       <div
