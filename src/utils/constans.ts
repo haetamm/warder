@@ -3,5 +3,6 @@ export const urlPage = {
   "PRODUCT": "/product",
   "LOGIN": "/guest/login",
   "REGISTER_USER": "/guest/register",
-  "PROFILE": "/profile"
+  "PROFILE": "/profile",
+  "CART": "/cart"
 }

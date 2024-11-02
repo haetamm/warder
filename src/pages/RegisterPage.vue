@@ -2,8 +2,17 @@
 import { urlPage } from '@/utils/constans'
 import { backHandle } from '@/utils/helper'
 import { AkArrowLeft, DeGoogleOriginal } from '@kalimahapps/vue-icons'
+import { useHead } from '@vueuse/head'
 
 const back = backHandle()
+
+useHead({
+  title: 'Register | Warder',
+  meta: [
+    { name: 'description', content: 'Warder Register Page' },
+    { name: 'keywords', content: 'marketplace, register, warder' },
+  ],
+})
 </script>
 
 <template>
@@ -31,10 +40,14 @@ const back = backHandle()
       <div
         class="flex items-center justify-start md:justify-center space-x-3 md:space-x-0"
       >
-        <AkArrowLeft @click="back" class="w-7 h-7 md:hidden" />
         <div class="text-start md:text-center">
-          <div class="font-bold text-2xl">Daftar Sekarang</div>
-          <div class="text-center text-sm mt-1">
+          <div
+            class="flex items-center justify-start md:justify-center space-x-3 md:space-x-0"
+          >
+            <AkArrowLeft @click="back" class="w-7 h-7 md:hidden" />
+            <div class="font-bold text-2xl">Daftar Sekarang</div>
+          </div>
+          <div class="text-center text-sm mt-0 md:mt-1 ml-[40px] md:ml-0">
             Sudah punya akun Warder?
             <router-link
               :to="urlPage.LOGIN"
@@ -45,7 +58,7 @@ const back = backHandle()
         </div>
       </div>
 
-      <button class="py-2.5 px-2 border-2 w-full rounded-lg mt-5 mb-4">
+      <button class="py-2.5 px-2 border-2 w-full rounded-lg mt-3 md:mt-5 mb-4">
         <div class="flex justify-center items-center space-x-1">
           <DeGoogleOriginal class="w-5 h-5" />
           <div class="text-slate-700 text-sm font-bold md:font-normal">

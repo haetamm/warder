@@ -32,7 +32,7 @@ useHead({
       </div>
 
       <div
-        class="h-full md:h-[calc(100vh-70px)] md:sticky top-[70px] overflow-hidden hidden lg:flex justify-end"
+        class="h-full md:h-[calc(100vh-70px)] md:sticky top-[70px] overflow-hidden hidden lg:flex justify-center"
       >
         <div class="lg:w-[250px] xl:w-[268px]">
           <CartProduct />
@@ -43,12 +43,4 @@ useHead({
   <ButtonCheckout />
 </template>
 
-<style scoped>
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>
+<style scoped></style>

@@ -68,7 +68,7 @@ import { beliLink, jualLink, linkApps, links, linkSocmed } from '@/utils/data'
             </div>
           </div>
           <div
-            class="flex justify-center mt-5 mb-2 text-sm font-bold text-slate-400"
+            class="flex justify-center mt-5 mb-2 text-sm font-bold text-gray-500"
           >
             © 2024 - PT. Warder Market
           </div>

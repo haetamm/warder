@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { scrollTop } from '@/utils/helper'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -16,7 +17,11 @@ const merchantName = route.params.merchant
         />
       </div>
       <div class="flex-1 text-md min-w-0 p-0">
-        <router-link class="hover:text-purple-600" :to="`/${merchantName}`">
+        <router-link
+          class="hover:text-purple-600"
+          @click="scrollTop"
+          :to="`/${merchantName}`"
+        >
           {{ merchantName }}
         </router-link>
         <p class="text-purple-600">Online</p>

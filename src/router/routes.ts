@@ -1,5 +1,6 @@
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import GuestLayout from "@/layouts/GuestLayout.vue";
+import CartPage from "@/pages/CartPage.vue";
 import HomePage from "@/pages/HomePage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
 import MerchantPage from "@/pages/MerchantPage.vue";
@@ -26,6 +27,11 @@ export const routes = [
       { path: '/:merchant/:id',
         name: 'productDetail',
         component: ProductDetailPage
+      },
+      {
+        path: '/cart',
+        name: 'cart',
+        component: CartPage
       }
     ]
   },

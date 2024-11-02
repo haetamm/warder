@@ -2,8 +2,17 @@
 import { urlPage } from '@/utils/constans'
 import { backHandle } from '@/utils/helper'
 import { AkArrowLeft, DeGoogleOriginal } from '@kalimahapps/vue-icons'
+import { useHead } from '@vueuse/head'
 
 const back = backHandle()
+
+useHead({
+  title: 'Login | Warder',
+  meta: [
+    { name: 'description', content: 'Warder Login Page' },
+    { name: 'keywords', content: 'marketplace, login, warder' },
+  ],
+})
 </script>
 
 <template>

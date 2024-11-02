@@ -4,6 +4,10 @@ import {
   AnOutlinedShareAlt,
   BsShop,
 } from '@kalimahapps/vue-icons'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const merchantName = route.params.merchant
 </script>
 
 <template>
@@ -17,11 +21,13 @@ import {
         class="h-[92px] w-[92px] rounded-full"
       />
       <div class="w-full xl:w-1/2">
-        <div class="font-bold text-2xl">gamming</div>
+        <div class="font-bold text-2xl">{{ merchantName }}</div>
         <div class="text-sm">
           <span class="text-purple-600">Online</span> . Kab. Tangerang
         </div>
-        <div class="flex items-center space-x-1 mt-1.5 w-full">
+        <div
+          class="flex items-center space-x-1 mt-1.5 w-full md:w-1/2 tab:w-full"
+        >
           <button
             class="bg-purple-600 text-white text-center text-sm px-5 py-1.5 rounded-md w-full"
           >
@@ -36,13 +42,15 @@ import {
         </div>
       </div>
     </div>
-    <div class="flex items-center mt-5 md:mt-0 justify-between">
+    <div
+      class="grid grid-cols-3 md:flex items-center mt-5 md:mt-0 justify-between"
+    >
       <div class="text-center px-1 xs:px-5 md:px-1.5 xl:px-5">
         <div class="flex justify-center items-center space-x-1">
           <AnFilledStar class="text-purple-600 w-6 h-6" />
           <div class="font-semibold text-md xl:font-bold">5.0</div>
         </div>
-        <p class="font-normal text-sm">Rating</p>
+        <p class="font-normal text-sm">Rating & Ulasan</p>
       </div>
       <div
         class="text-center px-1 xs:px-5 md:px-1.5 xl:px-5 border-r-2 border-l-2"
