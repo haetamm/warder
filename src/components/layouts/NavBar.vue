@@ -34,9 +34,16 @@ const isProductDetailPage = (route: ReturnType<typeof useRoute>) => {
     route.path === urlPage.CART
 }
 
-const isMerchantPage = (route: ReturnType<typeof useRoute>) => {
-  const merchantName = route.params.merchant as string | undefined
-  return route.path === `/${merchantName}`
+const isPageType = (
+  route: ReturnType<typeof useRoute>,
+  pageType: 'merchant' | 'cart',
+) => {
+  const paths = {
+    merchant: `/${route.params.merchant as string | undefined}`,
+    cart: urlPage.CART,
+  }
+
+  return route.path === paths[pageType]
 }
 
 onMounted(() => {
@@ -63,7 +70,7 @@ watch(
   >
     <div class="kontener mx-auto">
       <div
-        class="flex justify-between lg:justify-center items-center px-2 lg:px-6 xl:py-1 gap-2"
+        class="flex justify-between lg:justify-center items-center px-2 lg:px-6 xl:py-1"
       >
         <RouterLink
           :to="urlPage.HOME"
@@ -78,17 +85,26 @@ watch(
           Kategori
         </button>
 
-        <button
-          v-if="showLoginButton || isMerchantPage(route)"
-          @click="back"
-          class="p-1.5 hover:bg-slate-50 rounded-md block lg:hidden items-center"
-        >
-          <AkArrowLeft class="h-6 w-6" />
-        </button>
+        <div class="flex items-center">
+          <button
+            v-if="showLoginButton || isPageType(route, 'merchant')"
+            @click="back"
+            class="pr-1.5 py-1.5 hover:text-purple-600 rounded-md block lg:hidden items-center"
+          >
+            <AkArrowLeft class="h-6 w-6" />
+          </button>
+
+          <div
+            v-if="isPageType(route, 'cart')"
+            class="inline-block lg:hidden font-bold"
+          >
+            Keranjang
+          </div>
+        </div>
 
         <form
           v-if="!showLoginButton || isLargeScreen"
-          class="w-full mx-auto"
+          class="w-full mx-auto mr-3"
           @mouseover="showCartDropdown = false"
         >
           <div class="relative">
@@ -100,7 +116,7 @@ watch(
             <input
               type="search"
               class="block w-full px-3 py-2 ps-10 text-sm text-gray-900 border-gray-200 border outline-purple-600 focus:border-none rounded-lg bg-gray-50"
-              :placeholder="`Cari di ${isMerchantPage(route) ? `toko ${route.params.merchant}` : 'waroeng sederhana'}`"
+              :placeholder="`Cari di ${isPageType(route, 'merchant') ? `toko ${route.params.merchant}` : 'waroeng sederhana'}`"
               required
             />
           </div>
@@ -149,6 +165,7 @@ watch(
           >
             Login
           </router-link>
+
           <router-link
             :to="urlPage.REGISTER_USER"
             @click="scrollTop"

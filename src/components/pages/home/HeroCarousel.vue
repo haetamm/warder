@@ -61,7 +61,9 @@ onUnmounted(() => {
       </button>
 
       <!-- Dots Navigation -->
-      <div class="dots flex justify-start ml-2">
+      <div
+        class="dots flex justify-end md:justify-start mr-3 md:mr-0 ml-0 md:ml-3"
+      >
         <span
           v-for="(_slide, index) in slides"
           :key="index"

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import CartEmpty from '@/components/layouts/CartEmpty.vue'
+import ButtonBuy from '@/components/pages/cart/ButtonBuy.vue'
 import CartCheckout from '@/components/pages/cart/CartCheckout.vue'
+import ListProductCartPage from '@/components/pages/cart/ListProductCartPage.vue'
 import { useHead } from '@vueuse/head'
 
 useHead({
@@ -13,39 +14,29 @@ useHead({
 </script>
 
 <template>
-  <div class="flex-grow pt-[45px] xl:pt-[65px] bg-cartpage">
-    <div class="kontener mx-auto mb-4">
-      <div class="grid grid-cols-1 md:grid-cols-[60%_40%]">
+  <div class="flex-grow pt-[40px] xl:pt-[65px] bg-cartpage">
+    <div class="kontener mx-auto mb-1">
+      <div
+        class="grid grid-cols-1 md:grid-cols-[60%_40%] lg:grid-cols-[70%_30%]"
+      >
         <div
-          class="overflow-y-scroll no-scrollbar h-full md:h-[calc(100vh-85px)]"
+          class="overflow-y-scroll no-scrollbar h-full md:h-[calc(100vh-58px)]"
         >
-          <div class="font-bold text-xl mb-0 md:mb-2 mt-3 px-4">Keranjang</div>
-          <div class="px-0 md:px-4 pb-2 flex justify-center">
-            <div
-              class="bg-white w-full py-0 md:py-4 md:rounded-xl rounded-none flex justify-center items-center min-h-[200px]"
-            >
-              <CartEmpty />
-            </div>
-          </div>
+          <ListProductCartPage />
         </div>
         <div
-          class="h-full md:h-[calc(100vh-85px)] md:sticky top-[85px] overflow-hidden"
+          class="h-full md:h-[calc(100vh-58px)] md:sticky xl:top-[85px] overflow-hidden hidden md:block"
         >
           <CartCheckout />
         </div>
       </div>
     </div>
   </div>
+  <ButtonBuy />
 </template>
 
 <style scoped>
 .bg-cartpage {
-  background-color: white;
-}
-
-@media (min-width: 768px) {
-  .bg-cartpage {
-    background-color: rgb(var(--NN50, 240, 243, 247));
-  }
+  background-color: rgb(var(--NN50, 240, 243, 247));
 }
 </style>

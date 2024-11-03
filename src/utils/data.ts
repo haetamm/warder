@@ -1,6 +1,6 @@
 import { AnFilledInstagram, BsFacebook, CaPlayOutlineFilled, FaBandsSquareTwitter } from "@kalimahapps/vue-icons"
 import { ref } from "vue"
-import type { Slide } from "./interface"
+import type { Product, Slide } from "./interface"
 
 export const slides = ref<Slide[]>([
   {
@@ -166,4 +166,42 @@ export const linkSocmed = [
   { component: FaBandsSquareTwitter, sizeClass: 'w-7 h-7' },
   { component: AnFilledInstagram, sizeClass: 'w-8 h-8' },
   { component: CaPlayOutlineFilled, sizeClass: 'w-8 h-8' },
+]
+
+export const products: Product[] = [
+  {
+    id: 1,
+    name: 'Headset Earphone Samsung M23 M31 M33 Original 100% Super Bass',
+    color: 'Putih',
+    price: 'Rp35.500',
+    image: 'https://images.tokopedia.net/img/cache/100-square/VqbcmM/2023/5/29/93db4e43-41a2-4d4f-bbf4-b45dbf34cfce.jpg',
+  },
+  {
+    id: 2,
+    name: 'Earphone JBL T110 In-Ear',
+    color: 'Hitam',
+    price: 'Rp150.000',
+    image: 'https://via.placeholder.com/80x80?text=Product+1',
+  },
+  {
+    id: 3,
+    name: 'Sony WH-CH510 Wireless Headphone',
+    color: 'Biru',
+    price: 'Rp550.000',
+    image: 'https://via.placeholder.com/80x80?text=Product+2',
+  },
+  {
+    id: 4,
+    name: 'Xiaomi Redmi AirDots',
+    color: 'Merah',
+    price: 'Rp120.000',
+    image: 'https://via.placeholder.com/80x80?text=Product+3',
+  },
+  {
+    id: 5,
+    name: 'Samsung Galaxy Buds Live',
+    color: 'Emerald',
+    price: 'Rp1.200.000',
+    image: 'https://via.placeholder.com/80x80?text=Product+4',
+  },
 ]

@@ -14,7 +14,7 @@ useHead({
 </script>
 
 <template>
-  <div class="flex-grow pt-[45px] xl:pt-[55px]">
+  <div class="flex-grow pt-[41px] xl:pt-[55px]">
     <HeroCarousel />
     <br />
     <MultipleCarousel />

@@ -9,3 +9,11 @@ export interface Slide {
   title: string
   description: string
 }
+
+export interface Product {
+  id: number;
+  name: string;
+  color: string;
+  price: string;
+  image: string;
+}
