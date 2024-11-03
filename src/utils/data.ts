@@ -205,3 +205,9 @@ export const products: Product[] = [
     image: 'https://via.placeholder.com/80x80?text=Product+4',
   },
 ]
+
+export const listCost = [
+  "Total Harga",
+  "Total Ongkos Kirim",
+  "Biaya Jasa Aplikasi",
+]

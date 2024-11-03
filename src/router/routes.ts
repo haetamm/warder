@@ -7,6 +7,7 @@ import MerchantPage from "@/pages/MerchantPage.vue";
 import NotFoundPage from "@/pages/NotFoundPage.vue";
 import ProductDetailPage from "@/pages/ProductDetailPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
+import ShipmentPage from "@/pages/ShipmentPage.vue";
 import { urlPage } from "@/utils/constans";
 
 export const routes = [
@@ -31,7 +32,12 @@ export const routes = [
       {
         path: '/cart',
         name: 'cart',
-        component: CartPage
+        component: CartPage,
+      },
+      {
+        path: '/cart/shipment',
+        name: 'shipment',
+        component: ShipmentPage
       }
     ]
   },

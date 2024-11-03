@@ -8,7 +8,7 @@ import {
 import { urlPage } from '@/utils/constans'
 import { useRoute } from 'vue-router'
 import { useMediaQuery } from '@vueuse/core'
-import { backHandle, scrollTop } from '@/utils/helper'
+import { backHandle, isPageType, scrollTop } from '@/utils/helper'
 import CartEmpty from './CartEmpty.vue'
 
 const isVisible = ref(true)
@@ -34,18 +34,6 @@ const isProductDetailPage = (route: ReturnType<typeof useRoute>) => {
     route.path === urlPage.CART
 }
 
-const isPageType = (
-  route: ReturnType<typeof useRoute>,
-  pageType: 'merchant' | 'cart',
-) => {
-  const paths = {
-    merchant: `/${route.params.merchant as string | undefined}`,
-    cart: urlPage.CART,
-  }
-
-  return route.path === paths[pageType]
-}
-
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
   isProductDetailPage(route)
@@ -65,6 +53,7 @@ watch(
 
 <template>
   <div
+    v-if="!isPageType(route, 'shipment')"
     class="w-full border-b-2 fixed bg-white z-50 py-1"
     :class="{ hidden: !isVisible }"
   >

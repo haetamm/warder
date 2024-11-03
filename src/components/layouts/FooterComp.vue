@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { beliLink, jualLink, linkApps, links, linkSocmed } from '@/utils/data'
+import { isPageType } from '@/utils/helper'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 </script>
 
 <template>
-  <footer class="w-full border-t-2 py-4 mt-1 mb-10 md:mb-0">
+  <footer
+    v-if="!isPageType(route, 'shipment')"
+    class="w-full border-t-2 py-4 mt-1 mb-10 md:mb-0"
+  >
     <div class="kontener px-3 mx-auto mt-2">
       <div class="grid md:grid-cols-3 mx-auto">
         <div class="grid grid-cols-2">
