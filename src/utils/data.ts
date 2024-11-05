@@ -211,3 +211,75 @@ export const listCost = [
   "Total Ongkos Kirim",
   "Biaya Jasa Aplikasi",
 ]
+
+export const dataIdentity = [
+  {
+    label: "Name",
+    value: "Tatang Haetami",
+    type: "personal"
+  },
+  {
+    label: "Tanggal Lahir",
+    value: "11 September 2010",
+    type: "personal"
+  },
+  {
+    label: "Jenis Kelamin",
+    value: "Pria",
+    type: "personal"
+  },
+  {
+    label: "Email",
+    value: 'tami@ganteng.com',
+    type: "contact"
+  },
+  {
+    label: "Nomor HP",
+    value: '082260283276',
+    type: "contact"
+  }
+]
+
+export const dataAddress = [
+  {
+    id: 1,
+    label: 'Rumah',
+    name: 'Tatang Haetami',
+    phone: '082260283276',
+    address:
+      'Jln. Veteran, RT/RW : 02/03, Gambir, Kecamatan Gambir Jakarta pusat, DKI Jakarta',
+    selected: true,
+  },
+  {
+    id: 2,
+    label: 'Kantor',
+    name: 'Tatang Haetami',
+    phone: '082260283277',
+    address: 'Jl. Sudirman, Kav 50, Jakarta Selatan, DKI Jakarta',
+    selected: false,
+  },
+  {
+    id: 3,
+    label: 'Apartemen',
+    name: 'Tatang Haetami',
+    phone: '082260283278',
+    address: 'Jl. Casablanca, Kuningan, Jakarta Selatan, DKI Jakarta',
+    selected: false,
+  },
+  {
+    id: 4,
+    label: 'Rumah Kedua',
+    name: 'Tatang Haetami',
+    phone: '082260283279',
+    address: 'Jl. Palmerah, Kebayoran Lama, Jakarta Barat, DKI Jakarta',
+    selected: false,
+  },
+  {
+    id: 5,
+    label: 'Rumah Ketiga',
+    name: 'Tatang Haetami',
+    phone: '082260283280',
+    address: 'Jl. Thamrin, Jakarta Pusat, DKI Jakarta',
+    selected: false,
+  },
+]

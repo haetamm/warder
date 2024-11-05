@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import CartCheckout from '@/components/pages/cart/CartCheckout.vue'
 import ListOrder from '@/components/pages/shipment/ListOrder.vue'
+import { useScrollVisibility } from '@/compsables/useScrollVisibility'
 import { urlPage } from '@/utils/constans'
+import { scrollTop } from '@/utils/helper'
 import { useHead } from '@vueuse/head'
+
+const { isVisible } = useScrollVisibility()
 
 useHead({
   title: 'Checkout | Warder',
@@ -15,9 +19,13 @@ useHead({
 
 <template>
   <div class="flex-grow">
-    <div class="fixed mx-auto px-2 xl:px-0 bg-white z-10 w-full shadow-md">
-      <div class="kontener mx-auto">
-        <router-link :to="urlPage.HOME" class="h-[60px] items-center flex">
+    <div class="fixed mx-auto px-2 xl:px-0 z-10 bg-white w-full shadow-md">
+      <div :class="{ hidden: !isVisible }" class="kontener mx-auto">
+        <router-link
+          :to="urlPage.HOME"
+          @click="scrollTop"
+          class="h-[60px] items-center flex"
+        >
           <img src="/image/logo.png" alt="logo" class="h-[40px] w-[150px]" />
         </router-link>
       </div>

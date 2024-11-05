@@ -8,6 +8,9 @@ import NotFoundPage from "@/pages/NotFoundPage.vue";
 import ProductDetailPage from "@/pages/ProductDetailPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
 import ShipmentPage from "@/pages/ShipmentPage.vue";
+import UserAddressPage from "@/pages/UserAddressPage.vue";
+import UserPage from "@/pages/UserPage.vue";
+import UserSettingsPage from "@/pages/UserSettingsPage.vue";
 import { urlPage } from "@/utils/constans";
 
 export const routes = [
@@ -30,15 +33,36 @@ export const routes = [
         component: ProductDetailPage
       },
       {
-        path: '/cart',
+        path: urlPage.CART,
         name: 'cart',
         component: CartPage,
       },
       {
-        path: '/cart/shipment',
+        path: urlPage.SHIPMENT,
         name: 'shipment',
         component: ShipmentPage
-      }
+      },
+      {
+        path: '/user',
+        component: UserPage,
+        children: [
+            {
+                path: '',
+                redirect: urlPage.USER_SETTING
+            },
+            {
+                path: 'settings',
+                name: 'user',
+                component: UserSettingsPage, // Reusing UserPage here
+            },
+            {
+              path: urlPage.USER_ADDRESS,
+              name: 'userSetting',
+              component: UserAddressPage
+          }
+        ]
+    }
+
     ]
   },
   {

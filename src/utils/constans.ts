@@ -5,5 +5,7 @@ export const urlPage = {
   "REGISTER_USER": "/guest/register",
   "PROFILE": "/profile",
   "CART": "/cart",
-  "SHIPMENT": "/cart/shipment"
+  "SHIPMENT": "/cart/shipment",
+  "USER_SETTING": "/user/settings",
+  "USER_ADDRESS": "/user/settings/address"
 }
