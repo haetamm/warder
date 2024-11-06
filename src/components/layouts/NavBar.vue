@@ -22,7 +22,8 @@ const isProductDetailPage = (route: ReturnType<typeof useRoute>) => {
     (!!merchantName && route.path !== `/${merchantName}`) ||
     route.path === urlPage.CART ||
     route.path === urlPage.USER_SETTING ||
-    route.path === urlPage.USER_ADDRESS
+    route.path === urlPage.USER_ADDRESS ||
+    route.path === urlPage.SHOP
 }
 
 onMounted(() => {

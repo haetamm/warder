@@ -8,6 +8,7 @@ import NotFoundPage from "@/pages/NotFoundPage.vue";
 import ProductDetailPage from "@/pages/ProductDetailPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
 import ShipmentPage from "@/pages/ShipmentPage.vue";
+import ShopPage from "@/pages/ShopPage.vue";
 import UserAddressPage from "@/pages/UserAddressPage.vue";
 import UserPage from "@/pages/UserPage.vue";
 import UserSettingsPage from "@/pages/UserSettingsPage.vue";
@@ -53,7 +54,7 @@ export const routes = [
             {
                 path: 'settings',
                 name: 'user',
-                component: UserSettingsPage, // Reusing UserPage here
+                component: UserSettingsPage,
             },
             {
               path: urlPage.USER_ADDRESS,
@@ -61,7 +62,12 @@ export const routes = [
               component: UserAddressPage
           }
         ]
-    }
+      },
+      {
+        path: urlPage.SHOP,
+        name: 'shopPage',
+        component: ShopPage
+      }
 
     ]
   },

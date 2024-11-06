@@ -4,11 +4,12 @@ import { ChTickDouble } from '@kalimahapps/vue-icons'
 </script>
 
 <template>
-  <div class="mt-2 md:max-h-[372px] overflow-scroll no-scrollbar">
+  <div class="mt-2 md:max-h-[420px] overflow-scroll no-scrollbar">
     <div
       v-for="address in dataAddress"
       :key="address.id"
-      class="px-3 py-4 font-bold text-sm border-2 rounded-lg mt-5 border-purple-600 bg-purple-50"
+      class="px-3 py-4 font-bold text-sm rounded-lg mt-5 bg-purple-50"
+      :class="address.selected ? 'border-purple-600 border-2' : ''"
     >
       <div class="flex justify-between items-center">
         <div class="font-normal">

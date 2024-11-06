@@ -7,5 +7,6 @@ export const urlPage = {
   "CART": "/cart",
   "SHIPMENT": "/cart/shipment",
   "USER_SETTING": "/user/settings",
-  "USER_ADDRESS": "/user/settings/address"
+  "USER_ADDRESS": "/user/settings/address",
+  "SHOP": "/myshop"
 }
