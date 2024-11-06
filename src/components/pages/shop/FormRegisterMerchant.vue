@@ -50,7 +50,7 @@ import { FloatLabel, InputText } from 'primevue'
             <div class="pt-[8px] pb-[24px]">
               <div class="mt-2 mb-6">
                 <FloatLabel variant="on">
-                  <InputText id="on_label" v-model="value3" />
+                  <InputText id="on_label" />
                   <label for="on_label">Nama Toko</label>
                 </FloatLabel>
                 <div class="flex justify-between text-gray-500 text-xs mt-1">
@@ -65,7 +65,7 @@ import { FloatLabel, InputText } from 'primevue'
                 <div class="flex items-center space-x-2 w-full">
                   <div class="text-gray-500 text-xl">warderrr.com/</div>
                   <FloatLabel variant="on" class="w-full">
-                    <InputText id="domain_label" v-model="value3" />
+                    <InputText id="domain_label" />
                     <label for="domain_label">Nama Domain</label>
                   </FloatLabel>
                 </div>
