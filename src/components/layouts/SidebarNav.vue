@@ -18,8 +18,8 @@ defineProps({
 
 <template>
   <div class="w-[100vw] h-[100vh] bg-cartpage">
-    <div class="w-full fixed">
-      <div class="grid grid-cols-[80%_20%] h-14 items-center px-3 bg-white">
+    <div class="w-screen fixed mx-auto">
+      <div class="flex justify-between h-14 items-center px-3 bg-white">
         <div class="font-bold text-lg">Menu Utama</div>
         <ClCloseMd @click="closeSidebar" class="h-7 w-7" />
       </div>

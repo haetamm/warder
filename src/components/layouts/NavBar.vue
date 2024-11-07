@@ -129,7 +129,7 @@ const closeSidebar = () => {
 
   <Dialog
     v-model:visible="visible"
-    :position="position"
+    position="bottom"
     :modal="true"
     :showHeader="false"
     :draggable="false"
