@@ -23,7 +23,7 @@ const closeDropdown = () => {
         class="flex justify-center rounded-md items-center"
       >
         <AnOutlinedShoppingCart
-          class="h-6 w-6 hover:text-purple-600"
+          class="h-8 w-8 hover:text-purple-600"
           @mouseover="isWebScreen ? (showCartDropdown = true) : false"
         />
       </router-link>

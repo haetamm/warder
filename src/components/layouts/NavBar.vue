@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
-import { AkArrowLeft } from '@kalimahapps/vue-icons'
+import { AkArrowLeft, AkTextAlignJustified } from '@kalimahapps/vue-icons'
 import { urlPage } from '@/utils/constans'
 import { useRoute } from 'vue-router'
 import { useMediaQuery } from '@vueuse/core'
@@ -8,6 +8,8 @@ import { backHandle, isPageType, scrollTop } from '@/utils/helper'
 import ButtonCart from './ButtonCart.vue'
 import { useScrollVisibility } from '@/compsables/useScrollVisibility'
 import SearchBar from './SearchBar.vue'
+import { Dialog } from 'primevue'
+import SidebarNav from './SidebarNav.vue'
 
 const route = useRoute()
 const showButton = ref(false)
@@ -36,6 +38,18 @@ watch(
     isProductDetailPage(route)
   },
 )
+
+const position = ref('center')
+const visible = ref(false)
+
+const openPosition = (pos: string) => {
+  position.value = pos
+  visible.value = true
+}
+
+const closeSidebar = () => {
+  visible.value = false
+}
 </script>
 
 <template>
@@ -67,7 +81,7 @@ watch(
             @click="back"
             class="pr-1.5 py-1.5 hover:text-purple-600 rounded-md block lg:hidden items-center"
           >
-            <AkArrowLeft class="h-6 w-6" />
+            <AkArrowLeft class="h-8 w-8" />
           </button>
 
           <div
@@ -87,10 +101,16 @@ watch(
 
           <div class="border-l-2 border-purple-300 py-3"></div>
 
+          <AkTextAlignJustified
+            class="w-8 h-8 inline-block md:hidden"
+            @click="openPosition('bottom')"
+            severity="secondary"
+          />
+
           <router-link
             :to="urlPage.LOGIN"
             @click="scrollTop"
-            class="px-3 py-0.5 text-md hover:bg-purple-600 rounded-md border-2 border-purple-600 text-purple-600 hover:text-white"
+            class="hidden md:inline-block px-3 py-0.5 text-md hover:bg-purple-600 rounded-md border-2 border-purple-600 text-purple-600 hover:text-white"
           >
             Login
           </router-link>
@@ -106,6 +126,27 @@ watch(
       </div>
     </div>
   </div>
+
+  <Dialog
+    v-model:visible="visible"
+    :position="position"
+    :modal="true"
+    :showHeader="false"
+    :draggable="false"
+    :style="{
+      height: '100vh',
+      margin: '0px',
+      padding: '0px',
+      maxHeight: '100%',
+      backgroundColor: 'rgb(var(--NN50, 240, 243, 247))',
+    }"
+  >
+    <SidebarNav :close-sidebar="closeSidebar" />
+  </Dialog>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg-cartpage {
+  background-color: rgb(var(--NN50, 240, 243, 247));
+}
+</style>

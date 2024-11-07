@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { beliLink, jualLink, linkApps, links, linkSocmed } from '@/utils/data'
 import { isPageType } from '@/utils/helper'
+import { useMediaQuery } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 </script>
 
 <template>
   <footer
-    v-if="!isPageType(route, 'shipment')"
+    v-if="
+      !isPageType(route, 'shipment') &&
+      (!isPageType(route, 'shop') || isLargeScreen)
+    "
     class="w-full border-t-2 py-4 mt-1 mb-10 md:mb-0"
   >
     <div class="kontener px-3 mx-auto mt-2">

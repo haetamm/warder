@@ -32,32 +32,34 @@ watch(
 )
 </script>
 <template>
-  <div class="flex-grow mt-[60px] px-2 mb-3">
+  <div class="flex-grow mt-[40px] md:mt-[60px] px-2 mb-3">
     <div class="kontener mx-auto h-full">
-      <Tabs :value="selectedTab">
-        <TabList class="w-full py-0">
-          <div class="grid grid-cols-2 xs:inline-block w-full">
-            <Tab v-for="tab in items" :key="tab.label" :value="tab.route">
-              <router-link
-                v-if="tab.route"
-                v-slot="{ href, navigate }"
-                :to="tab.route"
-                custom
-              >
-                <a
-                  :href="href"
-                  @click="navigate"
-                  class="flex items-center justify-center xs:justify-normal text-inherit py-2.5 px-6"
+      <div class="hidden md:block">
+        <Tabs :value="selectedTab">
+          <TabList class="w-full py-0">
+            <div class="grid grid-cols-2 xs:inline-block w-full">
+              <Tab v-for="tab in items" :key="tab.label" :value="tab.route">
+                <router-link
+                  v-if="tab.route"
+                  v-slot="{ href, navigate }"
+                  :to="tab.route"
+                  custom
                 >
-                  <span class="text-sm md:text-md font-semibold">{{
-                    tab.label
-                  }}</span>
-                </a>
-              </router-link>
-            </Tab>
-          </div>
-        </TabList>
-      </Tabs>
+                  <a
+                    :href="href"
+                    @click="navigate"
+                    class="flex items-center justify-center xs:justify-normal text-inherit py-2.5 px-6"
+                  >
+                    <span class="text-sm md:text-md font-semibold">{{
+                      tab.label
+                    }}</span>
+                  </a>
+                </router-link>
+              </Tab>
+            </div>
+          </TabList>
+        </Tabs>
+      </div>
       <RouterView />
     </div>
   </div>

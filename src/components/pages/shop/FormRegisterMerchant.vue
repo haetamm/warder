@@ -26,7 +26,7 @@ import { FloatLabel, InputText } from 'primevue'
           >
             <ChTick class="w-full" />
           </div>
-          <div class="ml-5">
+          <div class="ml-0 lg:ml-5 w-full lg:w-[calc(100%-55px)]">
             <div class="font-bold text-lg">Masukan No. Hp-mu</div>
             <div class="pt-[8px] pb-[24px] text-lg">+62 822 60283287</div>
           </div>
@@ -43,7 +43,7 @@ import { FloatLabel, InputText } from 'primevue'
           >
             2
           </div>
-          <div class="ml-0 lg:ml-5 w-full lg:w-[calc(100%-20px)]">
+          <div class="ml-0 lg:ml-5 w-full lg:w-[calc(100%-55px)]">
             <div class="hidden lg:block font-bold text-lg">
               Masukan Nama Toko dan Domain
             </div>
@@ -61,7 +61,7 @@ import { FloatLabel, InputText } from 'primevue'
                 </div>
               </div>
 
-              <div class="my-3">
+              <div class="mt-2 mb-6">
                 <div class="flex items-center space-x-2 w-full">
                   <div class="text-gray-500 text-xl">warderrr.com/</div>
                   <FloatLabel variant="on" class="w-full">
@@ -89,7 +89,7 @@ import { FloatLabel, InputText } from 'primevue'
           >
             3
           </div>
-          <div class="ml-5">
+          <div class="ml-0 lg:ml-5 w-full lg:w-[calc(100%-55px)]">
             <div class="font-bold text-lg">Masukkan Alamat Tokomu</div>
           </div>
         </div>
@@ -100,5 +100,6 @@ import { FloatLabel, InputText } from 'primevue'
 <style scoped>
 .p-inputtext {
   width: 100%;
+  height: 48px;
 }
 </style>
