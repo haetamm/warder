@@ -15,7 +15,9 @@ useHead({
 </script>
 
 <template>
-  <div class="flex-grow mt-[47px] xs:mt-[53px] lg:mt-[70px]">
+  <div
+    class="flex-grow mt-[52px] xs:mt-[55px] md:pt-[10px] lg:mt-[45px] xl:mt-[55px]"
+  >
     <div
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[30%_45%_25%] kontener mx-auto gap-2"
     >

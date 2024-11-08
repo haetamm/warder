@@ -4,7 +4,9 @@ import { ChTickDouble } from '@kalimahapps/vue-icons'
 </script>
 
 <template>
-  <div class="mt-2 md:max-h-[420px] overflow-scroll no-scrollbar">
+  <div
+    class="mt-2 md:max-h-[380px] xl:max-h-[450px] overflow-scroll no-scrollbar"
+  >
     <div
       v-for="address in dataAddress"
       :key="address.id"
@@ -12,7 +14,7 @@ import { ChTickDouble } from '@kalimahapps/vue-icons'
       :class="address.selected ? 'border-purple-600 border-2' : ''"
     >
       <div class="flex justify-between items-center">
-        <div class="font-normal">
+        <div class="font-normal w-[70%] xs:w-full">
           <div class="flex items-center space-x-1">
             <p class="my-0.5 font-bold">{{ address.label }}</p>
             <small
@@ -23,10 +25,10 @@ import { ChTickDouble } from '@kalimahapps/vue-icons'
             </small>
           </div>
           <p class="text-lg my-0.5 font-bold">{{ address.name }}</p>
-          <p class="my-0.5">{{ address.phone }}</p>
-          <p class="my-0.5">
+          <p class="my-0.5 text-sm">{{ address.phone }}</p>
+          <small class="my-0.5">
             {{ address.address }}
-          </p>
+          </small>
         </div>
         <button
           v-if="!address.selected"

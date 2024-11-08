@@ -5,7 +5,7 @@ import { scrollTop } from '@/utils/helper'
 
 <template>
   <div
-    class="flex justify-between md:hidden items-center bottom-0 fixed w-full space-x-1 px-2 py-1.5 shadow-3xl shadow-black bg-white border-t-2 border-gray-200"
+    class="flex justify-between md:hidden items-center bottom-0 fixed w-full space-x-1 px-2 py-1.5 z-50 shadow-3xl shadow-black bg-white border-t-2 border-gray-200"
   >
     <div class="flex flex-1 items-center space-x-1">
       <input type="checkbox" class="checkbox-custom" />

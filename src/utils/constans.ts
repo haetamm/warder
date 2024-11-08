@@ -8,5 +8,6 @@ export const urlPage = {
   "SHIPMENT": "/cart/shipment",
   "USER_SETTING": "/user/settings",
   "USER_ADDRESS": "/user/settings/address",
-  "SHOP": "/myshop"
+  "MY_SHOP": "/myshop",
+  "WISHLIST": "/wishlist"
 }

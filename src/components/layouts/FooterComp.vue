@@ -12,7 +12,7 @@ const isLargeScreen = useMediaQuery('(min-width: 1024px)')
   <footer
     v-if="
       !isPageType(route, 'shipment') &&
-      (!isPageType(route, 'shop') || isLargeScreen)
+      (!isPageType(route, 'myShop') || isLargeScreen)
     "
     class="w-full border-t-2 py-4 mt-1 mb-10 md:mb-0"
   >

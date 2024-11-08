@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex tabCs:hidden hidden-costome justify-between items-center bottom-0 fixed w-full space-x-1 px-2 py-1.5 shadow-3xl shadow-black bg-white border-t-2 border-slate-50"
+    class="flex tabCs:hidden hidden-costome justify-between items-center bottom-0 fixed w-full z-50 space-x-1 px-2 py-1.5 shadow-3xl shadow-black bg-white border-t-2 border-slate-50"
   >
     <button
       class="w-full py-1.5 border-2 font-normal rounded-md text-purple-600 border-purple-600"

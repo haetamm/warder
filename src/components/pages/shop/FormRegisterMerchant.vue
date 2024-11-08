@@ -4,14 +4,22 @@ import { FloatLabel, InputText } from 'primevue'
 </script>
 
 <template>
-  <div class="font-sans px-0 pt-4 lg:pt-6 lg:pb-12 w-full">
+  <div class="font-sans px-0 pt-4 xs:pt-0 md:pt-4 lg:pt-6 lg:pb-12 w-full">
     <p class="text-lg px-0 lg:px-6 hidden lg:block">
       Hallo,
-      <span class="font-bold mb-[24px] hidden lg:inline-block"
-        >Tatang Haetami</span
-      >
+      <span class="font-bold mb-[24px] hidden lg:inline-block">
+        Tatang Haetami
+      </span>
       ayo isi detail tokomu
     </p>
+
+    <div class="flex justify-center lg:hidden mt-3 xs:mt-1 md:mt-3">
+      <div class="w-full xs:w-[450px] px-3">
+        <div class="text-2xl text-start font-bold text-slate-500">
+          Masukan Info Toko
+        </div>
+      </div>
+    </div>
 
     <div class="flex w-full justify-center px-0.5 lg:px-6">
       <div
@@ -75,7 +83,7 @@ import { FloatLabel, InputText } from 'primevue'
               </div>
 
               <button
-                class="w-full lg:w-[144px] py-2 font-bold bg-purple-600 text-white rounded-md"
+                class="w-full lg:w-[144px] py-3 lg:py-2 font-bold bg-purple-600 text-white rounded-md"
               >
                 Lanjut
               </button>

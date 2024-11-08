@@ -7,12 +7,12 @@ import ListAddress from '@/components/pages/user/ListAddress.vue'
     <div class="mt-6">
       <div class="flex justify-between">
         <div
-          class="px-3 py-1.5 rounded-md border-2 border-purple-600 text-sm md:text-md"
+          class="px-1 xxs:px-3 py-1.5 rounded-md border-2 border-purple-600 text-sm md:text-md"
         >
-          Daftar Alamat
+          Semua Alamat
         </div>
         <button
-          class="bg-purple-600 text-white px-3 py-1.5 rounded-md hover:bg-purple-700 text-sm md:text-md"
+          class="bg-purple-600 text-white px-1 xs:px-3 py-1.5 rounded-md hover:bg-purple-700 text-sm md:text-md"
         >
           + Tambah Alamat Baru
         </button>

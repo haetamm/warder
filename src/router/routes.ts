@@ -8,11 +8,12 @@ import NotFoundPage from "@/pages/NotFoundPage.vue";
 import ProductDetailPage from "@/pages/ProductDetailPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
 import ShipmentPage from "@/pages/ShipmentPage.vue";
-import ShopPage from "@/pages/ShopPage.vue";
+import MyShopPage from "@/pages/MyShopPage.vue";
 import UserAddressPage from "@/pages/UserAddressPage.vue";
 import UserPage from "@/pages/UserPage.vue";
 import UserSettingsPage from "@/pages/UserSettingsPage.vue";
 import { urlPage } from "@/utils/constans";
+import WishlistPage from "@/pages/WishlistPage.vue";
 
 export const routes = [
   {
@@ -21,26 +22,31 @@ export const routes = [
     children: [
       {
         path: '',
-        name: 'home',
+        name: 'Home',
         component: HomePage
       },
       {
         path: '/:merchant',
-        name: 'merchant',
+        name: 'Merchant',
         component: MerchantPage
       },
       { path: '/:merchant/:id',
-        name: 'productDetail',
+        name: 'Product Detail',
         component: ProductDetailPage
       },
       {
         path: urlPage.CART,
-        name: 'cart',
+        name: 'Keranjang',
         component: CartPage,
       },
       {
+        path: urlPage.WISHLIST,
+        name: 'Wishlist',
+        component: WishlistPage
+      },
+      {
         path: urlPage.SHIPMENT,
-        name: 'shipment',
+        name: 'Shipment',
         component: ShipmentPage
       },
       {
@@ -53,20 +59,20 @@ export const routes = [
             },
             {
                 path: 'settings',
-                name: 'user',
+                name: 'Akun Saya',
                 component: UserSettingsPage,
             },
             {
               path: urlPage.USER_ADDRESS,
-              name: 'userSetting',
+              name: 'Daftar Alamat',
               component: UserAddressPage
           }
         ]
       },
       {
-        path: urlPage.SHOP,
-        name: 'shopPage',
-        component: ShopPage
+        path: urlPage.MY_SHOP,
+        name: 'myShopPage',
+        component: MyShopPage
       }
 
     ]

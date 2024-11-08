@@ -16,11 +16,11 @@ useHead({
 </script>
 
 <template>
-  <div class="relative mx-auto w-full md:w-[861px] select-none">
+  <div class="relative mx-auto w-full md:w-[700px] lg:w-[861px] select-none">
     <img
       src="https://images.tokopedia.net/img/oauth/background/login-bg.png"
       alt="bg-login"
-      class="h-[587px] w-[861px] hidden md:block"
+      class="h-[477px] w-[700px] lg:h-[587px] lg:w-[861px] hidden md:block"
     />
 
     <div

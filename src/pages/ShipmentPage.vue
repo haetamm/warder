@@ -30,7 +30,7 @@ useHead({
         </router-link>
       </div>
     </div>
-    <hr class="mt-[60px]" />
+    <hr class="mt-[53px] md:mt-[60px]" />
     <div class="bg-cartpage">
       <div class="kontener mx-auto mb-1">
         <div class="grid grid-cols-1 md:grid-cols-[60%_40%]">

@@ -8,7 +8,7 @@ import { backHandle, isPageType, scrollTop } from '@/utils/helper'
 import ButtonCart from './ButtonCart.vue'
 import { useScrollVisibility } from '@/compsables/useScrollVisibility'
 import SearchBar from './SearchBar.vue'
-import { Dialog } from 'primevue'
+import { Drawer } from 'primevue'
 import SidebarNav from './SidebarNav.vue'
 
 const route = useRoute()
@@ -17,6 +17,7 @@ const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 const { isVisible } = useScrollVisibility()
 
 const back = backHandle()
+const visibleBottom = ref(false)
 
 const isProductDetailPage = (route: ReturnType<typeof useRoute>) => {
   const merchantName = route.params.merchant as string | undefined
@@ -25,7 +26,8 @@ const isProductDetailPage = (route: ReturnType<typeof useRoute>) => {
     route.path === urlPage.CART ||
     route.path === urlPage.USER_SETTING ||
     route.path === urlPage.USER_ADDRESS ||
-    route.path === urlPage.SHOP
+    route.path === urlPage.MY_SHOP ||
+    route.path === urlPage.WISHLIST
 }
 
 onMounted(() => {
@@ -39,16 +41,8 @@ watch(
   },
 )
 
-const position = ref('center')
-const visible = ref(false)
-
-const openPosition = (pos: string) => {
-  position.value = pos
-  visible.value = true
-}
-
-const closeSidebar = () => {
-  visible.value = false
+const toggleSidebar = () => {
+  visibleBottom.value = !visibleBottom.value
 }
 </script>
 
@@ -81,14 +75,19 @@ const closeSidebar = () => {
             @click="back"
             class="pr-1.5 py-1.5 hover:text-purple-600 rounded-md block lg:hidden items-center"
           >
-            <AkArrowLeft class="h-8 w-8" />
+            <AkArrowLeft class="h-7 w-7" />
           </button>
 
           <div
-            v-if="isPageType(route, 'cart')"
+            v-if="
+              isPageType(route, 'cart') ||
+              isPageType(route, 'wishlist') ||
+              isPageType(route, 'userSettings') ||
+              isPageType(route, 'userAddress')
+            "
             class="inline-block lg:hidden font-bold"
           >
-            Keranjang
+            {{ route.name }}
           </div>
         </div>
 
@@ -102,8 +101,8 @@ const closeSidebar = () => {
           <div class="border-l-2 border-purple-300 py-3"></div>
 
           <AkTextAlignJustified
-            class="w-8 h-8 inline-block md:hidden"
-            @click="openPosition('bottom')"
+            class="w-7 h-7 inline-block md:hidden"
+            @click="visibleBottom = true"
             severity="secondary"
           />
 
@@ -127,7 +126,7 @@ const closeSidebar = () => {
     </div>
   </div>
 
-  <Dialog
+  <!-- <Dialog
     v-model:visible="visible"
     position="bottom"
     :modal="true"
@@ -140,9 +139,19 @@ const closeSidebar = () => {
       maxHeight: '100%',
       backgroundColor: 'rgb(var(--NN50, 240, 243, 247))',
     }"
+  > -->
+  <Drawer
+    v-model:visible="visibleBottom"
+    header="Menu Utama"
+    position="bottom"
+    :style="{
+      height: '100vh',
+      backgroundColor: 'rgb(var(--NN50, 240, 243, 247))',
+    }"
   >
-    <SidebarNav :close-sidebar="closeSidebar" />
-  </Dialog>
+    <SidebarNav :toggleSidebar="toggleSidebar" />
+  </Drawer>
+  <!-- </Dialog> -->
 </template>
 
 <style scoped>
