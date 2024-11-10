@@ -4,6 +4,7 @@ import {
   AnOutlinedShareAlt,
   BsShop,
 } from '@kalimahapps/vue-icons'
+import { Button } from 'primevue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -28,15 +29,16 @@ const merchantName = route.params.merchant
         <div
           class="flex items-center space-x-1 mt-1.5 w-full md:w-1/2 tab:w-full"
         >
-          <button
-            class="bg-purple-600 text-white text-center text-sm px-5 py-1.5 rounded-md w-full"
+          <Button
+            class="w-full"
+            :style="{ padding: '4px 20px 4px 20px', fontSize: '14px' }"
           >
             Follow
-          </button>
-          <button class="p-1.5 border-2 rounded-md">
+          </Button>
+          <button class="p-1.5 border-[1px] rounded-md">
             <BsShop class="w-4 h-4" />
           </button>
-          <button class="p-1.5 border-2 rounded-md">
+          <button class="p-1.5 border-[1px] rounded-md">
             <AnOutlinedShareAlt class="w-4 h-4" />
           </button>
         </div>

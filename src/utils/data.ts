@@ -283,3 +283,93 @@ export const dataAddress = [
     selected: false,
   },
 ]
+
+export const dataReviews = [
+  {
+    id: '1',
+    customer: 'Yoona',
+    image:
+      'https://images.tokopedia.net/img/cache/100-square/default_v3-usrnophoto.png.webp?ect=4g',
+    content:
+      'Lorem ipsum dolor sit amet consectetur, adipisicing elit',
+    rating: 3,
+    createdAt: '1 hari lalu',
+    replies: [
+      {
+        title: 'Balasan',
+        content:
+          'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur similique labore suscipit ipsam harum, delectus doloremque, placeat, animi ea recusandae consectetur aliqui praesentium eos corrupti hic molestias excepturi nostrum sequi.',
+        value: '0',
+        image:
+          'https://images.tokopedia.net/img/cache/100-square/default_v3-usrnophoto.png.webp?ect=4g',
+        shopName: 'Advance Digital Store',
+        createdAt: '2 Jam lalu',
+      },
+    ],
+  },
+  {
+    id: '2',
+    customer: 'Rama',
+    image:
+      'https://images.tokopedia.net/img/cache/100-square/default_v3-usrnophoto.png.webp?ect=4g',
+    content:
+      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur similique labore suscipit ipsam harum, delectus doloremque, placeat,',
+    rating: 5,
+    createdAt: '4 hari lalu',
+    replies: [
+      {
+        title: 'Balasan',
+        content:
+          'Lorem delectus doloremque, placeat, animi ea recusandae consectetur aliqui praesentium eos corrupti hic molestias excepturi nostrum sequi.',
+        value: '0',
+        image:
+          'https://images.tokopedia.net/img/cache/100-square/default_v3-usrnophoto.png.webp?ect=4g',
+        shopName: 'Advance Digital Store',
+        createdAt: '2 Jam lalu',
+      },
+    ],
+  },
+]
+
+export const dataTransactions = [
+  {
+    dateOrder: '7 Nov 2024',
+    status: 'selesai',
+    invoice: 'INV/20231107/MPL/3552677877',
+    shopName: 'Tanto Komputer',
+    productImg: 'https://via.placeholder.com/80x80?text=Product+1',
+    productName: 'Earphone JBL T110 In-Ear',
+    qty: '1',
+    price: 'Rp20.000',
+    totalPayment: 'Rp30.500',
+  },
+  {
+    dateOrder: '12 Oct 2024',
+    status: 'berlangsung',
+    invoice: null,
+    shopName: 'Alfa Mania',
+    productImg: 'https://images.tokopedia.net/img/cache/100-square/VqbcmM/2023/5/29/93db4e43-41a2-4d4f-bbf4-b45dbf34cfce.jpg',
+    productName: 'Headset Earphone Samsung M23 M31 M33 Original 100% Super Bas',
+    qty: '1',
+    price: 'Rp20.000',
+    totalPayment: 'Rp30.500',
+  },
+  {
+    dateOrder: '30 Aug 2024',
+    status: 'tidak berhasil',
+    invoice: null,
+    shopName: 'Kocak Geming',
+    productImg: 'https://via.placeholder.com/80x80?text=Product+2',
+    productName: 'Xiaomi Redmi AirDots',
+    qty: '1',
+    price: 'Rp20.000',
+    totalPayment: 'Rp30.500',
+  },
+]
+
+export const statusData = [
+  { name: 'Semua' },
+  { name: 'Berlangsung' },
+  { name: 'Berhasil' },
+  { name: 'Tidak Berhasil' },
+]

@@ -36,7 +36,7 @@ const scroll = (direction: 'left' | 'right') => {
         <div
           v-for="(product, index) in dataProduct"
           :key="index"
-          class="relative group w-[165px] h-[286px] md:w-[185px] border-2 rounded-lg flex-shrink-0 overflow-hidden cursor-pointer"
+          class="relative group w-[165px] h-[286px] md:w-[185px] border-[1px] rounded-lg flex-shrink-0 overflow-hidden cursor-pointer"
         >
           <RouterLink
             :to="`${product.merchant_name}/${product.id}`"

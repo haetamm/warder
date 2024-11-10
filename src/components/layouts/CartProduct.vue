@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CaFavoriteFilled } from '@kalimahapps/vue-icons'
+import { Button } from 'primevue'
 </script>
 
 <template>
@@ -45,23 +45,26 @@ import { CaFavoriteFilled } from '@kalimahapps/vue-icons'
       <div class="text-slate-500">Subtotal</div>
       <div class="text-lg font-bold">Rp52.000</div>
     </div>
-    <button
-      class="w-full mt-2 py-2 border-2 border-purple-600 font-bold bg-purple-600 text-white rounded-md hover:bg-purple-700"
-    >
-      + Keranjang
-    </button>
-    <button
-      class="w-full mt-2 py-2 border-2 font-bold rounded-md text-purple-600 border-purple-600"
-    >
-      Beli
-    </button>
-    <div class="mt-3 text-sm flex justify-center items-center">
-      <span
-        class="cursor-pointer items-center py-0 px-1 rounded flex justify-center hover:bg-slate-200 space-x-1"
-      >
-        <CaFavoriteFilled />
-        <p>Wishlist</p>
-      </span>
+    <Button label="+ Keranjang" class="w-full mt-2" />
+    <Button
+      label="Beli"
+      class="w-full mt-2"
+      :style="{ borderColor: 'var(--p-button-outlined-primary-color)' }"
+      variant="outlined"
+    />
+    <div class="flex justify-center">
+      <Button
+        label="Wishlist"
+        icon="pi pi-heart"
+        size="small"
+        :style="{
+          backgroundColor: 'white',
+          color: 'black',
+          padding: '0px 3px 0px 3px',
+          marginTop: '6px',
+          border: 'none',
+        }"
+      />
     </div>
   </div>
 </template>

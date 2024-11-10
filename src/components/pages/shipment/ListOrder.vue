@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { products } from '@/utils/data'
 import { CaLocationFilled } from '@kalimahapps/vue-icons'
+import { Select } from 'primevue'
+import { ref } from 'vue'
+
+const selectedCourier = ref([])
+const courier = ref([
+  { name: 'JNE' },
+  { name: 'POS Indonesia' },
+  { name: 'SiCepat' },
+])
 </script>
 
 <template>
@@ -54,24 +63,17 @@ import { CaLocationFilled } from '@kalimahapps/vue-icons'
             <div class="font-bold text-md">{{ `1 x ${product.price}` }}</div>
           </div>
 
-          <div class="border-2 rounded-md mt-2">
-            <div class="px-2">
-              <select
-                class="w-full py-2 rounded-lg my-0.5 cursor-pointer px-0.5"
-              >
-                <option selected>Pilih Pengiriman</option>
-                <option>Produk Terjual</option>
-              </select>
-            </div>
-            <!-- <hr class="my-1" /> -->
-            <!-- <div class="px-2">
-              <select
-                class="w-full py-2 rounded-lg my-0.5 cursor-pointer hover:bg-slate-300 px-0.5"
-              >
-                <option selected>Pilih Pengiriman</option>
-                <option>Produk Terjual</option>
-              </select>
-            </div> -->
+          <div class="mt-2">
+            <Select
+              v-model="selectedCourier[index]"
+              :options="courier"
+              optionLabel="name"
+              placeholder="Pilih Pengiriman"
+              class="w-full"
+              :style="{
+                background: 'rgb(249 250 251 / var(--tw-bg-opacity)) ',
+              }"
+            />
           </div>
         </div>
       </div>

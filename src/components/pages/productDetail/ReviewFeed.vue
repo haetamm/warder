@@ -1,128 +1,142 @@
 <script setup lang="ts">
 import {
-  AnFilledLike,
   AnFilledStar,
+  BsChatLeftDots,
   BsThreeDotsVertical,
-  ByChevronBottom,
-  ByChevronTop,
 } from '@kalimahapps/vue-icons'
-import { ref } from 'vue'
+import { Select } from 'primevue'
 
-const isCollapsed = ref(true)
-const toggleCollapse = () => {
-  isCollapsed.value = !isCollapsed.value
-}
+import Accordion from 'primevue/accordion'
+import AccordionPanel from 'primevue/accordionpanel'
+import AccordionHeader from 'primevue/accordionheader'
+import AccordionContent from 'primevue/accordioncontent'
+import { ref } from 'vue'
+import { dataReviews } from '@/utils/data'
+
+const selectedSorted = ref()
+const sort = ref([
+  { name: 'Terbaru' },
+  { name: 'Rating Tertinggi' },
+  { name: 'Rating Terendah' },
+])
+
+const reviews = ref(dataReviews)
 </script>
 
 <template>
   <div class="mt-4 mb-10">
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center space-x-4 justify-between">
       <div class="flex-shrink-0">
-        <div class="font-bold text-lg">Ulasan Pilihan</div>
-        <small>Menampilkan 1 dari 1 ulasan</small>
+        <div class="font-bold text-lg">Ulasan</div>
+        <small>Menampilkan {{ reviews.length }} ulasan</small>
       </div>
-      <div
-        class="flex-1 hidden sm:inline-block font start-end text-sm font-bold min-w-0 p-0"
-      >
-        <p class="justify-end flex">Urutkan</p>
-      </div>
-      <select
-        aria-label="rating"
-        id="rating"
-        class="bg-gray-50 cursor-pointer select-none border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      >
-        <option class="py-2 cursor-pointer" selected>Terbaru</option>
-        <option class="py-2 cursor-pointer" value="US">Rating Tertinggi</option>
-        <option class="py-2 cursor-pointer" value="CA">Rating terendah</option>
-      </select>
+
+      <Select
+        v-model="selectedSorted"
+        :options="sort"
+        optionLabel="name"
+        placeholder="Urutkan"
+        class="w-full sm:w-44"
+        :style="{ background: 'rgb(249 250 251 / var(--tw-bg-opacity)) ' }"
+      />
     </div>
 
-    <div class="flex items-center mt-6 space-x-4">
-      <div class="flex-shrink-0">
-        <div class="flex">
-          <AnFilledStar
-            v-for="index in 4"
-            :key="index"
-            class="text-purple-600 mr-1"
-          />
-          <AnFilledStar class="text-gray-300 mr-1 dark:text-gray-500" />
-        </div>
-      </div>
-      <div class="flex-1 font text-md min-w-0 p-0">
-        <p>1 hari lalu</p>
-      </div>
-      <BsThreeDotsVertical class="h-6 w-6" />
-    </div>
-
-    <div class="border-b-2 pb-3">
-      <div class="flex items-center mt-3 font-semibold space-x-4">
-        <div class="flex-shrink-0">
-          <img
-            width="32"
-            height="32"
-            class="rounded-full"
-            src="https://images.tokopedia.net/img/cache/100-square/default_v3-usrnophoto.png.webp?ect=4g"
-            alt="avatar"
-          />
-        </div>
-        <div class="font text-md min-w-0 p-0">
-          <p>Yoona</p>
-        </div>
-      </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur
-        similique labore suscipit ipsam harum, delectus doloremque, placeat,
-        animi ea recusandae consectetur aliquid praesentium eos corrupti hic
-        molestias excepturi nostrum sequi.
-      </p>
-
+    <div v-for="review in reviews" :key="review.id">
       <div class="flex items-center mt-3 space-x-4">
         <div class="flex-shrink-0">
-          <AnFilledLike class="cursor-pointer hover:text-purple-600" />
+          <div class="flex">
+            <AnFilledStar
+              v-for="index in 5"
+              :key="index"
+              :class="
+                index <= review.rating
+                  ? 'text-purple-600 mr-1'
+                  : 'text-gray-300 mr-1'
+              "
+            />
+          </div>
         </div>
         <div class="flex-1 font text-md min-w-0 p-0">
-          <div>Membantu</div>
+          <p>{{ review.createdAt }}</p>
         </div>
-        <div
-          @click="toggleCollapse"
-          class="flex space-x-1 items-center cursor-pointer hover:underline"
-        >
-          <p class="">
-            {{ isCollapsed ? 'Lihat Balasannya' : 'Tutup Balasannya' }}
-          </p>
-          <ByChevronBottom v-if="isCollapsed" />
-          <ByChevronTop v-else />
-        </div>
+        <BsThreeDotsVertical class="h-6 w-6" />
       </div>
-    </div>
 
-    <div v-if="!isCollapsed" class="bg-gray-300 mt-3 px-3 py-2 rounded-lg">
-      <div class="flex items-center font-semibold space-x-4">
-        <div class="flex-shrink-0">
-          <img
-            width="32"
-            height="32"
-            class="rounded-full"
-            src="https://images.tokopedia.net/img/cache/100-square/default_v3-usrnophoto.png.webp?ect=4g"
-            alt="avatar"
-          />
+      <div class="pb-1">
+        <div class="flex items-center mt-3 font-semibold space-x-4 mb-2">
+          <div class="flex-shrink-0">
+            <img
+              width="32"
+              height="32"
+              class="rounded-full"
+              :src="review.image"
+              alt="avatar"
+            />
+          </div>
+          <div class="font text-md min-w-0 p-0">
+            <p>{{ review.customer }}</p>
+          </div>
         </div>
-        <div
-          class="inline-block xs:flex font-semibold text-sm items-center min-w-0 p-0 space-x-1"
-        >
-          <p>Advance Digital Store</p>
-          <small class="bg-purple-600 rounded-md px-1 text-white"
-            >penjual</small
+        <p>
+          {{ review.content }}
+        </p>
+
+        <Accordion :style="{ margin: '0px' }">
+          <AccordionPanel
+            v-for="reply in review.replies"
+            :key="reply.title"
+            :value="reply.value"
+            :style="{
+              padding: '2px 0px 6px 0px',
+              margin: '0px',
+            }"
           >
-          <p>2 Jam lalu</p>
-        </div>
+            <AccordionHeader
+              :style="{ padding: '4px 3px 6px 3px', marginBottom: '2px' }"
+            >
+              <div class="flex items-center mt-2 space-x-4">
+                <BsChatLeftDots class="cursor-pointer hover:text-purple-600" />
+                <div class="flex-1 font text-md min-w-0 p-0">
+                  <div>Balasan</div>
+                </div>
+              </div>
+            </AccordionHeader>
+            <AccordionContent
+              :style="{
+                padding: '6px 0px 6px 0px',
+                margin: '0px',
+                backgroundColor: 'transparent',
+              }"
+            >
+              <div
+                class="flex items-center font-semibold space-x-4 mb-1.5 m-0 bg-transparent"
+              >
+                <div class="flex-shrink-0">
+                  <img
+                    width="32"
+                    height="32"
+                    class="rounded-full"
+                    :src="reply.image"
+                    alt="avatar"
+                  />
+                </div>
+                <div
+                  class="inline-block xs:flex font-semibold text-sm items-center min-w-0 p-0 space-x-1"
+                >
+                  <p>{{ reply.shopName }}</p>
+                  <small class="bg-purple-600 rounded-md px-1 text-white">
+                    penjual
+                  </small>
+                  <p>{{ reply.createdAt }}</p>
+                </div>
+              </div>
+              <p>
+                {{ reply.content }}
+              </p>
+            </AccordionContent>
+          </AccordionPanel>
+        </Accordion>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur
-        similique labore suscipit ipsam harum, delectus doloremque, placeat,
-        animi ea recusandae consectetur aliquid praesentium eos corrupti hic
-        molestias excepturi nostrum sequi.
-      </p>
     </div>
   </div>
 </template>

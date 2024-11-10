@@ -14,6 +14,7 @@ import UserPage from "@/pages/UserPage.vue";
 import UserSettingsPage from "@/pages/UserSettingsPage.vue";
 import { urlPage } from "@/utils/constans";
 import WishlistPage from "@/pages/WishlistPage.vue";
+import TransactionPage from "@/pages/TransactionPage.vue";
 
 export const routes = [
   {
@@ -73,8 +74,12 @@ export const routes = [
         path: urlPage.MY_SHOP,
         name: 'myShopPage',
         component: MyShopPage
+      },
+      {
+        path: urlPage.TRANSACTION,
+        name: 'Daftar Transaksi',
+        component: TransactionPage
       }
-
     ]
   },
   {

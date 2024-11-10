@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { Select } from 'primevue'
+import { ref } from 'vue'
+
+const selectedProduct = ref([{ name: 'Semua Product' }])
+const product = ref([{ name: 'Semua Product' }, { name: 'Product Terjual' }])
+</script>
+
 <template>
   <div
     class="hidden md:block h-full md:h-[calc(100vh-70px)] lg:h-[calc(100vh-89px)] md:sticky top-[89px] overflow-hidden"
@@ -19,9 +27,14 @@
     <div class="px-2 font-bold text-md mb-1 xs:mb-0 w-full xs:w-1/3">
       Etalase Toko :
     </div>
-    <select class="w-full py-2 border-2 rounded-md px-1">
-      <option selected>Semua Produk</option>
-      <option>Produk Terjual</option>
-    </select>
+    <Select
+      v-model="selectedProduct[0]"
+      :options="product"
+      optionLabel="name"
+      class="w-full"
+      :style="{
+        background: 'rgb(249 250 251 / var(--tw-bg-opacity)) ',
+      }"
+    />
   </div>
 </template>

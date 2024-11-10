@@ -8,7 +8,7 @@ import { backHandle, isPageType, scrollTop } from '@/utils/helper'
 import ButtonCart from './ButtonCart.vue'
 import { useScrollVisibility } from '@/compsables/useScrollVisibility'
 import SearchBar from './SearchBar.vue'
-import { Drawer } from 'primevue'
+import { Button, Dialog } from 'primevue'
 import SidebarNav from './SidebarNav.vue'
 
 const route = useRoute()
@@ -27,7 +27,8 @@ const isProductDetailPage = (route: ReturnType<typeof useRoute>) => {
     route.path === urlPage.USER_SETTING ||
     route.path === urlPage.USER_ADDRESS ||
     route.path === urlPage.MY_SHOP ||
-    route.path === urlPage.WISHLIST
+    route.path === urlPage.WISHLIST ||
+    route.path === urlPage.TRANSACTION
 }
 
 onMounted(() => {
@@ -83,7 +84,8 @@ const toggleSidebar = () => {
               isPageType(route, 'cart') ||
               isPageType(route, 'wishlist') ||
               isPageType(route, 'userSettings') ||
-              isPageType(route, 'userAddress')
+              isPageType(route, 'userAddress') ||
+              isPageType(route, 'transaction')
             "
             class="inline-block lg:hidden font-bold"
           >
@@ -106,28 +108,37 @@ const toggleSidebar = () => {
             severity="secondary"
           />
 
-          <router-link
-            :to="urlPage.LOGIN"
-            @click="scrollTop"
-            class="hidden md:inline-block px-3 py-0.5 text-md hover:bg-purple-600 rounded-md border-2 border-purple-600 text-purple-600 hover:text-white"
-          >
-            Login
-          </router-link>
-
-          <router-link
-            :to="urlPage.REGISTER_USER"
-            @click="scrollTop"
-            class="hidden md:block px-3 py-0.5 text-md bg-purple-600 rounded-md border-2 text-white border-purple-600"
-          >
-            Register
-          </router-link>
+          <div class="hidden md:flex space-x-2">
+            <Button
+              v-on:click="scrollTop"
+              as="router-link"
+              label="Login"
+              :to="urlPage.LOGIN"
+              class="w-full"
+              :style="{
+                background: 'white',
+                color: '#9333ea',
+                padding: '3px 12px 3px 12px',
+              }"
+            />
+            <Button
+              v-on:click="scrollTop"
+              as="router-link"
+              label="Register"
+              :to="urlPage.REGISTER_USER"
+              class="w-full"
+              :style="{
+                padding: '3px 12px 3px 12px',
+              }"
+            />
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- <Dialog
-    v-model:visible="visible"
+  <Dialog
+    v-model:visible="visibleBottom"
     position="bottom"
     :modal="true"
     :showHeader="false"
@@ -139,19 +150,9 @@ const toggleSidebar = () => {
       maxHeight: '100%',
       backgroundColor: 'rgb(var(--NN50, 240, 243, 247))',
     }"
-  > -->
-  <Drawer
-    v-model:visible="visibleBottom"
-    header="Menu Utama"
-    position="bottom"
-    :style="{
-      height: '100vh',
-      backgroundColor: 'rgb(var(--NN50, 240, 243, 247))',
-    }"
   >
     <SidebarNav :toggleSidebar="toggleSidebar" />
-  </Drawer>
-  <!-- </Dialog> -->
+  </Dialog>
 </template>
 
 <style scoped>

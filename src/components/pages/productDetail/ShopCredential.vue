@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { scrollTop } from '@/utils/helper'
+import { Button } from 'primevue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -26,11 +27,7 @@ const merchantName = route.params.merchant
         </router-link>
         <p class="text-purple-600">Online</p>
       </div>
-      <div
-        class="px-4 py-1 rounded-md bg-purple-300 cursor-pointer hover:bg-purple-600"
-      >
-        Follow
-      </div>
+      <Button label="Follow" size="small" />
     </div>
     <div
       class="inline-block xs:flex md:inline-block xl:flex pl-[4rem] mt-3 font-normal space-x-0 xs:space-x-2 md:space-x-0 xl:space-x-2"

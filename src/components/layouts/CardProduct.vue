@@ -23,10 +23,11 @@ const route = useRoute()
     }"
   ></div>
 
-  <div class="p-2 h-1/2 flex flex-col text-sm">
+  <div class="h-1/2 flex flex-col text-sm">
     <router-link
       :to="`${product.merchant_name}/${product.id}`"
       :onclick="scrollTop"
+      class="p-2"
       :class="
         isPageType(route, 'wishlist')
           ? 'space-y-1.5'
@@ -43,9 +44,9 @@ const route = useRoute()
     </router-link>
     <div
       v-if="isPageType(route, 'wishlist')"
-      class="flex items-center space-x-1 mt-auto"
+      class="flex items-center space-x-1 mt-auto mx-1 mb-1"
     >
-      <div class="border-[1px] rounded-lg p-2.5 border-black">
+      <div class="border-[1px] border-gray-400 rounded-lg p-2.5">
         <BsThreeDots />
       </div>
       <button

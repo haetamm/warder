@@ -12,7 +12,7 @@ export function backHandle() {
 
 export const isPageType = (
   route: ReturnType<typeof useRoute>,
-  pageType: 'merchant' | 'cart' | 'shipment' | 'myShop' | 'userSettings' | 'userAddress' | 'wishlist'
+  pageType: 'merchant' | 'cart' | 'shipment' | 'myShop' | 'userSettings' | 'userAddress' | 'wishlist' | 'transaction'
 ) => {
   const paths = {
     merchant: `/${route.params.merchant as string | undefined}`,
@@ -21,7 +21,8 @@ export const isPageType = (
     myShop: urlPage.MY_SHOP,
     userSettings: urlPage.USER_SETTING,
     userAddress: urlPage.USER_ADDRESS,
-    wishlist: urlPage.WISHLIST
+    wishlist: urlPage.WISHLIST,
+    transaction: urlPage.TRANSACTION
   }
 
   return route.path === paths[pageType]

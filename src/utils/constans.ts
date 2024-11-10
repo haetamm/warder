@@ -9,5 +9,6 @@ export const urlPage = {
   "USER_SETTING": "/user/settings",
   "USER_ADDRESS": "/user/settings/address",
   "MY_SHOP": "/myshop",
-  "WISHLIST": "/wishlist"
+  "WISHLIST": "/wishlist",
+  "TRANSACTION": "/order-list"
 }
