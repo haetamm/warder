@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Button, FloatLabel, InputText, StepItem } from 'primevue'
-import { ref } from 'vue'
+import { Button, FloatLabel, InputText, Select, StepItem } from 'primevue'
+import { onMounted, ref } from 'vue'
 import Stepper from 'primevue/stepper'
 import Step from 'primevue/step'
 import StepPanel from 'primevue/steppanel'
@@ -22,6 +22,82 @@ function handleStoreInfoSubmit(activateCallback: (step: string) => void) {
   if (storeName.value && domainName.value) {
     isStoreInfoSubmitted.value = true
     activateCallback('3')
+  }
+}
+
+interface Wilayah {
+  id: string
+  name: string
+}
+
+const selectedProvinsi = ref<Wilayah | null>(null)
+const provinsi = ref<Wilayah[]>([])
+const selectedKab = ref<Wilayah | null>(null)
+const kab = ref<Wilayah[]>([])
+const selectedKec = ref<Wilayah | null>(null)
+const kec = ref<Wilayah[]>([])
+const selectedKel = ref<Wilayah | null>(null)
+const kel = ref<Wilayah[]>([])
+
+// Fetch Provinsi saat pertama kali halaman di-render
+onMounted(async () => {
+  try {
+    const response = await fetch(
+      'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json',
+    )
+    provinsi.value = await response.json()
+  } catch (error) {
+    console.error('Error fetching provinsi:', error)
+  }
+})
+
+// Fetch Kabupaten berdasarkan Provinsi yang dipilih
+async function fetchKabupaten() {
+  if (!selectedProvinsi.value) return
+  try {
+    const response = await fetch(
+      `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${selectedProvinsi.value.id}.json`,
+    )
+    kab.value = await response.json()
+    // Reset pilihan setelah level ini
+    selectedKab.value = null
+    selectedKec.value = null
+    selectedKel.value = null
+    kec.value = []
+    kel.value = []
+  } catch (error) {
+    console.error('Error fetching kabupaten:', error)
+  }
+}
+
+// Fetch Kecamatan berdasarkan Kabupaten yang dipilih
+async function fetchKecamatan() {
+  if (!selectedKab.value) return
+  try {
+    const response = await fetch(
+      `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${selectedKab.value.id}.json`,
+    )
+    kec.value = await response.json()
+    // Reset pilihan setelah level ini
+    selectedKec.value = null
+    selectedKel.value = null
+    kel.value = []
+  } catch (error) {
+    console.error('Error fetching kecamatan:', error)
+  }
+}
+
+async function fetchKelurahan() {
+  if (!selectedKec.value) return
+  try {
+    const response = await fetch(
+      `https://www.emsifa.com/api-wilayah-indonesia/api/villages/${selectedKec.value.id}.json`,
+    )
+    kel.value = await response.json()
+    // Reset pilihan Kelurahan
+    selectedKel.value = null
+  } catch (error) {
+    console.error('Error fetching kelurahan:', error)
   }
 }
 </script>
@@ -121,33 +197,98 @@ function handleStoreInfoSubmit(activateCallback: (step: string) => void) {
           <div class="font-bold text-lg">Masukkan Alamat Tokomu</div>
         </Step>
         <StepPanel class="w-full">
-          <div class="h-[165px]">
+          <div class="h-[255px] xl:h-[165px]">
             <div class="pt-[8px] pb-[24px]">
-              <div class="mt-2 mb-6 flex items-center space-x-2 w-full">
-                <FloatLabel variant="on" class="w-full">
-                  <InputText id="on_label" />
-                  <label for="on_label">Provinsi</label>
-                </FloatLabel>
-                <FloatLabel variant="on" class="w-full">
-                  <InputText id="on_label" />
-                  <label for="on_label">Kota/Kabupaten</label>
-                </FloatLabel>
+              <div
+                class="mt-2 mb-3 xl:mb-6 inline-block xl:flex items-center space-x-0 xl:space-x-2 w-full"
+              >
+                <Select
+                  v-model="selectedProvinsi"
+                  :options="provinsi"
+                  filter
+                  optionLabel="name"
+                  placeholder="Provinsi"
+                  class="w-full mb-3 xl:mb-0"
+                  @change="fetchKabupaten"
+                >
+                  <template #value="slotProps">
+                    <div v-if="slotProps.value">
+                      <div>{{ slotProps.value.name }}</div>
+                    </div>
+                    <span v-else>{{ slotProps.placeholder }}</span>
+                  </template>
+                  <template #option="slotProps">
+                    <div>{{ slotProps.option.name }}</div>
+                  </template>
+                </Select>
+
+                <Select
+                  v-model="selectedKab"
+                  :options="kab"
+                  filter
+                  optionLabel="name"
+                  placeholder="Kota/Kabupaten"
+                  class="w-full"
+                  @change="fetchKecamatan"
+                >
+                  <template #value="slotProps">
+                    <div v-if="slotProps.value">
+                      <div>{{ slotProps.value.name }}</div>
+                    </div>
+                    <span v-else>{{ slotProps.placeholder }}</span>
+                  </template>
+                  <template #option="slotProps">
+                    <div>{{ slotProps.option.name }}</div>
+                  </template>
+                </Select>
               </div>
 
-              <div class="mt-2 mb-6 flex items-center space-x-2">
-                <FloatLabel variant="on" class="w-full">
-                  <InputText id="on_label" />
-                  <label for="on_label">Kecamatan</label>
-                </FloatLabel>
-                <FloatLabel variant="on" class="w-full">
-                  <InputText id="on_label" />
-                  <label for="on_label">Kelurahan</label>
-                </FloatLabel>
+              <div
+                class="mt-2 mb-3 xl:mb-6 inline-block xl:flex items-center space-x-0 xl:space-x-2 w-full"
+              >
+                <Select
+                  v-model="selectedKec"
+                  :options="kec"
+                  filter
+                  optionLabel="name"
+                  placeholder="Kecamatan"
+                  class="w-full mb-3 xl:mb-0"
+                  @change="fetchKelurahan"
+                >
+                  <template #value="slotProps">
+                    <div v-if="slotProps.value">
+                      <div>{{ slotProps.value.name }}</div>
+                    </div>
+                    <span v-else>{{ slotProps.placeholder }}</span>
+                  </template>
+                  <template #option="slotProps">
+                    <div>{{ slotProps.option.name }}</div>
+                  </template>
+                </Select>
+
+                <Select
+                  v-model="selectedKel"
+                  :options="kel"
+                  filter
+                  optionLabel="name"
+                  placeholder="Kelurahan"
+                  class="w-full"
+                >
+                  <template #value="slotProps">
+                    <div v-if="slotProps.value">
+                      <div>{{ slotProps.value.name }}</div>
+                    </div>
+                    <span v-else>{{ slotProps.placeholder }}</span>
+                  </template>
+                  <template #option="slotProps">
+                    <div>{{ slotProps.option.name }}</div>
+                  </template>
+                </Select>
               </div>
             </div>
           </div>
           <Button
-            class="w-full lg:w-[144px] py-3 lg:py-2 font-bold"
+            class="w-full xl:w-[144px] py-3 xl:py-2 font-bold"
             label="Selesai"
             severity="secondary"
           />
