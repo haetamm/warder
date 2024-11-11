@@ -1,10 +1,33 @@
 <script setup lang="ts">
-import { ChTick } from '@kalimahapps/vue-icons'
-import { FloatLabel, InputText } from 'primevue'
+import { Button, FloatLabel, InputText, StepItem } from 'primevue'
+import { ref } from 'vue'
+import Stepper from 'primevue/stepper'
+import Step from 'primevue/step'
+import StepPanel from 'primevue/steppanel'
+
+const phoneNumber = ref('')
+const storeName = ref('')
+const domainName = ref('')
+const isPhoneNumberSubmitted = ref(false)
+const isStoreInfoSubmitted = ref(false)
+
+function handlePhoneNumberSubmit(activateCallback: (step: string) => void) {
+  if (phoneNumber.value) {
+    isPhoneNumberSubmitted.value = true
+    activateCallback('2')
+  }
+}
+
+function handleStoreInfoSubmit(activateCallback: (step: string) => void) {
+  if (storeName.value && domainName.value) {
+    isStoreInfoSubmitted.value = true
+    activateCallback('3')
+  }
+}
 </script>
 
 <template>
-  <div class="font-sans px-0 pt-4 xs:pt-0 md:pt-4 lg:pt-6 lg:pb-12 w-full">
+  <div class="font-sans px-0 pt-4 xs:pt-0 md:pt-4 lg:pt-6 pb-6 lg:pb-12 w-full">
     <p class="text-lg px-0 lg:px-6 hidden lg:block">
       Hallo,
       <span class="font-bold mb-[24px] hidden lg:inline-block">
@@ -13,59 +36,62 @@ import { FloatLabel, InputText } from 'primevue'
       ayo isi detail tokomu
     </p>
 
-    <div class="flex justify-center lg:hidden mt-3 xs:mt-1 md:mt-3">
-      <div class="w-full xs:w-[450px] px-3">
-        <div class="text-2xl text-start font-bold text-slate-500">
-          Masukan Info Toko
-        </div>
-      </div>
-    </div>
-
-    <div class="flex w-full justify-center px-0.5 lg:px-6">
-      <div
-        class="flex flex-col items-start w-full xs:w-[450px] md:w-[55%] lg:w-full"
-      >
-        <div
-          class="hidden lg:flex items-start relative w-full justify-center md:justify-start"
-        >
-          <div class="absolute top-8 left-4 h-full w-[2px] bg-purple-600"></div>
-          <div
-            class="flex items-center justify-center w-8 h-8 bg-purple-600 rounded-full text-white z-10"
-          >
-            <ChTick class="w-full" />
-          </div>
-          <div class="ml-0 lg:ml-5 w-full lg:w-[calc(100%-55px)]">
-            <div class="font-bold text-lg">Masukan No. Hp-mu</div>
-            <div class="pt-[8px] pb-[24px] text-lg">+62 822 60283287</div>
-          </div>
-        </div>
-
-        <div
-          class="inline-block lg:flex items-center lg:items-start relative w-full justify-center lg:justify-start px-3 lg:px-0"
-        >
-          <div
-            class="hidden lg:inline-block absolute top-8 left-4 h-full w-[2px] bg-gray-300"
-          ></div>
-          <div
-            class="hidden lg:flex items-center justify-center w-8 h-8 bg-white border-2 border-purple-600 rounded-full text-purple-600 font-bold z-10"
-          >
-            2
-          </div>
-          <div class="ml-0 lg:ml-5 w-full lg:w-[calc(100%-55px)]">
-            <div class="hidden lg:block font-bold text-lg">
-              Masukan Nama Toko dan Domain
-            </div>
+    <Stepper value="1" :linear="true" class="w-full justify-start pr-3 lg:px-6">
+      <StepItem value="1" class="flex items-start">
+        <Step>
+          <p class="text-lg font-bold">Masukan No. Hp-mu</p>
+          <p v-if="isPhoneNumberSubmitted" class="text-lg text-start mt-1">
+            {{ phoneNumber }}
+          </p>
+        </Step>
+        <StepPanel v-slot="{ activateCallback }" class="w-full">
+          <div class="h-24">
             <div class="pt-[8px] pb-[24px]">
               <div class="mt-2 mb-6">
                 <FloatLabel variant="on">
-                  <InputText id="on_label" />
-                  <label for="on_label">Nama Toko</label>
+                  <InputText id="phone_label" v-model="phoneNumber" />
+                  <label for="phone_label">Nomor Handphone</label>
+                </FloatLabel>
+                <div class="text-sm text-end">{{ phoneNumber.length }}/15</div>
+              </div>
+            </div>
+          </div>
+          <Button
+            :disabled="!phoneNumber"
+            class="w-full lg:w-[144px] py-3 lg:py-2 font-bold"
+            label="Lanjut"
+            @click="handlePhoneNumberSubmit(activateCallback)"
+          />
+        </StepPanel>
+      </StepItem>
+
+      <StepItem value="2">
+        <Step>
+          <p class="text-lg font-bold">Masukan Nama Toko dan Domain</p>
+          <div v-if="isStoreInfoSubmitted">
+            <p class="text-sm text-start mt-2">Nama Toko</p>
+            <div class="text-sm text-start">
+              {{ storeName }}
+            </div>
+            <p class="text-sm text-start mt-1">Nama Domain</p>
+            <div class="text-sm text-start">
+              {{ domainName }}
+            </div>
+          </div>
+        </Step>
+        <StepPanel v-slot="{ activateCallback }" class="w-full">
+          <div class="h-48">
+            <div class="pt-[8px] pb-[24px]">
+              <div class="mt-2 mb-6">
+                <FloatLabel variant="on">
+                  <InputText id="store_label" v-model="storeName" />
+                  <label for="store_label">Nama Toko</label>
                 </FloatLabel>
                 <div class="flex justify-between text-gray-500 text-xs mt-1">
                   <div class="text-sm">
                     Pastikan nama toko yang diisi sudah benar
                   </div>
-                  <div class="text-sm">0/60</div>
+                  <div class="text-sm">{{ storeName.length }}/60</div>
                 </div>
               </div>
 
@@ -73,36 +99,61 @@ import { FloatLabel, InputText } from 'primevue'
                 <div class="flex items-center space-x-2 w-full">
                   <div class="text-gray-500 text-xl">warderrr.com/</div>
                   <FloatLabel variant="on" class="w-full">
-                    <InputText id="domain_label" />
+                    <InputText id="domain_label" v-model="domainName" />
                     <label for="domain_label">Nama Domain</label>
                   </FloatLabel>
                 </div>
-                <div class="flex justify-end text-gray-500 text-xs mt-1">
-                  <div class="text-sm">0/24</div>
-                </div>
+                <div class="text-sm text-end">{{ domainName.length }}/24</div>
               </div>
-
-              <button
-                class="w-full lg:w-[144px] py-3 lg:py-2 font-bold bg-purple-600 text-white rounded-md"
-              >
-                Lanjut
-              </button>
             </div>
           </div>
-        </div>
+          <Button
+            :disabled="!storeName || !domainName"
+            class="w-full lg:w-[144px] py-3 lg:py-2 font-bold"
+            label="Lanjut"
+            @click="handleStoreInfoSubmit(activateCallback)"
+          />
+        </StepPanel>
+      </StepItem>
 
-        <div class="hidden lg:flex items-start w-full relative justify-start">
-          <div
-            class="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full text-white font-bold z-10"
-          >
-            3
+      <StepItem value="3">
+        <Step>
+          <div class="font-bold text-lg">Masukkan Alamat Tokomu</div>
+        </Step>
+        <StepPanel class="w-full">
+          <div class="h-[165px]">
+            <div class="pt-[8px] pb-[24px]">
+              <div class="mt-2 mb-6 flex items-center space-x-2 w-full">
+                <FloatLabel variant="on" class="w-full">
+                  <InputText id="on_label" />
+                  <label for="on_label">Provinsi</label>
+                </FloatLabel>
+                <FloatLabel variant="on" class="w-full">
+                  <InputText id="on_label" />
+                  <label for="on_label">Kota/Kabupaten</label>
+                </FloatLabel>
+              </div>
+
+              <div class="mt-2 mb-6 flex items-center space-x-2">
+                <FloatLabel variant="on" class="w-full">
+                  <InputText id="on_label" />
+                  <label for="on_label">Kecamatan</label>
+                </FloatLabel>
+                <FloatLabel variant="on" class="w-full">
+                  <InputText id="on_label" />
+                  <label for="on_label">Kelurahan</label>
+                </FloatLabel>
+              </div>
+            </div>
           </div>
-          <div class="ml-0 lg:ml-5 w-full lg:w-[calc(100%-55px)]">
-            <div class="font-bold text-lg">Masukkan Alamat Tokomu</div>
-          </div>
-        </div>
-      </div>
-    </div>
+          <Button
+            class="w-full lg:w-[144px] py-3 lg:py-2 font-bold"
+            label="Selesai"
+            severity="secondary"
+          />
+        </StepPanel>
+      </StepItem>
+    </Stepper>
   </div>
 </template>
 <style scoped>
