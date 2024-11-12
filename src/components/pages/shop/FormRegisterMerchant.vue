@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue'
 import Stepper from 'primevue/stepper'
 import Step from 'primevue/step'
 import StepPanel from 'primevue/steppanel'
+import axiosRegionInstance from '@/utils/api'
 
 const phoneNumber = ref('')
 const storeName = ref('')
@@ -25,41 +26,36 @@ function handleStoreInfoSubmit(activateCallback: (step: string) => void) {
   }
 }
 
-interface Wilayah {
+interface Region {
   id: string
   name: string
 }
 
-const selectedProvinsi = ref<Wilayah | null>(null)
-const provinsi = ref<Wilayah[]>([])
-const selectedKab = ref<Wilayah | null>(null)
-const kab = ref<Wilayah[]>([])
-const selectedKec = ref<Wilayah | null>(null)
-const kec = ref<Wilayah[]>([])
-const selectedKel = ref<Wilayah | null>(null)
-const kel = ref<Wilayah[]>([])
+const selectedProvinsi = ref<Region | null>(null)
+const provinsi = ref<Region[]>([])
+const selectedKab = ref<Region | null>(null)
+const kab = ref<Region[]>([])
+const selectedKec = ref<Region | null>(null)
+const kec = ref<Region[]>([])
+const selectedKel = ref<Region | null>(null)
+const kel = ref<Region[]>([])
 
-// Fetch Provinsi saat pertama kali halaman di-render
 onMounted(async () => {
   try {
-    const response = await fetch(
-      'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json',
-    )
-    provinsi.value = await response.json()
+    const { data: response } = await axiosRegionInstance.get('provinces.json')
+    provinsi.value = response
   } catch (error) {
     console.error('Error fetching provinsi:', error)
   }
 })
 
-// Fetch Kabupaten berdasarkan Provinsi yang dipilih
 async function fetchKabupaten() {
   if (!selectedProvinsi.value) return
   try {
-    const response = await fetch(
-      `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${selectedProvinsi.value.id}.json`,
+    const { data: response } = await axiosRegionInstance.get(
+      `regencies/${selectedProvinsi.value.id}.json`,
     )
-    kab.value = await response.json()
-    // Reset pilihan setelah level ini
+    kab.value = await response
     selectedKab.value = null
     selectedKec.value = null
     selectedKel.value = null
@@ -70,15 +66,13 @@ async function fetchKabupaten() {
   }
 }
 
-// Fetch Kecamatan berdasarkan Kabupaten yang dipilih
 async function fetchKecamatan() {
   if (!selectedKab.value) return
   try {
-    const response = await fetch(
-      `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${selectedKab.value.id}.json`,
+    const { data: response } = await axiosRegionInstance.get(
+      `districts/${selectedKab.value.id}.json`,
     )
-    kec.value = await response.json()
-    // Reset pilihan setelah level ini
+    kec.value = await response
     selectedKec.value = null
     selectedKel.value = null
     kel.value = []
@@ -90,20 +84,46 @@ async function fetchKecamatan() {
 async function fetchKelurahan() {
   if (!selectedKec.value) return
   try {
-    const response = await fetch(
-      `https://www.emsifa.com/api-wilayah-indonesia/api/villages/${selectedKec.value.id}.json`,
+    const { data: response } = await axiosRegionInstance.get(
+      `villages/${selectedKec.value.id}.json`,
     )
-    kel.value = await response.json()
-    // Reset pilihan Kelurahan
+    kel.value = await response
     selectedKel.value = null
   } catch (error) {
     console.error('Error fetching kelurahan:', error)
   }
 }
+
+const fields = ref([
+  {
+    model: selectedProvinsi,
+    options: provinsi,
+    placeholder: 'Provinsi',
+    onChange: fetchKabupaten,
+  },
+  {
+    model: selectedKab,
+    options: kab,
+    placeholder: 'Kota/Kabupaten',
+    onChange: fetchKecamatan,
+  },
+  {
+    model: selectedKec,
+    options: kec,
+    placeholder: 'Kecamatan',
+    onChange: fetchKelurahan,
+  },
+  {
+    model: selectedKel,
+    options: kel,
+    placeholder: 'Kelurahan',
+    onChange: null,
+  },
+])
 </script>
 
 <template>
-  <div class="font-sans px-0 pt-4 xs:pt-0 md:pt-4 lg:pt-6 pb-6 lg:pb-12 w-full">
+  <div class="px-0 pt-4 xs:pt-0 md:pt-4 lg:pt-6 pb-6 lg:pb-12 w-full">
     <p class="text-lg px-0 lg:px-6 hidden lg:block">
       Hallo,
       <span class="font-bold mb-[24px] hidden lg:inline-block">
@@ -111,6 +131,12 @@ async function fetchKelurahan() {
       </span>
       ayo isi detail tokomu
     </p>
+
+    <div class="w-full px-3 lg:hidden mt-3">
+      <div class="text-2xl text-start font-bold text-slate-600">
+        Masukan Info Toko
+      </div>
+    </div>
 
     <Stepper value="1" :linear="true" class="w-full justify-start pr-3 lg:px-6">
       <StepItem value="1" class="flex items-start">
@@ -197,93 +223,30 @@ async function fetchKelurahan() {
           <div class="font-bold text-lg">Masukkan Alamat Tokomu</div>
         </Step>
         <StepPanel class="w-full">
-          <div class="h-[255px] xl:h-[165px]">
+          <div class="h-[240px]">
             <div class="pt-[8px] pb-[24px]">
-              <div
-                class="mt-2 mb-3 xl:mb-6 inline-block xl:flex items-center space-x-0 xl:space-x-2 w-full"
-              >
-                <Select
-                  v-model="selectedProvinsi"
-                  :options="provinsi"
-                  filter
-                  optionLabel="name"
-                  placeholder="Provinsi"
-                  class="w-full mb-3 xl:mb-0"
-                  @change="fetchKabupaten"
-                >
-                  <template #value="slotProps">
-                    <div v-if="slotProps.value">
-                      <div>{{ slotProps.value.name }}</div>
-                    </div>
-                    <span v-else>{{ slotProps.placeholder }}</span>
-                  </template>
-                  <template #option="slotProps">
-                    <div>{{ slotProps.option.name }}</div>
-                  </template>
-                </Select>
-
-                <Select
-                  v-model="selectedKab"
-                  :options="kab"
-                  filter
-                  optionLabel="name"
-                  placeholder="Kota/Kabupaten"
-                  class="w-full"
-                  @change="fetchKecamatan"
-                >
-                  <template #value="slotProps">
-                    <div v-if="slotProps.value">
-                      <div>{{ slotProps.value.name }}</div>
-                    </div>
-                    <span v-else>{{ slotProps.placeholder }}</span>
-                  </template>
-                  <template #option="slotProps">
-                    <div>{{ slotProps.option.name }}</div>
-                  </template>
-                </Select>
-              </div>
-
-              <div
-                class="mt-2 mb-3 xl:mb-6 inline-block xl:flex items-center space-x-0 xl:space-x-2 w-full"
-              >
-                <Select
-                  v-model="selectedKec"
-                  :options="kec"
-                  filter
-                  optionLabel="name"
-                  placeholder="Kecamatan"
-                  class="w-full mb-3 xl:mb-0"
-                  @change="fetchKelurahan"
-                >
-                  <template #value="slotProps">
-                    <div v-if="slotProps.value">
-                      <div>{{ slotProps.value.name }}</div>
-                    </div>
-                    <span v-else>{{ slotProps.placeholder }}</span>
-                  </template>
-                  <template #option="slotProps">
-                    <div>{{ slotProps.option.name }}</div>
-                  </template>
-                </Select>
-
-                <Select
-                  v-model="selectedKel"
-                  :options="kel"
-                  filter
-                  optionLabel="name"
-                  placeholder="Kelurahan"
-                  class="w-full"
-                >
-                  <template #value="slotProps">
-                    <div v-if="slotProps.value">
-                      <div>{{ slotProps.value.name }}</div>
-                    </div>
-                    <span v-else>{{ slotProps.placeholder }}</span>
-                  </template>
-                  <template #option="slotProps">
-                    <div>{{ slotProps.option.name }}</div>
-                  </template>
-                </Select>
+              <div class="mt-2 mb-3 w-full">
+                <template v-for="(field, index) in fields" :key="index">
+                  <Select
+                    v-model="field.model"
+                    :options="field.options"
+                    filter
+                    optionLabel="name"
+                    :placeholder="field.placeholder"
+                    class="w-full mb-3"
+                    @change="field.onChange && field.onChange()"
+                  >
+                    <template #value="slotProps">
+                      <div v-if="slotProps.value">
+                        <div>{{ slotProps.value.name }}</div>
+                      </div>
+                      <span v-else>{{ slotProps.placeholder }}</span>
+                    </template>
+                    <template #option="slotProps">
+                      <div>{{ slotProps.option.name }}</div>
+                    </template>
+                  </Select>
+                </template>
               </div>
             </div>
           </div>

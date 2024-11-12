@@ -85,9 +85,10 @@ const toggleSidebar = () => {
               isPageType(route, 'wishlist') ||
               isPageType(route, 'userSettings') ||
               isPageType(route, 'userAddress') ||
-              isPageType(route, 'transaction')
+              isPageType(route, 'transaction') ||
+              isPageType(route, 'myShop')
             "
-            class="inline-block lg:hidden font-bold"
+            class="inline-block lg:hidden font-bold text-lg"
           >
             {{ route.name }}
           </div>

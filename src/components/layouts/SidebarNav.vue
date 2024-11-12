@@ -119,38 +119,41 @@ defineProps({
       </div>
 
       <div class="py-3 bg-white px-3 mb-1">
-        <router-link
-          :to="urlPage.TRANSACTION"
-          @click="
-            () => {
-              toggleSidebar?.()
-              scrollTop?.()
-            }
-          "
-          class="flex space-x-3 h-[44px] items-center"
-        >
+        <div class="flex space-x-3 h-[44px] items-center">
           <McBillLine class="w-7 h-7" />
-          <p>Daftar Transaksi</p>
-        </router-link>
-        <router-link
-          :to="urlPage.WISHLIST"
-          @click="
-            () => {
-              toggleSidebar?.()
-              scrollTop?.()
-            }
-          "
-          class="flex space-x-3 h-[44px] items-center"
-        >
+          <router-link
+            :to="urlPage.TRANSACTION"
+            @click="
+              () => {
+                toggleSidebar?.()
+                scrollTop?.()
+              }
+            "
+          >
+            Daftar Transaksi
+          </router-link>
+        </div>
+        <div class="flex space-x-3 h-[44px] items-center">
           <MdFavoriteBorder class="w-7 h-7" />
-          <p>Whislist</p>
-        </router-link>
+          <router-link
+            :to="urlPage.WISHLIST"
+            @click="
+              () => {
+                toggleSidebar?.()
+                scrollTop?.()
+              }
+            "
+          >
+            Wishlist
+          </router-link>
+        </div>
       </div>
 
       <div class="py-3 bg-white px-3">
         <div class="flex space-x-3 h-[44px] items-center">
           <MdLogout class="w-7 h-7" />
-          <p>Logout</p>
+
+          <div>Logout</div>
         </div>
       </div>
     </div>

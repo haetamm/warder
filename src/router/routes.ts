@@ -72,7 +72,7 @@ export const routes = [
       },
       {
         path: urlPage.MY_SHOP,
-        name: 'myShopPage',
+        name: 'Buat Toko',
         component: MyShopPage
       },
       {
