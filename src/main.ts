@@ -5,8 +5,14 @@ import 'primeicons/primeicons.css'
 
 
 
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+
+import Tooltip from 'primevue/tooltip';
+
+
+
 
 
 import App from './App.vue'
@@ -17,7 +23,8 @@ import Aura from '@primevue/themes/aura'
 import { clickOutside } from './directives/clickOutside'
 
 const app = createApp(App)
-app.directive('click-outside', clickOutside);
+app.directive('click-outside', clickOutside)
+app.directive('tooltip', Tooltip)
 const head = createHead()
 app.use(PrimeVue, {
   theme: {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MultipleCarousel from '@/components/layouts/MultipleCarousel.vue'
+import MultipleCarousel from '@/components/layouts/default/MultipleCarousel.vue'
 import HeroCarousel from '@/components/pages/home/HeroCarousel.vue'
 import ListProductHomePage from '@/components/pages/home/ListProductHomePage.vue'
 import { useHead } from '@vueuse/head'

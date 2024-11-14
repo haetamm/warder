@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import { AkArrowLeft, AkTextAlignJustified } from '@kalimahapps/vue-icons'
-import { urlPage } from '@/utils/constans'
 import { useRoute } from 'vue-router'
 import { useMediaQuery } from '@vueuse/core'
-import { backHandle, isPageType, scrollTop } from '@/utils/helper'
 import ButtonCart from './ButtonCart.vue'
-import { useScrollVisibility } from '@/compsables/useScrollVisibility'
 import SearchBar from './SearchBar.vue'
 import { Button, Dialog } from 'primevue'
-import SidebarNav from './SidebarNav.vue'
+import SidebarNav from '../SidebarNav.vue'
+import { urlPage } from '@/utils/constans'
+import { backHandle, isPageType, scrollTop } from '@/utils/helper'
+import { useScrollVisibility } from '@/compsables/useScrollVisibility'
 
 const route = useRoute()
 const showButton = ref(false)

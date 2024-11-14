@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CardProduct from '@/components/layouts/CardProduct.vue'
+import CardProduct from '@/components/layouts/default/CardProduct.vue'
 import { dataProduct } from '@/utils/data'
 import { useHead } from '@vueuse/head'
 import { Select } from 'primevue'

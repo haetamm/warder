@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ButtonCheckout from '@/components/pages/productDetail/ButtonCheckout.vue'
-import CartProduct from '@/components/layouts/CartProduct.vue'
+import CartProduct from '@/components/layouts/default/CartProduct.vue'
 import DetailProduct from '@/components/pages/productDetail/DetailProduct.vue'
 import ImageProduct from '@/components/pages/productDetail/ImageProduct.vue'
 import { useHead } from '@vueuse/head'

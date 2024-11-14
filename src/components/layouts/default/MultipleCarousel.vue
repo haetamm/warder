@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import CardProduct from './CardProduct.vue'
+
 import { scrollTop } from '@/utils/helper'
 import { dataProduct } from '@/utils/data'
+import CardProduct from './CardProduct.vue'
 
 const carouselRef = ref<HTMLDivElement | null>(null)
 

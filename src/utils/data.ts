@@ -373,3 +373,31 @@ export const statusData = [
   { name: 'Berhasil' },
   { name: 'Tidak Berhasil' },
 ]
+
+export const productPopular = [
+  {
+    image: "https://via.placeholder.com/80x80?text=Product",
+    name: "Samsung Galaxy S23 Ultra",
+    price: "Rp.18,500,000",
+  },
+  {
+    image: "https://via.placeholder.com/80x80?text=Product+2",
+    name: "Sony WH-1000XM5 Wireless Headphones",
+    price: "Rp.4,800,000",
+  },
+  {
+    image: "https://via.placeholder.com/80x80?text=Product",
+    name: "Apple MacBook Pro 14-inch M2",
+    price: "Rp.30,000,000",
+  },
+  {
+    image: "https://via.placeholder.com/80x80?text=Product",
+    name: "Nike Air Max 270 React",
+    price: "Rp.1,800,000",
+  },
+  {
+    image: "https://via.placeholder.com/80x80?text=Product",
+    name: "Oculus Quest 2 VR Headset",
+    price: "Rp.5,500,000",
+  }
+]

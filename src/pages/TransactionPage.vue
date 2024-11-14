@@ -18,7 +18,7 @@ const selectedStatus = ref(statusData[0])
 const status = ref(statusData)
 
 useHead({
-  title: 'Daftar Yransaksi Pembelian | Warder',
+  title: 'Daftar Transaksi Pembelian | Warder',
   meta: [
     { name: 'description', content: 'Warder Transaction Page' },
     { name: 'keywords', content: 'marketplace, transaction' },

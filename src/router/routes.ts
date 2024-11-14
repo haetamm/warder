@@ -15,6 +15,8 @@ import UserSettingsPage from "@/pages/UserSettingsPage.vue";
 import { urlPage } from "@/utils/constans";
 import WishlistPage from "@/pages/WishlistPage.vue";
 import TransactionPage from "@/pages/TransactionPage.vue";
+import SellerLayout from "@/layouts/SellerLayout.vue";
+import SellerHomePage from "@/pages/SellerHomePage.vue";
 
 export const routes = [
   {
@@ -79,6 +81,21 @@ export const routes = [
         path: urlPage.TRANSACTION,
         name: 'Daftar Transaksi',
         component: TransactionPage
+      }
+    ]
+  },
+  {
+    path: '/seller',
+    component: SellerLayout,
+    children: [
+      {
+        path: '',
+        redirect: urlPage.SELLER_HOME
+      },
+      {
+        path: 'home',
+        component: SellerHomePage,
+        name: 'Seller Dashboard'
       }
     ]
   },

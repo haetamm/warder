@@ -5,6 +5,8 @@ import Stepper from 'primevue/stepper'
 import Step from 'primevue/step'
 import StepPanel from 'primevue/steppanel'
 import axiosRegionInstance from '@/utils/api'
+import { capitalizeFirstLetterOnly, scrollTop } from '@/utils/helper'
+import { urlPage } from '@/utils/constans'
 
 const phoneNumber = ref('')
 const storeName = ref('')
@@ -238,7 +240,9 @@ const fields = ref([
                   >
                     <template #value="slotProps">
                       <div v-if="slotProps.value">
-                        <div>{{ slotProps.value.name }}</div>
+                        <div>
+                          {{ capitalizeFirstLetterOnly(slotProps.value.name) }}
+                        </div>
                       </div>
                       <span v-else>{{ slotProps.placeholder }}</span>
                     </template>
@@ -251,6 +255,9 @@ const fields = ref([
             </div>
           </div>
           <Button
+            v-on:click="scrollTop"
+            as="router-link"
+            :to="urlPage.SELLER_HOME"
             class="w-full xl:w-[144px] py-3 xl:py-2 font-bold"
             label="Selesai"
             severity="secondary"

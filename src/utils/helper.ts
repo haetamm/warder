@@ -1,4 +1,4 @@
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter, type RouteLocationNormalizedLoaded } from 'vue-router';
 import { urlPage } from './constans';
 
 export const scrollTop = () => {
@@ -27,3 +27,20 @@ export const isPageType = (
 
   return route.path === paths[pageType]
 }
+
+export const capitalizeFirstLetterOnly = (text: string)  => {
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}
+
+export const isActive = (targetPath: string): boolean => {
+  const route: RouteLocationNormalizedLoaded = useRoute()
+  return route.path === targetPath
+}
+
+const date = new Date();
+
+export const currentDate = date.toLocaleDateString('id-ID', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric'
+});

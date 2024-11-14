@@ -1,0 +1,66 @@
+<script setup lang="ts">
+import SellerNavBar from '@/components/layouts/seller/SellerNavBar.vue'
+import SellerSidebar from '@/components/layouts/seller/SellerSidebar.vue'
+</script>
+
+<template>
+  <SellerNavBar />
+  <div class="flex justify-center">
+    <div class="kontener pt-[50px] xl:pt-[60px]">
+      <div
+        class="grid grid-cols-[15%_85%] xs:grid-cols-[13%_87%] xl:grid-cols-[16%_84%]"
+      >
+        <SellerSidebar />
+
+        <div
+          class="overflow-y-auto no-scrollbar h-[calc(100vh-50px)] xl:h-[calc(100vh-60px)]"
+        >
+          <RouterView />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.kontener {
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  .kontener {
+    max-width: 500px;
+  }
+}
+@media (min-width: 640px) {
+  .kontener {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+  .kontener {
+    max-width: 768px;
+  }
+}
+@media (min-width: 845px) {
+  .kontener {
+    max-width: 845px;
+  }
+}
+@media (min-width: 1024px) {
+  .kontener {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+  .kontener {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1340px) {
+  .kontener {
+    max-width: 1340px;
+  }
+}
+</style>
