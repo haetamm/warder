@@ -36,7 +36,7 @@ import { BsTrash, CaFavorite } from '@kalimahapps/vue-icons'
         <div class="flex flex-col flex-1">
           <div class="inline-block xs:flex justify-between items-start mb-0">
             <div class="font-normal text-sm lg:text-md flex-1">
-              <div class="truncate max-w-[190px] xl:max-w-none">
+              <div class="line-clamp-1">
                 {{ product.name }}
               </div>
               <div>{{ product.color }}</div>

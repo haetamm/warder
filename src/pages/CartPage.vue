@@ -14,7 +14,7 @@ useHead({
 </script>
 
 <template>
-  <div class="flex-grow pt-[40px] xl:pt-[65px] bg-cartpage">
+  <div class="flex-grow pt-[40px] xl:pt-[55px] bg-cartpage">
     <div class="kontener mx-auto mb-1">
       <div
         class="grid grid-cols-1 md:grid-cols-[60%_40%] lg:grid-cols-[70%_30%]"

@@ -401,3 +401,24 @@ export const productPopular = [
     price: "Rp.5,500,000",
   }
 ]
+
+export const  dataArticle = [
+  {
+    title: 'Dapatkan Teman Diskusi Berjualan dan Undangan Khusus Kegiatan SellerWarder',
+    img: 'https://images.tokopedia.net/img/cache/350/kjjBfF/2024/11/15/2e5520d4-422d-4604-9ead-e2d61fa4c488.png.webp?ect=3g',
+    category: 'Materi Seller Baru',
+    createdAt: '15 Nov 2024'
+  },
+  {
+    title: '[Pengiriman] Jenis-Jenis Pengiriman dan Cara Mengaturnya',
+    img: 'https://images.tokopedia.net/img/cache/350/kjjBfF/2023/8/14/edd1da48-d8a3-4bf2-b03b-ec24e68239ac.jpg.webp?ect=3g',
+    category: 'Materi Seller Baru',
+    createdAt: '6 Nov 2024'
+  },
+  {
+    title: 'Selamat! Kamu Mendapatkan Voucher Menarik Hanya Dengan Menyelesaikan Tantangan Toko!🎉',
+    img: 'https://images.tokopedia.net/img/cache/350/kjjBfF/2024/9/17/1809a313-9dff-40a9-b70e-e8d260c860b6.png.webp?ect=3g',
+    category: 'Materi Seller Baru',
+    createdAt: '3 Oct 2024'
+  }
+]

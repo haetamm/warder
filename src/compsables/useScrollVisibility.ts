@@ -5,16 +5,19 @@ export function useScrollVisibility() {
   let lastScrollTop = 0;
 
   const handleScroll = () => {
-    const currentScrollTop = window.scrollY;
+    const currentScrollTop = window.scrollY
+    console.log(currentScrollTop, isVisible.value)
     isVisible.value = currentScrollTop < lastScrollTop || currentScrollTop === 0;
     lastScrollTop = currentScrollTop;
   };
 
   onMounted(() => {
+    console.log('Scroll event listener added');
     window.addEventListener('scroll', handleScroll);
   });
 
   onBeforeUnmount(() => {
+    console.log('Scroll event listener added');
     window.removeEventListener('scroll', handleScroll);
   });
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { urlPage } from '@/utils/constans'
-import { isPageType, scrollTop } from '@/utils/helper'
+import { scrollTop } from '@/utils/helper'
 import {
   AkTextAlignJustified,
   MdOutlinedNotifications,
@@ -19,34 +19,19 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div
-    v-if="!isPageType(route, 'shipment')"
-    class="w-full border-b-2 fixed bg-white z-50 py-2 flex justify-center px-0 md:px-5"
-  >
-    <div class="kontener">
+  <div class="w-full border-b-2 fixed bg-white z-50 py-2 px-0 md:px-5">
+    <div class="kontener mx-auto">
       <div class="flex justify-between items-center px-2 lg:px-0 xl:py-1">
         <RouterLink
           :to="urlPage.HOME"
-          class="h-[35px] w-[170px] hidden xs:flex items-center space-x-2"
+          class="h-[35px] w-[170px] hidden md:flex items-center space-x-2"
         >
           <img src="/image/logo.png" alt="logo" class="h-[30px] w-[170px]" />
           <img src="/image/seller.svg" alt="logo" class="h-[20px] w-[170px]" />
         </RouterLink>
 
-        <div class="flex items-center">
-          <div
-            v-if="
-              isPageType(route, 'cart') ||
-              isPageType(route, 'wishlist') ||
-              isPageType(route, 'userSettings') ||
-              isPageType(route, 'userAddress') ||
-              isPageType(route, 'transaction') ||
-              isPageType(route, 'myShop')
-            "
-            class="inline-block lg:hidden font-bold text-lg"
-          >
-            {{ route.name }}
-          </div>
+        <div class="inline-block md:hidden font-bold text-lg">
+          {{ route.name }}
         </div>
 
         <div class="flex justify-center items-center space-x-3">

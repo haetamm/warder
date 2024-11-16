@@ -10,7 +10,11 @@ import SellerSidebar from '@/components/layouts/seller/SellerSidebar.vue'
       <div
         class="grid grid-cols-[15%_85%] xs:grid-cols-[13%_87%] xl:grid-cols-[16%_84%]"
       >
-        <SellerSidebar />
+        <div
+          class="sticky top-0 border-r-2 h-[calc(100vh-54px)] xl:h-[calc(100vh-60px)] flex flex-col justify-between py-3 px-[3px] xl:px-0 pt-5"
+        >
+          <SellerSidebar />
+        </div>
 
         <div
           class="overflow-y-auto no-scrollbar h-[calc(100vh-50px)] xl:h-[calc(100vh-60px)]"
