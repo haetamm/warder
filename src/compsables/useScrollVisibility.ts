@@ -6,7 +6,6 @@ export function useScrollVisibility() {
 
   const handleScroll = () => {
     const currentScrollTop = window.scrollY
-    console.log(currentScrollTop, isVisible.value)
     isVisible.value = currentScrollTop < lastScrollTop || currentScrollTop === 0;
     lastScrollTop = currentScrollTop;
   };

@@ -32,7 +32,7 @@ useHead({
         <NavListProduct />
 
         <div
-          class="overflow-y-scroll no-scrollbar h-full md:h-[calc(100vh-70px)] lg:h-[calc(100vh-89px)] border-l-none md:border-l-2"
+          class="overflow-y-scroll no-scrollbar h-full md:h-[calc(100vh-50px)] lg:h-[calc(100vh-50px)] border-l-none md:border-l-2"
         >
           <ListProduct />
         </div>

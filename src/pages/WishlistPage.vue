@@ -4,6 +4,7 @@ import { dataProduct } from '@/utils/data'
 import { useHead } from '@vueuse/head'
 import { Select } from 'primevue'
 import { ref } from 'vue'
+import DataView from 'primevue/dataview'
 
 useHead({
   title: 'Wishlist | Warder',
@@ -21,7 +22,7 @@ const sort = ref([
 </script>
 
 <template>
-  <div class="flex-grow kontener mx-auto pt-[75px]">
+  <div class="flex-grow kontener mx-auto pt-[75px] pb-5">
     <div
       class="mt-1 flex justify-between items-end xs:items-center px-3 w-full"
     >
@@ -40,20 +41,24 @@ const sort = ref([
         class="w-full md:w-56"
       />
     </div>
-    <div
-      class="w-full gap-0 grid grid-cols-1 xxs:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 relative justify-center mt-3"
-    >
-      <div
-        v-for="(product, index) in dataProduct"
-        :key="index"
-        class="relative h-min-[450px] m-3 mx-auto"
-      >
+    <DataView :value="dataProduct" paginator :rows="10" dataKey="id">
+      <template #list="slotProps">
         <div
-          class="relative w-[250px] xxs:w-[175px] xs:w-[205px] h-[400px] xl:w-[230px] group border-[1px] rounded-lg flex-shrink-0 overflow-hidden cursor-pointer"
+          class="w-full gap-0 grid grid-cols-1 xxs:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 relative justify-center mt-3"
         >
-          <CardProduct :product="product" />
+          <div
+            v-for="product in slotProps.items"
+            :key="product.id"
+            class="relative h-min-[450px] m-3 mx-auto"
+          >
+            <div
+              class="relative w-[250px] xxs:w-[175px] xs:w-[205px] h-[400px] xl:w-[230px] group border-[1px] rounded-lg flex-shrink-0 overflow-hidden cursor-pointer"
+            >
+              <CardProduct :product="product" />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </template>
+    </DataView>
   </div>
 </template>

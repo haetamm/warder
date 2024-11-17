@@ -1,12 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Button, Column, DataTable, ToggleButton } from 'primevue'
+import { ref, computed } from 'vue'
+import {
+  Button,
+  Column,
+  DataTable,
+  ToggleButton,
+  IconField,
+  InputIcon,
+  InputText,
+} from 'primevue'
 import { productSeller } from '@/utils/data'
 import { useMediaQuery } from '@vueuse/core'
 
 const products = ref(productSeller)
+const searchQuery = ref('')
 const isLargeScreen = useMediaQuery('(min-width: 768px)')
 const dt = ref()
+
+// Filtered products based on search query (filter by name or SKU)
+const filteredProducts = computed(() => {
+  if (!searchQuery.value.trim()) {
+    return products.value
+  }
+  return products.value.filter(
+    product =>
+      product.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      product.sku.toLowerCase().includes(searchQuery.value.toLowerCase()),
+  )
+})
 
 const exportCSV = () => {
   dt.value.exportCSV()
@@ -17,24 +38,63 @@ const exportCSV = () => {
   <div class="mx-0">
     <DataTable
       ref="dt"
-      :value="products"
+      :value="filteredProducts"
       removableSort
       scrollable
       tableStyle="min-width: 360px"
-      :scrollHeight="isLargeScreen ? '400px ' : 'none'"
+      :scrollHeight="isLargeScreen ? '420px ' : 'none'"
       paginator
       class="text-black"
-      :rows="7"
+      :rows="9"
     >
-      <div class="justify-end space-x-2 flex mb-4">
-        <Button
-          icon="pi pi-external-link"
-          class="font-bold text-sm"
-          label="Export"
-          @click="exportCSV()"
-        />
-        <Button class="font-bold text-sm" label="+ Tambah Produk" />
+      <div
+        class="flex flex-col xs:flex-row justify-between w-full items-center mb-5"
+      >
+        <div
+          class="w-full xs:w-1/2 inline-block xs:flex justify-start items-center order-2 xs:order-1 mt-4 xs:mt-0"
+        >
+          <IconField>
+            <InputIcon>
+              <i class="pi pi-search" />
+            </InputIcon>
+            <InputText
+              v-model="searchQuery"
+              class="w-full"
+              placeholder="Cari berdasarkan Nama atau SKU"
+            />
+          </IconField>
+        </div>
+
+        <div
+          class="flex justify-between xs:justify-end space-x-2 items-center order-1 xs:order-2 w-full xs:w-auto"
+        >
+          <Button
+            icon="pi pi-external-link"
+            class="font-bold text-sm"
+            :style="{
+              height: '42px',
+              padding: '3px 6px 3px 6px',
+              background: '#9333ea',
+            }"
+            label="Export"
+            @click="exportCSV()"
+          />
+          <Button
+            :style="{
+              height: '42px',
+              padding: '3px 6px 3px 6px',
+              background: '#9333ea',
+            }"
+            class="font-bold text-sm"
+            icon="pi pi-plus"
+            label="Tambah Produk"
+          />
+        </div>
       </div>
+
+      <template #empty> Tidak ada data produk yang ditemukan. </template>
+      <template #loading> Memuat data produk. Mohon tunggu. </template>
+
       <Column
         class="min-w-[200px] text-black"
         field="name"
@@ -77,7 +137,7 @@ const exportCSV = () => {
             :style="{
               background: '#c084fc',
               color: 'white',
-              padding: '6px 3px 6px 3px',
+              padding: '6px 0px 6px 0px',
             }"
             class="w-20"
             onLabel="On"

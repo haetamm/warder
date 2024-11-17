@@ -14,7 +14,7 @@ import { scrollTop } from '@/utils/helper'
       class="relative h-min-[450px] m-3 mx-auto"
     >
       <div
-        class="relative w-[250px] xxs:w-[175px] h-[286px] lg:w-[175px] xl:w-[185px] group border-[1px] rounded-lg flex-shrink-0 overflow-hidden cursor-pointer"
+        class="relative w-[250px] xxs:w-[164px] h-[286px] lg:w-[175px] xl:w-[185px] group border-[1px] rounded-lg flex-shrink-0 overflow-hidden cursor-pointer"
       >
         <router-link
           :to="`${product.merchant_name}/${product.id}`"

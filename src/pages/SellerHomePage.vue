@@ -21,7 +21,7 @@ useHead({
       <CardDasboard />
       <TrendCardDashboard />
     </div>
-    <div class="mt-4 w-full px-2 mb-5">
+    <div class="mt-4 w-full px-1 md:px-2 mb-5">
       <StartGuide />
 
       <ListArticle />

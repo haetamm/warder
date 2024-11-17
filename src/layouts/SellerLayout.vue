@@ -6,7 +6,7 @@ import SellerSidebar from '@/components/layouts/seller/SellerSidebar.vue'
 <template>
   <SellerNavBar />
   <div class="flex justify-center">
-    <div class="kontener pt-[50px] xl:pt-[60px]">
+    <div class="kontener pt-[50px] lg:pt-[49px] xl:pt-[60px]">
       <div
         class="grid grid-cols-[15%_85%] xs:grid-cols-[13%_87%] xl:grid-cols-[16%_84%]"
       >

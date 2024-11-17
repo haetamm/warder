@@ -23,25 +23,22 @@ const route = useRoute()
     }"
   ></div>
 
-  <div class="h-1/2 flex flex-col text-sm">
+  <div class="h-1/2 flex flex-col text-sm text-black">
     <router-link
       :to="`${product.merchant_name}/${product.id}`"
       :onclick="scrollTop"
-      class="p-2"
-      :class="
-        isPageType(route, 'wishlist')
-          ? 'space-y-1.5'
-          : 'space-y-0 md:space-y-0.5'
-      "
+      class="p-2 space-y-1"
     >
-      <p class="line-clamp-3">
-        Ellipsesinc - Kaos Oversize Pria Wanita NY - Putih
+      <p class="line-clamp-2">
+        {{ product.product_name }} - {{ product.color }}
       </p>
-      <p class="font-bold">Rp43.900</p>
-      <p>Jakarta Barat</p>
+      <p class="font-bold">{{ product.price }}</p>
+      <p>{{ product.address }}</p>
       <div class="flex items-center">
         <AnFilledStar />
-        <p class="ml-1">. 4.1 | 400 Terjual</p>
+        <p class="ml-1">
+          . {{ product.rating }} | {{ product.count_sales }} Terjual
+        </p>
       </div>
     </router-link>
     <div

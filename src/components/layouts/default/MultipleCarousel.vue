@@ -35,7 +35,7 @@ const scroll = (direction: 'left' | 'right') => {
         :style="{ scrollSnapType: 'x mandatory' }"
       >
         <div
-          v-for="(product, index) in dataProduct"
+          v-for="(product, index) in dataProduct.slice(0, 10)"
           :key="index"
           class="relative group w-[165px] h-[286px] md:w-[185px] border-[1px] rounded-lg flex-shrink-0 overflow-hidden cursor-pointer"
         >

@@ -1,7 +1,14 @@
 export interface ProductCardProps {
-  id: string
-  poster_path: string
-  merchant_name: string
+  id: string;
+  product_name: string;
+  color: string;
+  price: string;
+  address: string;
+  rating: string;
+  merchant_name: string;
+  count_sales: string;
+  poster_path: string;
+  createdAt: string;
 }
 
 export interface Slide {
