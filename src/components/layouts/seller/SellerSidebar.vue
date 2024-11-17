@@ -20,7 +20,7 @@ const navItems = [
   {
     name: 'produk',
     label: 'Produk',
-    route: '#',
+    route: urlPage.SELLER_PRODUCT,
     icon: FaBoxesPacking,
     size: 'h-7 w-7',
   },
@@ -35,7 +35,7 @@ const navItems = [
 </script>
 
 <template>
-  <div class="px-0 md:px-3">
+  <div class="px-0 md:px-3 z-50">
     <div
       class="flex items-center justify-center xl:justify-start pb-3 space-x-0 md:space-x-3 space-y-0 shadow-custom"
     >

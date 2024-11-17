@@ -47,7 +47,7 @@ const transactions = ref(dataTransactions)
         <div class="flex flex-col flex-1">
           <div class="inline-block xs:flex justify-between items-start mb-0">
             <div class="font-normal text-sm lg:text-md flex-1">
-              <div class="font-bold">
+              <div class="font-bold line-clamp-1">
                 {{ transaction.productName }}
               </div>
               <div class="mt-2">

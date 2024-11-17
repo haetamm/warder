@@ -3,10 +3,8 @@ import { AkChevronRight } from '@kalimahapps/vue-icons'
 </script>
 
 <template>
-  <p class="font-bold text-lg">Keperluan untuk jualanmu</p>
-  <p class="text-sm">Cek semuanya untuk tingkatkan performa toko</p>
   <div
-    class="border-[1px] my-auto rounded-md w-full px-5 py-3 text-sm mt-2 cursor-pointer h-[105px]"
+    class="border-[1px] my-auto rounded-md w-full px-5 py-3 text-sm cursor-pointer h-[105px]"
   >
     <div class="flex justify-between items-center">
       <div class="flex items-center space-x-3 mb-1 justify-center">

@@ -422,3 +422,167 @@ export const  dataArticle = [
     createdAt: '3 Oct 2024'
   }
 ]
+
+
+export const productSeller = [
+  {
+    name: "Disney Tsum Tsum Squishies",
+    img: "https://via.placeholder.com/80x80?text=Product",
+    price: "1000000",
+    stock: 10,
+    active: true,
+    sku: "A8900"
+  },
+  {
+    name: "LEGO Creator Expert Modular Buildings",
+    img: "https://via.placeholder.com/80x80?text=LEGO",
+    price: "2500000",
+    stock: 5,
+    active: true,
+    sku: "L9201"
+  },
+  {
+    name: "Funko Pop! Marvel Spider-Man",
+    img: "https://via.placeholder.com/80x80?text=Funko+Pop",
+    price: "350000",
+    stock: 20,
+    active: true,
+    sku: "F9800"
+  },
+  {
+    name: "Hot Wheels Monster Trucks",
+    img: "https://via.placeholder.com/80x80?text=Hot+Wheels",
+    price: "150000",
+    stock: 50,
+    active: true,
+    sku: "HW7865"
+  },
+  {
+    name: "Barbie Dreamhouse Playset",
+    img: "https://via.placeholder.com/80x80?text=Barbie",
+    price: "4500000",
+    stock: 3,
+    active: false,
+    sku: "BDR123"
+  },
+  {
+    name: "NERF Elite 2.0 Flipshots",
+    img: "https://via.placeholder.com/80x80?text=NERF",
+    price: "400000",
+    stock: 15,
+    active: true,
+    sku: "NE2048"
+  },
+  {
+    name: "Play-Doh Kitchen Creations",
+    img: "https://via.placeholder.com/80x80?text=Play-Doh",
+    price: "200000",
+    stock: 30,
+    active: true,
+    sku: "PD5934"
+  },
+  {
+    name: "Fisher-Price Laugh & Learn Puppy",
+    img: "https://via.placeholder.com/80x80?text=Fisher-Price",
+    price: "500000",
+    stock: 8,
+    active: false,
+    sku: "FP3940"
+  },
+  {
+    name: "Transformers Optimus Prime Action Figure",
+    img: "https://via.placeholder.com/80x80?text=Transformers",
+    price: "850000",
+    stock: 12,
+    active: true,
+    sku: "TF4098"
+  },
+  {
+    name: "Jenga Classic Game",
+    img: "https://via.placeholder.com/80x80?text=Jenga",
+    price: "250000",
+    stock: 25,
+    active: true,
+    sku: "JG5623"
+  },
+  {
+    name: "Monopoly Classic Board Game",
+    img: "https://via.placeholder.com/80x80?text=Monopoly",
+    price: "300000",
+    stock: 18,
+    active: true,
+    sku: "MP2023"
+  },
+  {
+    name: "Crayola Ultimate Crayon Collection",
+    img: "https://via.placeholder.com/80x80?text=Crayola",
+    price: "450000",
+    stock: 25,
+    active: true,
+    sku: "CRY567"
+  },
+  {
+    name: "Baby Yoda Plush Toy",
+    img: "https://via.placeholder.com/80x80?text=Baby+Yoda",
+    price: "750000",
+    stock: 6,
+    active: true,
+    sku: "BY1234"
+  },
+  {
+    name: "Paw Patrol Ultimate Rescue Fire Truck",
+    img: "https://via.placeholder.com/80x80?text=Paw+Patrol",
+    price: "1200000",
+    stock: 7,
+    active: true,
+    sku: "PP8900"
+  },
+  {
+    name: "Rubik's Cube 3x3",
+    img: "https://via.placeholder.com/80x80?text=Rubik's+Cube",
+    price: "100000",
+    stock: 50,
+    active: true,
+    sku: "RC333"
+  },
+  {
+    name: "Mattel Uno Card Game",
+    img: "https://via.placeholder.com/80x80?text=Uno",
+    price: "85000",
+    stock: 100,
+    active: true,
+    sku: "UNO567"
+  },
+  {
+    name: "PlayStation DualShock 4 Controller",
+    img: "https://via.placeholder.com/80x80?text=DualShock",
+    price: "650000",
+    stock: 15,
+    active: true,
+    sku: "PS4DS4"
+  },
+  {
+    name: "Xiaomi Mi Smart Band 6",
+    img: "https://via.placeholder.com/80x80?text=Mi+Band+6",
+    price: "550000",
+    stock: 20,
+    active: true,
+    sku: "MB6600"
+  },
+  {
+    name: "Razer DeathAdder V2 Gaming Mouse",
+    img: "https://via.placeholder.com/80x80?text=Razer+Mouse",
+    price: "1200000",
+    stock: 10,
+    active: true,
+    sku: "RAZV2"
+  },
+  {
+    name: "Samsung Galaxy Buds 2",
+    img: "https://via.placeholder.com/80x80?text=Galaxy+Buds",
+    price: "1700000",
+    stock: 8,
+    active: true,
+    sku: "SGB2023"
+  }
+];

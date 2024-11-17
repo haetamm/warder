@@ -11,5 +11,6 @@ export const urlPage = {
   "MY_SHOP": "/myshop",
   "WISHLIST": "/wishlist",
   "TRANSACTION": "/order-list",
-  "SELLER_HOME": "/seller/home"
+  "SELLER_HOME": "/seller/home",
+  "SELLER_PRODUCT": "/seller/product",
 }

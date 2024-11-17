@@ -6,22 +6,18 @@ import TrendCardDashboard from '@/components/pages/sellerHomePage/TrendCardDashb
 import { useHead } from '@vueuse/head'
 
 useHead({
-  title: 'Seller Dashboard | Warder',
+  title: 'Dashboard | Warder Seller',
   meta: [
-    { name: 'description', content: 'Seller dashboard about seler' },
-    { name: 'keywords', content: 'product, details, vue' },
+    { name: 'description', content: 'Seller dashboard about seller' },
+    { name: 'keywords', content: 'dashboard, details, vue' },
   ],
 })
 </script>
 <template>
   <div
-    class="w-full grid grid-cols-1 lg:grid-cols-[60%_40%] xl:grid-cols-[65%_35%] lg:mb-2 xl:mb-0 min-h-screen"
+    class="w-full grid grid-cols-1 lg:grid-cols-[60%_40%] xl:grid-cols-[65%_35%] lg:mb-2 xl:pt-3 xl:mb-0 min-h-[calc(100vh-60px)]"
   >
-    <div class="mt-4 w-full md:border-r-[1px] px-2">
-      <p class="font-bold text-lg">Selamat datang di Waroeng Sederhana!</p>
-      <p class="text-sm">
-        Kuti rekomendasi dan misi untuk raih penjualan pertama.
-      </p>
+    <div class="mt-2 w-full lg:border-r-[1px] px-1 md:px-2">
       <CardDasboard />
       <TrendCardDashboard />
     </div>

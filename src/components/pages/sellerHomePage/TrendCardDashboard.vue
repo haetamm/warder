@@ -2,6 +2,10 @@
 import { productPopular } from '@/utils/data'
 import { currentDate } from '@/utils/helper'
 import { CaWarning } from '@kalimahapps/vue-icons'
+import { Column, DataTable } from 'primevue'
+import { ref } from 'vue'
+
+const products = ref(productPopular)
 </script>
 
 <template>
@@ -15,36 +19,34 @@ import { CaWarning } from '@kalimahapps/vue-icons'
         <div class="font-normal text-sm">{{ currentDate }}</div>
       </div>
 
-      <div class="overflow-x-auto w-full">
-        <table class="table-auto font-normal text-md min-w-[400px] w-full">
-          <thead class="font-normal">
-            <tr>
-              <th class="text-left py-2 px-4"></th>
-              <th class="text-left py-2 px-4">Nama Produk</th>
-              <th class="text-left py-2 px-4">Harga</th>
-            </tr>
-          </thead>
-          <tbody class="text-sm">
-            <tr
-              v-for="(product, index) in productPopular"
-              :key="index"
-              class="border-b-2"
-            >
-              <td class="flex justify-center items-center w-14 xs:w-20 py-1">
-                <img
-                  :src="product.image"
-                  alt="product-img"
-                  class="w-[46px] h-[46px] rounded-md"
-                />
-              </td>
-              <td class="px-4">
-                {{ product.name }}
-              </td>
-              <td class="px-4 py-2">{{ product.price }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <DataTable :value="products" tableStyle="min-width: 360px ">
+        <Column
+          :style="{
+            padding: '4px 8px 4px 8px',
+            width: '70px',
+          }"
+        >
+          <template #body="slotProps">
+            <img
+              :src="slotProps.data.image"
+              :alt="slotProps.data.image"
+              class="w-[46px] h-[46px] rounded-md"
+            />
+          </template>
+        </Column>
+        <Column field="name" header="Name" class="text-sm">
+          <template #body="slotProps">
+            <div class="line-clamp-1 text-black">
+              {{ slotProps.data.name }}
+            </div>
+          </template>
+        </Column>
+        <Column
+          field="price"
+          header="Price"
+          class="text-sm text-black"
+        ></Column>
+      </DataTable>
     </div>
   </div>
 </template>

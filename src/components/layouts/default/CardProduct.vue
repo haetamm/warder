@@ -34,7 +34,9 @@ const route = useRoute()
           : 'space-y-0 md:space-y-0.5'
       "
     >
-      <p>Ellipsesinc - Kaos Oversize Pria Wanita NY - Putih</p>
+      <p class="line-clamp-3">
+        Ellipsesinc - Kaos Oversize Pria Wanita NY - Putih
+      </p>
       <p class="font-bold">Rp43.900</p>
       <p>Jakarta Barat</p>
       <div class="flex items-center">

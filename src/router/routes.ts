@@ -17,6 +17,7 @@ import WishlistPage from "@/pages/WishlistPage.vue";
 import TransactionPage from "@/pages/TransactionPage.vue";
 import SellerLayout from "@/layouts/SellerLayout.vue";
 import SellerHomePage from "@/pages/SellerHomePage.vue";
+import SellerProductPage from "@/pages/SellerProductPage.vue";
 
 export const routes = [
   {
@@ -95,7 +96,12 @@ export const routes = [
       {
         path: 'home',
         component: SellerHomePage,
-        name: 'Seller Dashboard'
+        name: 'Dashboard'
+      },
+      {
+        path: 'product',
+        component: SellerProductPage,
+        name: 'Produk'
       }
     ]
   },
