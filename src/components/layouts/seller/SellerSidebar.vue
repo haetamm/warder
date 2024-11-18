@@ -1,37 +1,8 @@
 <script setup lang="ts">
 import { isActive, scrollTop } from '@/utils/helper'
-import { urlPage } from '@/utils/constans'
 
-import {
-  AnFilledSetting,
-  FaBoxesPacking,
-  FlFilledClipboardText,
-  HiSolidHome,
-} from '@kalimahapps/vue-icons'
-
-const navItems = [
-  {
-    name: 'home',
-    label: 'Home',
-    route: urlPage.SELLER_HOME,
-    icon: HiSolidHome,
-    size: 'h-7 w-7',
-  },
-  {
-    name: 'produk',
-    label: 'Produk',
-    route: urlPage.SELLER_PRODUCT,
-    icon: FaBoxesPacking,
-    size: 'h-7 w-7',
-  },
-  {
-    name: 'pesanan',
-    label: 'Pesanan',
-    route: '#',
-    icon: FlFilledClipboardText,
-    size: 'h-7 w-7',
-  },
-]
+import { AnFilledSetting } from '@kalimahapps/vue-icons'
+import { navItems } from '@/utils/data'
 </script>
 
 <template>
@@ -54,10 +25,10 @@ const navItems = [
 
     <div class="my-1 mt-8 xs:mt-5 md:mt-8">
       <router-link
-        v-for="item in navItems"
+        v-for="item in navItems.slice(0, 3)"
         :key="item.name"
         :to="item.route"
-        @click="scrollTop"
+        v-on:click="scrollTop"
         :class="[
           'flex items-center hover:text-purple-600 rounded-md justify-center xl:justify-start py-2 my-1 space-x-0 md:space-x-3 xl:hover:bg-gray-200 px-2',
           isActive(item.route) ? 'text-purple-600 font-bold' : '',

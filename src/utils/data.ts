@@ -1,6 +1,7 @@
-import { AnFilledInstagram, BsFacebook, CaPlayOutlineFilled, FaBandsSquareTwitter } from "@kalimahapps/vue-icons"
+import { AnFilledInstagram, AnFilledSetting, BsFacebook, CaPlayOutlineFilled, FaBandsSquareTwitter, FaBoxesPacking, FlFilledClipboardText, HiSolidHome } from "@kalimahapps/vue-icons"
 import { ref } from "vue"
 import type { Product, Slide } from "./interface"
+import { urlPage } from "./constans";
 
 export const slides = ref<Slide[]>([
   {
@@ -260,7 +261,7 @@ export const dataProduct = [
     address: "Medan",
     rating: "4.1",
     count_sales: "300",
-    merchant_name: "active_wear",
+    merchant_name: "status_wear",
     poster_path: "https://via.placeholder.com/200x300?text=Product+20",
     createdAt: "2024-11-08T07:30:00Z",
   },
@@ -362,7 +363,36 @@ export const dataProduct = [
   }
 ];
 
-
+export const navItems = [
+  {
+    name: 'home',
+    label: 'Home',
+    route: urlPage.SELLER_HOME,
+    icon: HiSolidHome,
+    size: 'h-7 w-7',
+  },
+  {
+    name: 'produk',
+    label: 'Produk',
+    route: urlPage.SELLER_PRODUCT,
+    icon: FaBoxesPacking,
+    size: 'h-7 w-7',
+  },
+  {
+    name: 'pesanan',
+    label: 'Pesanan',
+    route: '#',
+    icon: FlFilledClipboardText,
+    size: 'h-7 w-7',
+  },
+  {
+    name: 'pengaturan',
+    label: 'Pengaturan',
+    route: '#',
+    icon: AnFilledSetting,
+    size: 'h-7 w-7',
+  },
+]
 
 export const links = [
   "Tentang Warder",
@@ -746,7 +776,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Product",
     price: "1000000",
     stock: 10,
-    active: false,
+    status: false,
     sku: "A8900"
   },
   {
@@ -754,7 +784,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=LEGO",
     price: "2500000",
     stock: 5,
-    active: true,
+    status: true,
     sku: "L9201"
   },
   {
@@ -762,7 +792,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Funko+Pop",
     price: "350000",
     stock: 20,
-    active: true,
+    status: true,
     sku: "F9800"
   },
   {
@@ -770,7 +800,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Hot+Wheels",
     price: "150000",
     stock: 50,
-    active: false,
+    status: false,
     sku: "HW7865"
   },
   {
@@ -778,7 +808,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Barbie",
     price: "4500000",
     stock: 3,
-    active: false,
+    status: false,
     sku: "BDR123"
   },
   {
@@ -786,7 +816,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=NERF",
     price: "400000",
     stock: 15,
-    active: false,
+    status: false,
     sku: "NE2048"
   },
   {
@@ -794,7 +824,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Play-Doh",
     price: "200000",
     stock: 30,
-    active: true,
+    status: true,
     sku: "PD5934"
   },
   {
@@ -802,7 +832,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Fisher-Price",
     price: "500000",
     stock: 8,
-    active: false,
+    status: false,
     sku: "FP3940"
   },
   {
@@ -810,7 +840,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Transformers",
     price: "850000",
     stock: 12,
-    active: false,
+    status: false,
     sku: "TF4098"
   },
   {
@@ -818,7 +848,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Jenga",
     price: "250000",
     stock: 25,
-    active: true,
+    status: true,
     sku: "JG5623"
   },
   {
@@ -826,7 +856,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Monopoly",
     price: "300000",
     stock: 18,
-    active: true,
+    status: true,
     sku: "MP2023"
   },
   {
@@ -834,7 +864,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Crayola",
     price: "450000",
     stock: 25,
-    active: true,
+    status: true,
     sku: "CRY567"
   },
   {
@@ -842,7 +872,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Baby+Yoda",
     price: "750000",
     stock: 6,
-    active: true,
+    status: true,
     sku: "BY1234"
   },
   {
@@ -850,7 +880,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Paw+Patrol",
     price: "1200000",
     stock: 7,
-    active: false,
+    status: false,
     sku: "PP8900"
   },
   {
@@ -858,7 +888,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Rubik's+Cube",
     price: "100000",
     stock: 50,
-    active: true,
+    status: true,
     sku: "RC333"
   },
   {
@@ -866,7 +896,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Uno",
     price: "85000",
     stock: 100,
-    active: true,
+    status: true,
     sku: "UNO567"
   },
   {
@@ -874,7 +904,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=DualShock",
     price: "650000",
     stock: 15,
-    active: true,
+    status: true,
     sku: "PS4DS4"
   },
   {
@@ -882,7 +912,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Mi+Band+6",
     price: "550000",
     stock: 20,
-    active: false,
+    status: false,
     sku: "MB6600"
   },
   {
@@ -890,7 +920,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Razer+Mouse",
     price: "1200000",
     stock: 10,
-    active: false,
+    status: false,
     sku: "RAZV2"
   },
   {
@@ -898,7 +928,7 @@ export const productSeller = [
     img: "https://via.placeholder.com/80x80?text=Galaxy+Buds",
     price: "1700000",
     stock: 8,
-    active: false,
+    status: false,
     sku: "SGB2023"
   }
 ];

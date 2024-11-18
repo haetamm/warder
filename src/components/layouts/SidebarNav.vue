@@ -160,10 +160,4 @@ defineProps({
   </div>
 </template>
 
-<style scoped>
-.bg-blur {
-  background-color: rgba(248, 246, 246, 0.5); /* Black color with 50% opacity */
-  backdrop-filter: blur(10px); /* Apply a blur effect */
-  z-index: 1000;
-}
-</style>
+<style scoped></style>

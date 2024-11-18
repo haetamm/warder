@@ -8,25 +8,41 @@ import {
   IconField,
   InputIcon,
   InputText,
+  Select,
 } from 'primevue'
 import { productSeller } from '@/utils/data'
 import { useMediaQuery } from '@vueuse/core'
 
+const statusOptions = [
+  { label: 'Aktif', value: true },
+  { label: 'Non Aktif', value: false },
+]
+
+const selectedStatus = ref<{ label: string; value: boolean } | null>(null)
 const products = ref(productSeller)
 const searchQuery = ref('')
 const isLargeScreen = useMediaQuery('(min-width: 768px)')
 const dt = ref()
 
-// Filtered products based on search query (filter by name or SKU)
-const filteredProducts = computed(() => {
-  if (!searchQuery.value.trim()) {
+const filterByStatus = () => {
+  if (selectedStatus.value === null) {
     return products.value
   }
   return products.value.filter(
-    product =>
-      product.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      product.sku.toLowerCase().includes(searchQuery.value.toLowerCase()),
+    product => product.status === selectedStatus.value?.value,
   )
+}
+
+const filteredProducts = computed(() => {
+  const queryFilter = searchQuery.value.trim().toLowerCase()
+
+  const searchFiltered = products.value.filter(
+    product =>
+      product.name.toLowerCase().includes(queryFilter) ||
+      product.sku.toLowerCase().includes(queryFilter),
+  )
+
+  return filterByStatus().filter(product => searchFiltered.includes(product))
 })
 
 const exportCSV = () => {
@@ -48,12 +64,12 @@ const exportCSV = () => {
       :rows="9"
     >
       <div
-        class="flex flex-col xs:flex-row justify-between w-full items-center mb-5"
+        class="flex flex-col lg:flex-row justify-between w-full items-center mb-5"
       >
         <div
-          class="w-full xs:w-1/2 inline-block xs:flex justify-start items-center order-2 xs:order-1 mt-4 xs:mt-0"
+          class="w-full lg:w-[60%] xl:w-full inline-block xs:flex justify-start items-center order-2 lg:order-1 mt-4 lg:mt-0 space-x-0 xs:space-x-2"
         >
-          <IconField>
+          <IconField class="w-full">
             <InputIcon>
               <i class="pi pi-search" />
             </InputIcon>
@@ -63,16 +79,24 @@ const exportCSV = () => {
               placeholder="Cari berdasarkan Nama atau SKU"
             />
           </IconField>
+          <Select
+            :options="statusOptions"
+            optionLabel="label"
+            placeholder="Status"
+            :showClear="true"
+            class="w-full xs:w-[118px] mt-3 xs:mt-0"
+            v-model="selectedStatus"
+          >
+          </Select>
         </div>
 
         <div
-          class="flex justify-between xs:justify-end space-x-2 items-center order-1 xs:order-2 w-full xs:w-auto"
+          class="flex justify-between md:justify-end space-x-2 items-center order-1 lg:order-2 w-full lg:w-[40%] xl:w-full"
         >
           <Button
             icon="pi pi-external-link"
-            class="font-bold text-sm"
             :style="{
-              height: '42px',
+              height: '39px',
               padding: '3px 6px 3px 6px',
               background: '#9333ea',
             }"
@@ -81,11 +105,10 @@ const exportCSV = () => {
           />
           <Button
             :style="{
-              height: '42px',
+              height: '39px',
               padding: '3px 6px 3px 6px',
               background: '#9333ea',
             }"
-            class="font-bold text-sm"
             icon="pi pi-plus"
             label="Tambah Produk"
           />
@@ -100,7 +123,7 @@ const exportCSV = () => {
         field="name"
         header="INFO PRODUK"
         sortable
-        :style="{ padding: '5px 2px 5px 2px' }"
+        :style="{ padding: '5px 2px 5px 2px', fontSize: '1rem' }"
       >
         <template #body="slotProps">
           <div class="flex space-x-2 items-center text-md">
@@ -110,7 +133,7 @@ const exportCSV = () => {
               class="w-[56px] h-[56px] rounded-md"
             />
             <div class="flex flex-col">
-              <p class="line-clamp-2 text-sm xl:text-md">
+              <p class="line-clamp-2">
                 {{ slotProps.data.name }}
               </p>
               <small>SKU: {{ slotProps.data.sku }}</small>
@@ -133,7 +156,7 @@ const exportCSV = () => {
       <Column class="text-sm text-black" field="status" header="AKTIF">
         <template #body="slotProps">
           <ToggleButton
-            v-model="slotProps.data.active"
+            v-model="slotProps.data.status"
             :style="{
               background: '#c084fc',
               color: 'white',

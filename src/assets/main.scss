@@ -24,6 +24,11 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.bg-blur {
+  background-color: rgba(248, 246, 246, 0.5); /* Black color with 50% opacity */
+  backdrop-filter: blur(10px); /* Apply a blur effect */
+  z-index: 1000;
+}
 
 .checkbox-custom {
   appearance: none;
