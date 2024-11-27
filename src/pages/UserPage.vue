@@ -37,26 +37,24 @@ watch(
       <div class="hidden md:block">
         <Tabs :value="selectedTab">
           <TabList class="w-full py-0">
-            <div class="grid grid-cols-2 xs:inline-block w-full">
-              <Tab v-for="tab in items" :key="tab.label" :value="tab.route">
-                <router-link
-                  v-if="tab.route"
-                  v-slot="{ href, navigate }"
-                  :to="tab.route"
-                  custom
+            <Tab v-for="tab in items" :key="tab.label" :value="tab.route">
+              <router-link
+                v-if="tab.route"
+                v-slot="{ href, navigate }"
+                :to="tab.route"
+                custom
+              >
+                <a
+                  :href="href"
+                  @click="navigate"
+                  class="flex items-center justify-center xs:justify-normal text-inherit py-2.5 px-6"
                 >
-                  <a
-                    :href="href"
-                    @click="navigate"
-                    class="flex items-center justify-center xs:justify-normal text-inherit py-2.5 px-6"
-                  >
-                    <span class="text-sm md:text-md font-semibold">{{
-                      tab.label
-                    }}</span>
-                  </a>
-                </router-link>
-              </Tab>
-            </div>
+                  <span class="text-sm md:text-md font-semibold">{{
+                    tab.label
+                  }}</span>
+                </a>
+              </router-link>
+            </Tab>
           </TabList>
         </Tabs>
       </div>
@@ -97,9 +95,6 @@ watch(
 @media (min-width: 1024px) {
   .kontener {
     max-width: 900px;
-  }
-  .hero {
-    max-height: 100%;
   }
 }
 </style>

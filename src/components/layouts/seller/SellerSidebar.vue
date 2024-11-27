@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { isActive, scrollTop } from '@/utils/helper'
+import { scrollTop } from '@/utils/helper'
 
 import { AnFilledSetting } from '@kalimahapps/vue-icons'
 import { navItems } from '@/utils/data'
+import { urlPage } from '@/utils/constans'
+import NavItem from './NavItem.vue'
 </script>
 
 <template>
@@ -24,46 +26,24 @@ import { navItems } from '@/utils/data'
     </div>
 
     <div class="my-1 mt-8 xs:mt-5 md:mt-8">
-      <router-link
+      <NavItem
         v-for="item in navItems.slice(0, 3)"
         :key="item.name"
-        :to="item.route"
-        v-on:click="scrollTop"
-        :class="[
-          'flex items-center hover:text-purple-600 rounded-md justify-center xl:justify-start py-2 my-1 space-x-0 md:space-x-3 xl:hover:bg-gray-200 px-2',
-          isActive(item.route) ? 'text-purple-600 font-bold' : '',
-        ]"
-      >
-        <div class="group flex relative">
-          <component :is="item.icon" :class="item.size" />
-          <span
-            class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 xl:hidden text-sm text-gray-100 rounded-md absolute left-full ml-2 opacity-0"
-            style="top: 50%; transform: translateY(-50%)"
-          >
-            {{ item.label }}
-          </span>
-        </div>
-        <div class="hidden xl:block text-sm">{{ item.label }}</div>
-      </router-link>
+        :route="item.route"
+        :icon="item.icon"
+        :label="item.label"
+        :size="item.size"
+        :onClick="scrollTop"
+      />
     </div>
   </div>
 
   <div class="px-0 md:px-3">
-    <router-link
-      to="#"
-      class="flex items-center hover:text-purple-600 rounded-md justify-center xl:justify-start py-2 my-1 space-x-0 md:space-x-3 xl:hover:bg-gray-200 px-2"
-    >
-      <div class="group flex relative">
-        <AnFilledSetting class="w-7 h-7" />
-        <span
-          class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-full ml-2 opacity-0"
-          style="top: 50%; transform: translateY(-50%)"
-        >
-          Pengaturan
-        </span>
-      </div>
-      <div class="hidden xl:block text-sm">Pengaturan</div>
-    </router-link>
+    <NavItem
+      :route="urlPage.SELLER_SETTING"
+      :icon="AnFilledSetting"
+      label="Pengaturan"
+    />
   </div>
 </template>
 

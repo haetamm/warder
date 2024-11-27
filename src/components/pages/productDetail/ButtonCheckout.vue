@@ -4,7 +4,7 @@ import { Button } from 'primevue'
 
 <template>
   <div
-    class="flex tabCs:hidden hidden-costome justify-between items-center bottom-0 fixed w-full z-50 space-x-1 px-2 py-1.5 shadow-3xl shadow-black bg-white"
+    class="flex tabCs:hidden hidden-costome justify-between items-center bottom-0 fixed w-full z-50 space-x-1 px-2 py-1.5 border-t-[1px] bg-white"
   >
     <Button
       label="Beli"

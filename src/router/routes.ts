@@ -1,42 +1,47 @@
-import DefaultLayout from "@/layouts/DefaultLayout.vue";
-import GuestLayout from "@/layouts/GuestLayout.vue";
-import CartPage from "@/pages/CartPage.vue";
-import HomePage from "@/pages/HomePage.vue";
-import LoginPage from "@/pages/LoginPage.vue";
-import MerchantPage from "@/pages/MerchantPage.vue";
-import NotFoundPage from "@/pages/NotFoundPage.vue";
-import ProductDetailPage from "@/pages/ProductDetailPage.vue";
-import RegisterPage from "@/pages/RegisterPage.vue";
-import ShipmentPage from "@/pages/ShipmentPage.vue";
-import MyShopPage from "@/pages/MyShopPage.vue";
-import UserAddressPage from "@/pages/UserAddressPage.vue";
-import UserPage from "@/pages/UserPage.vue";
-import UserSettingsPage from "@/pages/UserSettingsPage.vue";
-import { urlPage } from "@/utils/constans";
-import WishlistPage from "@/pages/WishlistPage.vue";
-import TransactionPage from "@/pages/TransactionPage.vue";
-import SellerLayout from "@/layouts/SellerLayout.vue";
-import SellerHomePage from "@/pages/SellerHomePage.vue";
-import SellerProductPage from "@/pages/SellerProductPage.vue";
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import GuestLayout from '@/layouts/GuestLayout.vue'
+import CartPage from '@/pages/CartPage.vue'
+import HomePage from '@/pages/HomePage.vue'
+import LoginPage from '@/pages/LoginPage.vue'
+import MerchantPage from '@/pages/MerchantPage.vue'
+import NotFoundPage from '@/pages/NotFoundPage.vue'
+import ProductDetailPage from '@/pages/ProductDetailPage.vue'
+import RegisterPage from '@/pages/RegisterPage.vue'
+import ShipmentPage from '@/pages/ShipmentPage.vue'
+import MyShopPage from '@/pages/MyShopPage.vue'
+import UserAddressPage from '@/pages/UserAddressPage.vue'
+import UserPage from '@/pages/UserPage.vue'
+import UserSettingsPage from '@/pages/UserSettingsPage.vue'
+import { urlPage } from '@/utils/constans'
+import WishlistPage from '@/pages/WishlistPage.vue'
+import TransactionPage from '@/pages/TransactionPage.vue'
+import SellerLayout from '@/layouts/SellerLayout.vue'
+import SellerHomePage from '@/pages/SellerHomePage.vue'
+import SellerProductPage from '@/pages/SellerProductPage.vue'
+import SellerSettingsPage from '@/pages/SellerSettingsPage.vue'
+import SellerInfoPage from '@/pages/SellerInfoPage.vue'
+import SellerOperationalPage from '@/pages/SellerOperationalPage.vue'
+import SellerAddressPage from '@/pages/SellerAddressPage.vue'
 
 export const routes = [
   {
-    path: '/',
+    path: urlPage.HOME,
     component: DefaultLayout,
     children: [
       {
         path: '',
         name: 'Home',
-        component: HomePage
+        component: HomePage,
       },
       {
         path: '/:merchant',
         name: 'Merchant',
-        component: MerchantPage
+        component: MerchantPage,
       },
-      { path: '/:merchant/:id',
+      {
+        path: '/:merchant/:id',
         name: 'Product Detail',
-        component: ProductDetailPage
+        component: ProductDetailPage,
       },
       {
         path: urlPage.CART,
@@ -46,84 +51,106 @@ export const routes = [
       {
         path: urlPage.WISHLIST,
         name: 'Wishlist',
-        component: WishlistPage
+        component: WishlistPage,
       },
       {
         path: urlPage.SHIPMENT,
         name: 'Shipment',
-        component: ShipmentPage
+        component: ShipmentPage,
       },
       {
-        path: '/user',
+        path: urlPage.USER,
         component: UserPage,
         children: [
-            {
-                path: '',
-                redirect: urlPage.USER_SETTING
-            },
-            {
-                path: 'settings',
-                name: 'Akun Saya',
-                component: UserSettingsPage,
-            },
-            {
-              path: urlPage.USER_ADDRESS,
-              name: 'Daftar Alamat',
-              component: UserAddressPage
-          }
-        ]
+          {
+            path: '',
+            redirect: urlPage.USER_SETTING,
+          },
+          {
+            path: 'settings',
+            name: 'Akun Saya',
+            component: UserSettingsPage,
+          },
+          {
+            path: urlPage.USER_ADDRESS,
+            name: 'Daftar Alamat',
+            component: UserAddressPage,
+          },
+        ],
       },
       {
         path: urlPage.MY_SHOP,
         name: 'Buat Toko',
-        component: MyShopPage
+        component: MyShopPage,
       },
       {
         path: urlPage.TRANSACTION,
         name: 'Daftar Transaksi',
-        component: TransactionPage
-      }
-    ]
+        component: TransactionPage,
+      },
+    ],
   },
   {
-    path: '/seller',
+    path: urlPage.SELLER,
     component: SellerLayout,
     children: [
       {
         path: '',
-        redirect: urlPage.SELLER_HOME
+        redirect: urlPage.SELLER_HOME,
       },
       {
         path: 'home',
         component: SellerHomePage,
-        name: 'Dashboard'
+        name: 'Dashboard',
       },
       {
         path: 'product',
         component: SellerProductPage,
-        name: 'Produk'
-      }
-    ]
+        name: 'Produk',
+      },
+      {
+        path: urlPage.SELLER_SETTING,
+        component: SellerSettingsPage,
+        children: [
+          {
+            path: '',
+            redirect: urlPage.SELLER_SETTING_INFO,
+          },
+          {
+            path: 'info',
+            component: SellerInfoPage,
+          },
+          {
+            path: 'operational-hour',
+            component: SellerOperationalPage,
+          },
+          {
+            path: 'address',
+            component: SellerAddressPage,
+          },
+        ],
+      },
+    ],
   },
   {
-    path: '/guest',
+    path: urlPage.GUEST,
     component: GuestLayout,
     children: [
       {
         path: '',
-        redirect: urlPage.LOGIN
+        redirect: urlPage.LOGIN,
       },
       {
         path: 'login',
         name: 'login',
-        component: LoginPage
+        component: LoginPage,
       },
       {
         path: 'register',
         name: 'register',
-        component: RegisterPage
-      }
-    ]
+        component: RegisterPage,
+      },
+    ],
   },
   {
     path: '/:pathMatch(.*)*',

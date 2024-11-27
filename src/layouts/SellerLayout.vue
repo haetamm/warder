@@ -7,7 +7,7 @@ import SellerSidebar from '@/components/layouts/seller/SellerSidebar.vue'
 <template>
   <SellerNavBar />
   <div class="flex justify-center">
-    <div class="kontener pt-[45px] lg:pt-[49px] xl:pt-[60px] pb-[50px] md:pb-0">
+    <div class="kontener pt-[65px] md:pt-[54px] xl:pt-[60px] mb-14 md:mb-0">
       <div
         class="grid grid-cols-1 md:grid-cols-[13%_87%] xl:grid-cols-[16%_84%]"
       >
@@ -18,7 +18,7 @@ import SellerSidebar from '@/components/layouts/seller/SellerSidebar.vue'
         </div>
 
         <div
-          class="overflow-y-auto no-scrollbar h-full md:h-[calc(100vh-50px)] xl:h-[calc(100vh-60px)]"
+          class="overflow-y-auto no-scrollbar h-full md:h-[calc(100vh-54px)] xl:h-[calc(100vh-60px)]"
         >
           <RouterView />
         </div>

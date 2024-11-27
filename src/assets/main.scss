@@ -25,8 +25,8 @@ body {
   scrollbar-width: none;
 }
 .bg-blur {
-  background-color: rgba(248, 246, 246, 0.5); /* Black color with 50% opacity */
-  backdrop-filter: blur(10px); /* Apply a blur effect */
+  background-color: rgba(248, 246, 246, 0.5);
+  backdrop-filter: blur(10px);
   z-index: 1000;
 }
 

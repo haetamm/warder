@@ -15,13 +15,13 @@ useHead({
 </script>
 <template>
   <div
-    class="w-full grid grid-cols-1 lg:grid-cols-[60%_40%] xl:grid-cols-[65%_35%] lg:mb-2 xl:pt-3 xl:mb-0 min-h-[calc(100vh-60px)]"
+    class="w-full grid grid-cols-1 lg:grid-cols-[60%_40%] xl:grid-cols-[65%_35%] xl:mb-0 min-h-[calc(100vh-76px)] md:mt-2 xl:mt-4"
   >
-    <div class="mt-2 w-full lg:border-r-[1px] px-1 md:px-2">
+    <div class="w-full lg:border-r-[1px] px-1 md:px-2">
       <CardDasboard />
       <TrendCardDashboard />
     </div>
-    <div class="mt-4 w-full px-1 md:px-2 mb-5">
+    <div class="w-full px-1 md:px-2 mb-5">
       <StartGuide />
 
       <ListArticle />

@@ -11,8 +11,8 @@ useHead({
 })
 </script>
 <template>
-  <div class="w-full lg:mb-2 xl:mb-0 pt-3">
-    <div class="px-2 lg:px-6 mt-3">
+  <div class="w-full lg:mb-2 xl:mb-0 md:mt-2 xl:mt-4">
+    <div class="px-2 lg:px-4">
       <ProductTable />
     </div>
   </div>

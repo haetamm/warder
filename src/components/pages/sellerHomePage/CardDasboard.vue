@@ -21,7 +21,7 @@ const listCard = ref(statusList)
 
 <template>
   <div
-    class="inline-block lg:flex space-x-0 space-y-2 lg:space-y-0 lg:space-x-2 mt-2 w-full"
+    class="inline-block lg:flex space-x-0 space-y-2 lg:space-y-0 lg:space-x-2 w-full"
   >
     <div
       v-for="(item, index) in listCard"

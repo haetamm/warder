@@ -4,22 +4,26 @@ import { isActive, scrollTop } from '@/utils/helper'
 </script>
 
 <template>
-  <div
-    class="flex md:hidden bg-blur justify-center items-center bottom-0 fixed w-full z-50 shadow-3xl py-2.5"
-  >
-    <router-link
-      v-for="item in navItems"
-      :key="item.name"
-      :to="item.route"
-      v-on:click="scrollTop"
-      :class="[
-        'flex items-center hover:text-purple-600 rounded-md justify-center px-4 xl:justify-start space-x-0 md:space-x-3 xl:hover:bg-gray-200',
-        isActive(item.route) ? 'text-purple-600 font-bold' : '',
-      ]"
+  <div class="kontener">
+    <div
+      class="flex md:hidden bg-white border-t-[1px] justify-center items-center bottom-0 fixed w-full z-50 shadow-3xl py-2.5"
     >
-      <div class="px-4">
-        <component :is="item.icon" :class="item.size" />
+      <div
+        v-for="item in navItems"
+        :key="item.name"
+        class="w-[25%] flex items-center space-x-2 justify-center"
+      >
+        <router-link
+          :to="item.route"
+          v-on:click="scrollTop"
+          :class="[
+            ' hover:text-purple-600 rounded-md xl:hover:bg-gray-200',
+            isActive(item.route) ? 'text-purple-600 font-bold' : '',
+          ]"
+        >
+          <component :is="item.icon" :class="item.size" />
+        </router-link>
       </div>
-    </router-link>
+    </div>
   </div>
 </template>
