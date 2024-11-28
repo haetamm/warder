@@ -19,7 +19,7 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div class="w-full border-b-2 fixed bg-white z-50 py-2 px-0 md:px-5">
+  <div class="w-full fixed bg-white z-50 py-2 px-0 md:px-5">
     <div class="kontener mx-auto">
       <div class="flex justify-between items-center px-2 lg:px-0 xl:py-1">
         <RouterLink
@@ -92,20 +92,8 @@ const toggleSidebar = () => {
 </template>
 
 <style scoped>
-@media (min-width: 845px) {
-  .kontener {
-    max-width: 845px;
-  }
-}
-@media (min-width: 1024px) {
-  .kontener {
-    max-width: 1024px;
-  }
-}
-@media (min-width: 1280px) {
-  .kontener {
-    max-width: 1280px;
-  }
+.kontener {
+  width: 100%;
 }
 
 @media (min-width: 1340px) {

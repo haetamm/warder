@@ -8,7 +8,7 @@ import { TabList } from 'primevue'
 
 const tabs = ref([
   { route: urlPage.SELLER_SETTING_INFO, label: 'Informasi' },
-  { route: urlPage.SELLER_SETTING_OPERATIONAL, label: 'Jadwal Operasional' },
+  { route: urlPage.SELLER_SETTING_OPERATIONAL, label: 'Jadwal ' },
   { route: urlPage.SELLER_SETTING_ADDRESS, label: 'Lokasi' },
 ])
 
@@ -24,8 +24,8 @@ watch(
 </script>
 
 <template>
-  <div class="m-1 xs:m-2 border-[1px]">
-    <Tabs :value="selectedTab">
+  <div class="m-1 xs:mx-2 md:mt-2 xl:mt-4 border-[1px] bg-white rounded-lg">
+    <Tabs :value="selectedTab" class="">
       <TabList class="w-full py-0">
         <div class="flex justify-between xs:inline-block w-full">
           <Tab v-for="tab in tabs" :key="tab.label" :value="tab.route">
@@ -38,9 +38,9 @@ watch(
               <a
                 :href="href"
                 @click="navigate"
-                class="flex items-center justify-center xs:justify-normal text-inherit py-[10px] px-[10px] xs:px-[24px]"
+                class="flex items-center justify-center xs:justify-normal text-inherit py-[10px] px-[20px] xs:px-[24px]"
               >
-                <span class="text-sm md:text-md font-semibold">
+                <span class="text-md font-semibold">
                   {{ tab.label }}
                 </span>
               </a>
@@ -58,5 +58,8 @@ watch(
 <style scoped>
 .p-tab {
   padding: 0;
+}
+.p-tablist-content {
+  border-radius: 8px;
 }
 </style>

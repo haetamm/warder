@@ -26,7 +26,7 @@ const listCard = ref(statusList)
     <div
       v-for="(item, index) in listCard"
       :key="index"
-      class="border-[1px] rounded-md w-full lg:w-1/2 p-3 text-sm"
+      class="border-[1px] rounded-md w-full lg:w-1/2 p-3 text-sm bg-white"
     >
       <div class="flex items-center space-x-1 text-gray-600 mb-1">
         <div>{{ item.title }}</div>

@@ -4,7 +4,6 @@ import {
   Button,
   Column,
   DataTable,
-  ToggleButton,
   IconField,
   InputIcon,
   InputText,
@@ -155,17 +154,22 @@ const exportCSV = () => {
       ></Column>
       <Column class="text-sm text-black" field="status" header="AKTIF">
         <template #body="slotProps">
-          <ToggleButton
-            v-model="slotProps.data.status"
-            :style="{
-              background: '#c084fc',
-              color: 'white',
-              padding: '6px 0px 6px 0px',
-            }"
-            class="w-20"
-            onLabel="On"
-            offLabel="Off"
-          />
+          <div class="flex space-x-3 items-center">
+            <label class="switch">
+              <input
+                type="checkbox"
+                class="hidden"
+                v-model="slotProps.data.status"
+              />
+              <span class="slider round"></span>
+            </label>
+            <Button
+              label="Ubah"
+              class="w-[80px]"
+              :style="{ padding: '3px' }"
+              variant="outlined"
+            />
+          </div>
         </template>
       </Column>
     </DataTable>

@@ -4,7 +4,7 @@ import { dataArticle } from '@/utils/data'
 
 <template>
   <div
-    class="border-[1px] my-auto rounded-md w-full px-5 pt-5 pb-3 text-sm mt-3"
+    class="border-[1px] my-auto rounded-md w-full px-5 pt-5 pb-3 text-sm mt-3 bg-white"
   >
     <div class="flex items-center space-x-3 mb-4 justify-start">
       Bacaan Terkini

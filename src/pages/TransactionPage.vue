@@ -54,7 +54,6 @@ useHead({
       placeholder="Status"
       optionLabel="name"
       class="w-full xs:hidden mb-3"
-      :style="{ background: 'rgb(249 250 251 / var(--tw-bg-opacity)) ' }"
     />
     <ListTransaction />
   </div>

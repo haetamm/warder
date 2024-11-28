@@ -6,6 +6,8 @@
   font-style: normal;
 }
 
+@import url('./checkbox-custom.scss');
+@import url('./toggle-custom.scss');
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 footer {
@@ -15,43 +17,26 @@ footer {
 body {
   font-family: 'Tokped', Roboto;
   font-size: 16px;
+  background-color: #f3f4f5;
 }
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .bg-blur {
   background-color: rgba(248, 246, 246, 0.5);
   backdrop-filter: blur(10px);
   z-index: 1000;
 }
 
-.checkbox-custom {
-  appearance: none;
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 2px solid #a855f7;
-  border-radius: 0.25rem;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.checkbox-custom:checked {
-  background-color: #a855f7;
-  color: white;
-}
-
-.checkbox-custom:checked::after {
-  content: '✓';
-  font-size: 0.875rem;
-  font-weight: bold;
+.bg-custom {
+  background-color: #f3f4f5;
 }
 
 .kontener {

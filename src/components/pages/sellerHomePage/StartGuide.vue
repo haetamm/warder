@@ -4,7 +4,7 @@ import { AkChevronRight } from '@kalimahapps/vue-icons'
 
 <template>
   <div
-    class="border-[1px] my-auto rounded-md w-full px-5 py-3 text-sm cursor-pointer h-[105px]"
+    class="border-[1px] my-auto rounded-md w-full px-5 py-3 text-sm cursor-pointer h-[105px] bg-white"
   >
     <div class="flex justify-between items-center">
       <div class="flex items-center space-x-3 mb-1 justify-center">

@@ -749,6 +749,16 @@ export const productPopular = [
   },
 ]
 
+export const storeLocation = [
+  {
+    address:
+      'Jln. Veteran, RT/RW : 02/03, Gambir, Kecamatan Gambir Jakarta pusat, DKI Jakarta',
+    city: 'Gambir, Jakarta Pusat',
+    postcode: '42000',
+    status: true,
+  },
+]
+
 export const dataArticle = [
   {
     title:

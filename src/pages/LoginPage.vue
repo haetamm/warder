@@ -16,7 +16,9 @@ useHead({
 </script>
 
 <template>
-  <div class="relative mx-auto w-full md:w-[700px] lg:w-[861px] select-none">
+  <div
+    class="mx-auto w-full md:w-[700px] lg:w-[861px] select-none relative bg-white"
+  >
     <img
       src="https://images.tokopedia.net/img/oauth/background/login-bg.png"
       alt="bg-login"
@@ -24,7 +26,7 @@ useHead({
     />
 
     <div
-      class="absolute top-0 left-0 w-full flex justify-center items-center mt-4 mb-3 md:mt-6"
+      class="md:absolute top-0 left-0 w-full flex justify-center items-center mt-4 mb-3 md:mt-6"
     >
       <div
         class="border-none md:border-2 w-[360px] lg:w-[370px] md:p-6 md:shadow-2xl rounded-lg bg-white"

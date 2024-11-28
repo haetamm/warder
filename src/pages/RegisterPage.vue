@@ -17,7 +17,7 @@ useHead({
 
 <template>
   <div
-    class="flex justify-center items-center mt-4 mb-10 md:mt-8 md:gap-7 xl:gap-[80px] select-none"
+    class="flex justify-center items-center pt-4 mb-10 md:mt-8 md:gap-7 xl:gap-[80px] bg-white min-h-full"
   >
     <div class="hidden md:block">
       <div class="flex justify-center item-center">

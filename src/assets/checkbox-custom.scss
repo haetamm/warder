@@ -1,0 +1,23 @@
+.checkbox-custom {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #a855f7;
+  border-radius: 0.25rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.checkbox-custom:checked {
+  background-color: #a855f7;
+  color: white;
+}
+
+.checkbox-custom:checked::after {
+  content: '✓';
+  font-size: 0.875rem;
+  font-weight: bold;
+}

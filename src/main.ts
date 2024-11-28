@@ -1,19 +1,9 @@
 import './assets/main.scss'
 import './assets/style.css'
-
 import 'primeicons/primeicons.css'
-
-
-
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
-import Tooltip from 'primevue/tooltip';
-
-
-
-
+import Tooltip from 'primevue/tooltip'
 
 import App from './App.vue'
 import router from './router'
@@ -28,10 +18,9 @@ app.directive('tooltip', Tooltip)
 const head = createHead()
 app.use(PrimeVue, {
   theme: {
-      preset: Aura
-  }
-});
-
+    preset: Aura,
+  },
+})
 
 app.use(createPinia())
 app.use(head)

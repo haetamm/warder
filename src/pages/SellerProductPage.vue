@@ -12,7 +12,7 @@ useHead({
 </script>
 <template>
   <div class="w-full lg:mb-2 xl:mb-0 md:mt-2 xl:mt-4">
-    <div class="px-2 lg:px-4">
+    <div class="mx-1 lg:mx-2 py-6 lg:py-2 px-2 lg:p-6 bg-white rounded-lg">
       <ProductTable />
     </div>
   </div>
