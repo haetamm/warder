@@ -5,6 +5,7 @@ const apiWarder = import.meta.env.VITE_API_WARDER_URL
 
 const axiosWarderApiInstance = axios.create({
   baseURL: `${apiWarder}`,
+  withCredentials: true,
 })
 
 axiosWarderApiInstance.interceptors.request.use(config => {
