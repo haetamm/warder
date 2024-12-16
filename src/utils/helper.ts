@@ -14,6 +14,11 @@ export function backHandle() {
   return () => router.back()
 }
 
+export function backHandleGuest() {
+  const router = useRouter()
+  return () => router.go(-2)
+}
+
 export const isPageType = (
   route: ReturnType<typeof useRoute>,
   pageType:

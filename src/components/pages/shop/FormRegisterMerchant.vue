@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue'
 import Stepper from 'primevue/stepper'
 import Step from 'primevue/step'
 import StepPanel from 'primevue/steppanel'
-import axiosRegionInstance from '@/utils/api'
+import axiosRegionInstance from '@/utils/apiRegion'
 import { capitalizeFirstLetterOnly, scrollTop } from '@/utils/helper'
 import { urlPage } from '@/utils/constans'
 

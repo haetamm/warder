@@ -52,7 +52,6 @@ onUnmounted(() => {
         />
       </div>
 
-      <!-- Navigation Arrows -->
       <button @click="prevSlide" class="nav prev hidden xs:inline-block">
         &#10094;
       </button>
@@ -60,7 +59,6 @@ onUnmounted(() => {
         &#10095;
       </button>
 
-      <!-- Dots Navigation -->
       <div
         class="dots flex justify-end md:justify-start mr-3 md:mr-0 ml-0 md:ml-3"
       >

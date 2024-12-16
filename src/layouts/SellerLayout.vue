@@ -2,9 +2,25 @@
 import SellerMobileSidebar from '@/components/layouts/seller/SellerMobileSidebar.vue'
 import SellerNavBar from '@/components/layouts/seller/SellerNavBar.vue'
 import SellerSidebar from '@/components/layouts/seller/SellerSidebar.vue'
+import { useUserStore } from '@/stores/user'
+import { urlPage } from '@/utils/constans'
+import { useRouter } from 'vue-router'
+import Toast from 'primevue/toast'
+
+const { roles } = useUserStore()
+const router = useRouter()
+
+if (!roles.includes('SELLER') || roles.includes('ADMIN')) {
+  router.push(urlPage.MY_SHOP)
+}
 </script>
 
 <template>
+  <Toast
+    position="top-right"
+    :style="{ width: '320px', fontSize: '10px' }"
+    warn-icon="true"
+  />
   <div class="bg-custom">
     <SellerNavBar />
     <div class="kontenir mx-auto">

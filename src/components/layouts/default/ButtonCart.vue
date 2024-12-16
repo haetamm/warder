@@ -32,7 +32,7 @@ const closeDropdown = () => {
         v-show="showCartDropdown"
         @mouseleave="showCartDropdown = false"
         v-click-outside="closeDropdown"
-        class="absolute left-1/2 transform -translate-x-1/2 mt-3 w-[440px] bg-white border border-gray-200 rounded-md shadow-lg z-50"
+        class="absolute left-1/2 transform -translate-x-1/2 mt-5 w-[440px] bg-white border border-gray-200 rounded-md shadow-lg z-50"
       >
         <div class="text-sm text-gray-600">
           <div

@@ -4,15 +4,18 @@ import { scrollTop } from '@/utils/helper'
 import { defineProps } from 'vue'
 import {
   AnOutlinedSetting,
-  CiUser,
   ClCloseMd,
   FlBuildingShop,
-  McBillLine,
-  MdFavoriteBorder,
-  MdLogout,
 } from '@kalimahapps/vue-icons'
 import { Button } from 'primevue'
+import { useUserStore } from '@/stores/user'
+import ButtonLoginAndRegis from './ButtonLoginAndRegis.vue'
+import ButtonTransaction from './ButtonTransaction.vue'
+import ButtonWishlist from './ButtonWishlist.vue'
+import ButtonProfile from './ButtonProfile.vue'
+import ButtonLogout from './ButtonLogout.vue'
 
+const { token, roles } = useUserStore()
 defineProps({
   toggleSidebar: Function,
 })
@@ -39,38 +42,15 @@ defineProps({
     </div>
     <div class="pt-[59px] px-4">
       <div
+        v-if="!token"
         class="flex space-x-2 w-full justify-between bg-white py-3 px-3 mb-1"
       >
-        <Button
-          v-on:click="scrollTop"
-          as="router-link"
-          label="Login"
-          :to="urlPage.LOGIN"
-          class="w-full"
-          :style="{ background: 'white', color: '#9333ea' }"
-        />
-        <Button
-          v-on:click="scrollTop"
-          as="router-link"
-          label="Register"
-          :to="urlPage.REGISTER_USER"
-          class="w-full"
-        />
+        <ButtonLoginAndRegis />
       </div>
 
-      <div class="py-3 bg-white px-3 mb-2">
+      <div v-if="token" class="py-3 bg-white px-3 mb-2">
         <div class="flex items-center justify-between">
-          <div class="flex space-x-1 items-center">
-            <img
-              src="https://images.tokopedia.net/img/cache/300/tPxBYm/2023/1/20/757f728e-d320-4f75-91ac-cedc5f1edc42.jpg.webp?ect=3g"
-              alt="profile-img"
-              class="h-[50px] w-[50px] rounded-full"
-            />
-            <div class="flex items-center space-x-1">
-              <CiUser class="h-6 w-6" />
-              <div class="text-lg font-bold">Tatang Haetami</div>
-            </div>
-          </div>
+          <ButtonProfile />
           <router-link
             :to="urlPage.USER_SETTING"
             @click="
@@ -85,6 +65,7 @@ defineProps({
         </div>
 
         <Button
+          v-if="token && !roles.includes('ADMIN')"
           v-on:click="
             () => {
               toggleSidebar?.()
@@ -92,10 +73,18 @@ defineProps({
             }
           "
           as="router-link"
-          label="Buka Toko"
+          :label="
+            token && roles.includes('SELLER')
+              ? 'Toko Serba Seratus'
+              : 'Buka Toko'
+          "
           :to="urlPage.MY_SHOP"
           class="w-full mt-3"
-          :style="{ background: 'white', color: 'black', borderColor: 'black' }"
+          :style="{
+            background: 'white',
+            color: 'black',
+            borderColor: 'black',
+          }"
         />
       </div>
 
@@ -119,42 +108,12 @@ defineProps({
       </div>
 
       <div class="py-3 bg-white px-3 mb-1">
-        <div class="flex space-x-3 h-[44px] items-center">
-          <McBillLine class="w-7 h-7" />
-          <router-link
-            :to="urlPage.TRANSACTION"
-            @click="
-              () => {
-                toggleSidebar?.()
-                scrollTop?.()
-              }
-            "
-          >
-            Daftar Transaksi
-          </router-link>
-        </div>
-        <div class="flex space-x-3 h-[44px] items-center">
-          <MdFavoriteBorder class="w-7 h-7" />
-          <router-link
-            :to="urlPage.WISHLIST"
-            @click="
-              () => {
-                toggleSidebar?.()
-                scrollTop?.()
-              }
-            "
-          >
-            Wishlist
-          </router-link>
-        </div>
+        <ButtonTransaction :toogleButton="toggleSidebar" />
+        <ButtonWishlist :toogleButton="toggleSidebar" />
       </div>
 
-      <div class="py-3 bg-white px-3">
-        <div class="flex space-x-3 h-[44px] items-center">
-          <MdLogout class="w-7 h-7" />
-
-          <div>Logout</div>
-        </div>
+      <div v-if="token" class="py-3 bg-white px-3">
+        <ButtonLogout />
       </div>
     </div>
   </div>

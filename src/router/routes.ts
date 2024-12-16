@@ -22,6 +22,7 @@ import SellerSettingsPage from '@/pages/SellerSettingsPage.vue'
 import SellerInfoPage from '@/pages/SellerInfoPage.vue'
 import SellerOperationalPage from '@/pages/SellerOperationalPage.vue'
 import SellerAddressPage from '@/pages/SellerAddressPage.vue'
+import AuthLayout from '@/layouts/AuthLayout.vue'
 
 export const routes = [
   {
@@ -43,6 +44,12 @@ export const routes = [
         name: 'Product Detail',
         component: ProductDetailPage,
       },
+    ],
+  },
+  {
+    path: urlPage.HOME,
+    component: AuthLayout,
+    children: [
       {
         path: urlPage.CART,
         name: 'Keranjang',

@@ -5,16 +5,21 @@ import { useRoute } from 'vue-router'
 import { useMediaQuery } from '@vueuse/core'
 import ButtonCart from './ButtonCart.vue'
 import SearchBar from './SearchBar.vue'
-import { Button, Dialog } from 'primevue'
+import { Dialog } from 'primevue'
 import SidebarNav from '../SidebarNav.vue'
 import { urlPage } from '@/utils/constans'
-import { backHandle, isPageType, scrollTop } from '@/utils/helper'
+import { backHandle, isPageType } from '@/utils/helper'
 import { useScrollVisibility } from '@/compsables/useScrollVisibility'
+import { useUserStore } from '@/stores/user'
+import ButtonSeller from '../auth/ButtonSeller.vue'
+import ButtonLoginAndRegis from '../ButtonLoginAndRegis.vue'
+import ButtonDropdownProfile from '../auth/ButtonDropdownProfile.vue'
 
 const route = useRoute()
 const showButton = ref(false)
 const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 const { isVisible } = useScrollVisibility()
+const { token, roles } = useUserStore()
 
 const back = backHandle()
 const visibleBottom = ref(false)
@@ -109,30 +114,16 @@ const toggleSidebar = () => {
             severity="secondary"
           />
 
-          <div class="hidden md:flex space-x-2">
-            <Button
-              v-on:click="scrollTop"
-              as="router-link"
-              label="Login"
-              :to="urlPage.LOGIN"
-              class="w-full"
-              :style="{
-                background: 'white',
-                color: '#9333ea',
-                padding: '3px 12px 3px 12px',
-              }"
-            />
-            <Button
-              v-on:click="scrollTop"
-              as="router-link"
-              label="Register"
-              :to="urlPage.REGISTER_USER"
-              class="w-full"
-              :style="{
-                padding: '3px 12px 3px 12px',
-              }"
-            />
+          <div v-if="!token" class="hidden md:flex space-x-2">
+            <ButtonLoginAndRegis />
           </div>
+
+          <template v-if="token && !roles.includes('ADMIN')">
+            <ButtonSeller />
+          </template>
+          <template v-if="token">
+            <ButtonDropdownProfile />
+          </template>
         </div>
       </div>
     </div>

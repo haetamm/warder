@@ -1,10 +1,27 @@
 <script setup lang="ts">
 import { urlPage } from '@/utils/constans'
-import { backHandle } from '@/utils/helper'
-import { AkArrowLeft, DeGoogleOriginal } from '@kalimahapps/vue-icons'
+import { backHandleGuest } from '@/utils/helper'
+import { useLoginStore } from '@/stores/login'
+import { loginSchema } from '@/utils/validation'
+import { AkArrowLeft } from '@kalimahapps/vue-icons'
+import { useForm } from 'vee-validate'
 import { useHead } from '@vueuse/head'
+import { useToast } from 'primevue/usetoast'
+import FormCustom from '@/components/layouts/guest/FormCustom.vue'
+import { fieldsGuest } from '@/utils/fields'
+import ButtonGoogle from '@/components/layouts/guest/ButtonGoogle.vue'
+import BorderLine from '@/components/layouts/guest/BorderLine.vue'
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+import type { LoginResponse } from '@/utils/interface'
+import { computed } from 'vue'
 
-const back = backHandle()
+const toast = useToast()
+const loginStore = useLoginStore()
+const userStore = useUserStore()
+const router = useRouter()
+
+const back = backHandleGuest()
 
 useHead({
   title: 'Login | Warder',
@@ -12,6 +29,27 @@ useHead({
     { name: 'description', content: 'Warder Login Page' },
     { name: 'keywords', content: 'marketplace, login, warder' },
   ],
+})
+
+const isSubmitting = computed(() => loginStore.loading)
+
+const { handleSubmit, meta } = useForm({
+  validationSchema: loginSchema,
+})
+
+const onSubmit = handleSubmit(values => {
+  loginStore
+    .loginUser(values, toast)
+    .then((response: LoginResponse) => {
+      if (response) {
+        userStore.setToken(response.token)
+        userStore.setRoles(response.roles)
+        router.push(urlPage.HOME)
+      }
+    })
+    .catch((err: unknown) => {
+      console.error(err)
+    })
 })
 </script>
 
@@ -44,38 +82,21 @@ useHead({
           </router-link>
         </div>
 
-        <input
-          type="text"
-          placeholder="Email"
-          class="w-full rounded-lg mb-6 py-2.5 px-3 border-2 outline-none"
+        <FormCustom
+          :fields="fieldsGuest"
+          :onSubmit="onSubmit"
+          :isSubmitting="isSubmitting"
+          :meta="meta"
+          buttonName="Login"
         />
 
-        <input
-          type="password"
-          placeholder="Password"
-          class="w-full rounded-lg mb-6 py-2.5 px-3 border-2 outline-none"
-        />
-
-        <button
-          class="py-2.5 px-2 border-2 w-full rounded-lg mb-6 text-sm font-bold md:font-normal"
-        >
-          Login
-        </button>
-
-        <div class="flex items-center gap-2 mb-6">
-          <div class="flex-grow border-t border-gray-300"></div>
-          <span class="text-gray-500">atau masuk dengan</span>
-          <div class="flex-grow border-t border-gray-300"></div>
+        <div class="mb-6">
+          <BorderLine text="atau masuk dengan" />
         </div>
 
-        <button class="py-2.5 px-2 border-2 w-full rounded-lg mb-6">
-          <div class="flex justify-center items-center space-x-1">
-            <DeGoogleOriginal class="w-5 h-5" />
-            <div class="text-slate-700 text-sm font-bold md:font-normal">
-              Google
-            </div>
-          </div>
-        </button>
+        <div class="mb-6">
+          <ButtonGoogle />
+        </div>
       </div>
     </div>
   </div>

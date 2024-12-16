@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { urlPage } from '@/utils/constans'
-import { scrollTop } from '@/utils/helper'
 import {
   AkTextAlignJustified,
   MdOutlinedNotifications,
 } from '@kalimahapps/vue-icons'
-import { Button, Dialog } from 'primevue'
+import { Dialog } from 'primevue'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import SidebarNav from '../SidebarNav.vue'
+import ButtonDropdownProfile from '../auth/ButtonDropdownProfile.vue'
 
 const route = useRoute()
 const visibleBottom = ref(false)
@@ -45,29 +45,7 @@ const toggleSidebar = () => {
             severity="secondary"
           />
 
-          <router-link
-            :to="urlPage.USER_SETTING"
-            class="hidden md:flex items-center"
-          >
-            <img
-              src="https://images.tokopedia.net/img/cache/300/tPxBYm/2023/1/20/757f728e-d320-4f75-91ac-cedc5f1edc42.jpg"
-              alt="profile-img"
-              class="h-8 w-8 rounded-full"
-            />
-            <Button
-              v-on:click="scrollTop"
-              as="router-link"
-              label="Tatang Haetami"
-              :to="urlPage.USER_SETTING"
-              class="w-full"
-              :style="{
-                padding: '3px 12px 3px 12px',
-                color: 'black',
-                border: 'none',
-                background: 'none',
-              }"
-            />
-          </router-link>
+          <ButtonDropdownProfile />
         </div>
       </div>
     </div>

@@ -1,10 +1,23 @@
 <script setup lang="ts">
+import BorderLine from '@/components/layouts/guest/BorderLine.vue'
+import ButtonGoogle from '@/components/layouts/guest/ButtonGoogle.vue'
+import FormCustom from '@/components/layouts/guest/FormCustom.vue'
+import { useRegisterUserStore } from '@/stores/register'
 import { urlPage } from '@/utils/constans'
+import { fieldsGuest } from '@/utils/fields'
 import { backHandle } from '@/utils/helper'
-import { AkArrowLeft, DeGoogleOriginal } from '@kalimahapps/vue-icons'
+import { registerUserSchema } from '@/utils/validation'
+import { AkArrowLeft } from '@kalimahapps/vue-icons'
 import { useHead } from '@vueuse/head'
+import { useToast } from 'primevue'
+import { useForm } from 'vee-validate'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 const back = backHandle()
+const toast = useToast()
+const registerUserStore = useRegisterUserStore()
+const router = useRouter()
 
 useHead({
   title: 'Register | Warder',
@@ -12,6 +25,25 @@ useHead({
     { name: 'description', content: 'Warder Register Page' },
     { name: 'keywords', content: 'marketplace, register, warder' },
   ],
+})
+
+const isSubmitting = computed(() => registerUserStore.loading)
+
+const { handleSubmit, meta, setErrors } = useForm({
+  validationSchema: registerUserSchema,
+})
+
+const onSubmit = handleSubmit(values => {
+  registerUserStore
+    .registerUser(values, toast, setErrors)
+    .then((response: string) => {
+      if (response) {
+        router.push(urlPage.LOGIN)
+      }
+    })
+    .catch((err: unknown) => {
+      console.error(err)
+    })
 })
 </script>
 
@@ -52,44 +84,28 @@ useHead({
             <router-link
               :to="urlPage.LOGIN"
               class="text-purple-600 cursor-pointer"
-              >Login</router-link
             >
+              Login
+            </router-link>
           </div>
         </div>
       </div>
 
-      <button class="py-2.5 px-2 border-2 w-full rounded-lg mt-3 md:mt-5 mb-4">
-        <div class="flex justify-center items-center space-x-1">
-          <DeGoogleOriginal class="w-5 h-5" />
-          <div class="text-slate-700 text-sm font-bold md:font-normal">
-            Google
-          </div>
-        </div>
-      </button>
-
-      <div class="flex items-center gap-2 mb-4">
-        <div class="flex-grow border-t border-gray-300"></div>
-        <span class="text-gray-500">atau</span>
-        <div class="flex-grow border-t border-gray-300"></div>
+      <div class="mt-3 md:mt-5 mb-4">
+        <ButtonGoogle />
       </div>
 
-      <input
-        type="text"
-        placeholder="Email"
-        class="w-full rounded-lg mb-4 py-2.5 px-3 border-2 outline-none"
-      />
+      <div class="mb-2">
+        <BorderLine text="atau" />
+      </div>
 
-      <input
-        type="password"
-        placeholder="Password"
-        class="w-full rounded-lg mb-4 py-2.5 px-3 border-2 outline-none"
+      <FormCustom
+        :fields="fieldsGuest"
+        :onSubmit="onSubmit"
+        :isSubmitting="isSubmitting"
+        :meta="meta"
+        buttonName="Daftar"
       />
-
-      <button
-        class="py-2.5 px-2 border-2 w-full rounded-lg mb-2 text-sm font-bold md:font-normal"
-      >
-        Daftar
-      </button>
 
       <div class="text-center text-sm">
         Dengan mendaftar, saya menyetujui
