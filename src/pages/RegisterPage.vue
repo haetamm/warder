@@ -6,6 +6,7 @@ import { useRegisterUserStore } from '@/stores/register'
 import { urlPage } from '@/utils/constans'
 import { fieldsGuest } from '@/utils/fields'
 import { backHandle } from '@/utils/helper'
+import type { GuestForm } from '@/utils/interface'
 import { registerUserSchema } from '@/utils/validation'
 import { AkArrowLeft } from '@kalimahapps/vue-icons'
 import { useHead } from '@vueuse/head'
@@ -29,11 +30,11 @@ useHead({
 
 const isSubmitting = computed(() => registerUserStore.loading)
 
-const { handleSubmit, meta, setErrors } = useForm({
+const { handleSubmit, meta, setErrors } = useForm<GuestForm>({
   validationSchema: registerUserSchema,
 })
 
-const onSubmit = handleSubmit(values => {
+const onSubmit = handleSubmit((values: GuestForm) => {
   registerUserStore
     .registerUser(values, toast, setErrors)
     .then((response: string) => {

@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import axiosWarderApiInstance from '@/utils/apiWarder'
 import { handleApiError } from '@/utils/handleApiErrors'
 import type { Toast } from '@/utils/type'
+import type { GuestForm } from '@/utils/interface'
 
 export const useLoginStore = defineStore('login', {
   state: () => ({
@@ -10,10 +11,7 @@ export const useLoginStore = defineStore('login', {
     error: null as string | null,
   }),
   actions: {
-    async loginUser(
-      formData: { email: string; password: string },
-      toast: Toast,
-    ) {
+    async loginUser(formData: GuestForm, toast: Toast) {
       this.loading = true
       this.error = null
       try {

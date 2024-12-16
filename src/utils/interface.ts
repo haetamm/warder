@@ -33,3 +33,8 @@ export interface LoginResponse {
 export interface UserStore {
   token: string | null
 }
+
+export interface GuestForm {
+  email: string
+  password: string
+}

@@ -13,7 +13,7 @@ import ButtonGoogle from '@/components/layouts/guest/ButtonGoogle.vue'
 import BorderLine from '@/components/layouts/guest/BorderLine.vue'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
-import type { LoginResponse } from '@/utils/interface'
+import type { GuestForm, LoginResponse } from '@/utils/interface'
 import { computed } from 'vue'
 
 const toast = useToast()
@@ -33,11 +33,11 @@ useHead({
 
 const isSubmitting = computed(() => loginStore.loading)
 
-const { handleSubmit, meta } = useForm({
+const { handleSubmit, meta } = useForm<GuestForm>({
   validationSchema: loginSchema,
 })
 
-const onSubmit = handleSubmit(values => {
+const onSubmit = handleSubmit((values: GuestForm) => {
   loginStore
     .loginUser(values, toast)
     .then((response: LoginResponse) => {

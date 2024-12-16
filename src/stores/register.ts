@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import axiosWarderApiInstance from '@/utils/apiWarder'
 import { handleApiError } from '@/utils/handleApiErrors'
 import type { Toast, ValidationErrors } from '@/utils/type'
+import type { GuestForm } from '@/utils/interface'
 
 export const useRegisterUserStore = defineStore('register', {
   state: () => ({
@@ -10,7 +11,7 @@ export const useRegisterUserStore = defineStore('register', {
   }),
   actions: {
     async registerUser(
-      formData: { email: string; password: string },
+      formData: GuestForm,
       toast: Toast,
       setErrors: (errors: ValidationErrors) => void,
     ) {
