@@ -30,6 +30,10 @@ defineProps({
     type: String,
     required: true,
   },
+  onChange: {
+    type: Object as PropType<Record<string, (e: Event) => void>>,
+    required: true,
+  },
 })
 </script>
 
@@ -40,6 +44,7 @@ defineProps({
         :name="field.name"
         :type="field.type"
         :placeholder="field.placeholder"
+        @input="onChange[field.name]?.($event)"
       />
     </template>
     <button

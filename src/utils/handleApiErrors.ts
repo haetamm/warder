@@ -15,7 +15,7 @@ export function handleApiError(
   if (error instanceof AxiosError) {
     const errorData = error.response?.data
     if (error.response?.status === 422 && setErrors) {
-      setErrors(errorData.errors)
+      setErrors(errorData.message)
     } else {
       toast.add({
         severity: 'error',

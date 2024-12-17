@@ -2,9 +2,9 @@
 import { urlPage } from '@/utils/constans'
 import { backHandleGuest } from '@/utils/helper'
 import { useLoginStore } from '@/stores/login'
-import { loginSchema } from '@/utils/validation'
+import { email, loginSchema, passwordLogin } from '@/utils/validation'
 import { AkArrowLeft } from '@kalimahapps/vue-icons'
-import { useForm } from 'vee-validate'
+import { useField, useForm } from 'vee-validate'
 import { useHead } from '@vueuse/head'
 import { useToast } from 'primevue/usetoast'
 import FormCustom from '@/components/layouts/guest/FormCustom.vue'
@@ -14,7 +14,6 @@ import BorderLine from '@/components/layouts/guest/BorderLine.vue'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 import type { GuestForm, LoginResponse } from '@/utils/interface'
-import { computed } from 'vue'
 
 const toast = useToast()
 const loginStore = useLoginStore()
@@ -31,11 +30,20 @@ useHead({
   ],
 })
 
-const isSubmitting = computed(() => loginStore.loading)
-
 const { handleSubmit, meta } = useForm<GuestForm>({
   validationSchema: loginSchema,
 })
+
+const { handleChange: handleEmailChange } = useField('email', email)
+const { handleChange: handlePasswordChange } = useField(
+  'password',
+  passwordLogin,
+)
+
+const onChange: Record<string, (e: Event) => void> = {
+  email: handleEmailChange,
+  password: handlePasswordChange,
+}
 
 const onSubmit = handleSubmit((values: GuestForm) => {
   loginStore
@@ -85,8 +93,9 @@ const onSubmit = handleSubmit((values: GuestForm) => {
         <FormCustom
           :fields="fieldsGuest"
           :onSubmit="onSubmit"
-          :isSubmitting="isSubmitting"
+          :isSubmitting="loginStore.loading"
           :meta="meta"
+          :onChange="onChange"
           buttonName="Login"
         />
 

@@ -4,14 +4,11 @@ import { useUserStore } from '@/stores/user'
 import { MdLogout } from '@kalimahapps/vue-icons'
 import { useToast } from 'primevue'
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
 
 const logoutStore = useLogoutStore()
 const userStore = useUserStore()
 const toast = useToast()
 const router = useRouter()
-
-const isSubmitting = computed(() => logoutStore.loading)
 
 const onSubmit = () => {
   logoutStore
@@ -34,6 +31,6 @@ const onSubmit = () => {
     class="flex space-x-3 h-[44px] items-center cursor-pointer"
   >
     <MdLogout class="w-7 h-7" />
-    <div>{{ isSubmitting ? 'Loading...' : 'Logout' }}</div>
+    <div>{{ logoutStore.loading ? 'Loading...' : 'Logout' }}</div>
   </div>
 </template>

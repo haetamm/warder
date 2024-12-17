@@ -3,21 +3,19 @@ import Cookies from 'js-cookie'
 import axiosWarderApiInstance from '@/utils/apiWarder'
 import { handleApiError } from '@/utils/handleApiErrors'
 import type { Toast } from '@/utils/type'
-import type { GuestForm } from '@/utils/interface'
 
-export const useLoginStore = defineStore('login', {
+export const useGetAuth = defineStore('getAuth', {
   state: () => ({
     loading: false,
     error: null as string | null,
   }),
   actions: {
-    async loginUser(formData: GuestForm, toast: Toast) {
+    async getAuth(toast: Toast, code: string) {
       this.loading = true
       this.error = null
       try {
-        const { data: response } = await axiosWarderApiInstance.post(
-          'login',
-          formData,
+        const { data: response } = await axiosWarderApiInstance.get(
+          `login/google/callback?code=${code}`,
         )
         const { data } = response
         const { token } = data

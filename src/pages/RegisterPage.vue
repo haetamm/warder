@@ -7,12 +7,11 @@ import { urlPage } from '@/utils/constans'
 import { fieldsGuest } from '@/utils/fields'
 import { backHandle } from '@/utils/helper'
 import type { GuestForm } from '@/utils/interface'
-import { registerUserSchema } from '@/utils/validation'
+import { email, password, registerUserSchema } from '@/utils/validation'
 import { AkArrowLeft } from '@kalimahapps/vue-icons'
 import { useHead } from '@vueuse/head'
 import { useToast } from 'primevue'
-import { useForm } from 'vee-validate'
-import { computed } from 'vue'
+import { useField, useForm } from 'vee-validate'
 import { useRouter } from 'vue-router'
 
 const back = backHandle()
@@ -28,11 +27,17 @@ useHead({
   ],
 })
 
-const isSubmitting = computed(() => registerUserStore.loading)
-
 const { handleSubmit, meta, setErrors } = useForm<GuestForm>({
   validationSchema: registerUserSchema,
 })
+
+const { handleChange: handleEmailChange } = useField('email', email)
+const { handleChange: handlePasswordChange } = useField('password', password)
+
+const onChange: Record<string, (e: Event) => void> = {
+  email: handleEmailChange,
+  password: handlePasswordChange,
+}
 
 const onSubmit = handleSubmit((values: GuestForm) => {
   registerUserStore
@@ -103,8 +108,9 @@ const onSubmit = handleSubmit((values: GuestForm) => {
       <FormCustom
         :fields="fieldsGuest"
         :onSubmit="onSubmit"
-        :isSubmitting="isSubmitting"
+        :isSubmitting="registerUserStore.loading"
         :meta="meta"
+        :onChange="onChange"
         buttonName="Daftar"
       />
 

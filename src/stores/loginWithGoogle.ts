@@ -1,29 +1,22 @@
 import { defineStore } from 'pinia'
-import Cookies from 'js-cookie'
 import axiosWarderApiInstance from '@/utils/apiWarder'
 import { handleApiError } from '@/utils/handleApiErrors'
 import type { Toast } from '@/utils/type'
-import type { GuestForm } from '@/utils/interface'
 
-export const useLoginStore = defineStore('login', {
+export const useLoginWithGoogleStore = defineStore('loginWithGoogle', {
   state: () => ({
     loading: false,
     error: null as string | null,
   }),
   actions: {
-    async loginUser(formData: GuestForm, toast: Toast) {
+    async loginWithGoogle(toast: Toast) {
       this.loading = true
       this.error = null
       try {
-        const { data: response } = await axiosWarderApiInstance.post(
-          'login',
-          formData,
-        )
-        const { data } = response
-        const { token } = data
-
-        Cookies.set('token', token, { expires: 10080 })
-        return data
+        const response = await axiosWarderApiInstance.get('login/google')
+        if (response.data.url) {
+          window.location.href = response.data.url
+        }
       } catch (error: unknown) {
         handleApiError(error, toast)
       } finally {
