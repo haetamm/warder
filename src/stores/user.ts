@@ -14,8 +14,8 @@ let decodedToken: DecodedToken = {
   image: '',
 }
 let roles: string[] = []
-let name: string
-let image: string | null
+let name: string | null = null
+let image: string | null = null
 
 if (token) {
   try {
