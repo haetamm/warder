@@ -14,7 +14,7 @@ const getAuthStore = useGetAuth()
 const toast = useToast()
 const route = useRoute()
 const router = useRouter()
-const userStore = useUserStore()
+const { setToken, setRoles, setImage, setName } = useUserStore()
 
 const onSubmit = () => {
   try {
@@ -29,8 +29,11 @@ const getAuth = (code: string) => {
     .getAuth(toast, code)
     .then((response: LoginResponse) => {
       if (response) {
-        userStore.setToken(response.token)
-        userStore.setRoles(response.roles)
+        const { token, roles, name, image } = response
+        setToken(token)
+        setRoles(roles)
+        setName(name)
+        setImage(image)
         router.push(urlPage.HOME)
       }
     })

@@ -17,7 +17,7 @@ import type { GuestForm, LoginResponse } from '@/utils/interface'
 
 const toast = useToast()
 const loginStore = useLoginStore()
-const userStore = useUserStore()
+const { setToken, setRoles, setImage, setName } = useUserStore()
 const router = useRouter()
 
 const back = backHandleGuest()
@@ -50,8 +50,11 @@ const onSubmit = handleSubmit((values: GuestForm) => {
     .loginUser(values, toast)
     .then((response: LoginResponse) => {
       if (response) {
-        userStore.setToken(response.token)
-        userStore.setRoles(response.roles)
+        const { token, roles, name, image } = response
+        setToken(token)
+        setRoles(roles)
+        setName(name)
+        setImage(image)
         router.push(urlPage.HOME)
       }
     })

@@ -28,6 +28,17 @@ export interface Product {
 export interface LoginResponse {
   token: string
   roles: string[]
+  name: string
+  image: string
+}
+
+export interface ProfileResponse {
+  name: string | null
+  image: string | null
+  birth_date: Date | null
+  gender: string | null
+  email: string | null
+  phone_number: string | null
 }
 
 export interface UserStore {
@@ -37,4 +48,20 @@ export interface UserStore {
 export interface GuestForm {
   email: string
   password: string
+}
+
+export interface SelectedField {
+  label: string
+  value: string
+  name: string
+  type: string
+  inputType: string
+}
+
+export interface UpdateProfilePayload {
+  name?: string
+  birth_date?: string
+  gender?: 'pria' | 'wanita'
+  email?: string
+  phone_number?: string
 }
