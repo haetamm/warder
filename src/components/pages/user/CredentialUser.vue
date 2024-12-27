@@ -82,7 +82,7 @@ const openDialog = (field: SelectedField) => {
 </script>
 
 <template>
-  <div class="px-2 xs:mt-10">
+  <div class="px-2 mt-5 xs:mt-10">
     <template v-if="getProfileStore.loading || !profile">
       <Skeleton width="100%" height="300px"></Skeleton>
     </template>

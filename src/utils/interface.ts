@@ -41,6 +41,20 @@ export interface ProfileResponse {
   phone_number: string | null
 }
 
+export interface AddressResponse {
+  id: string | null
+  recipient_name: string | null
+  phone_number: string | null
+  label: string | null
+  province: string | null
+  city: string | null
+  district: string | null
+  subdistrict: string | null
+  street_name: string | null
+  postal_code: string | null
+  selected: boolean | null
+}
+
 export interface UserStore {
   token: string | null
 }
