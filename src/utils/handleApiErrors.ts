@@ -14,8 +14,12 @@ export function handleApiError(
 ) {
   if (error instanceof AxiosError) {
     const errorData = error.response?.data
+
     if (error.response?.status === 422 && setErrors) {
       setErrors(errorData.message)
+    }
+    if (error.response?.status === 401) {
+      window.location.reload()
     } else {
       toast.add({
         severity: 'error',

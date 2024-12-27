@@ -1,43 +1,30 @@
 import { defineStore } from 'pinia'
 import Cookies from 'js-cookie'
-import { jwtDecode } from 'jwt-decode'
-
-interface DecodedToken {
-  name: string
-  image: string
-  roles?: string[]
-}
-
-const token = Cookies.get('token')
-let decodedToken: DecodedToken = {
-  name: '',
-  image: '',
-}
-let roles: string[] = []
-let name: string | null = null
-let image: string | null = null
-
-if (token) {
-  try {
-    decodedToken = jwtDecode<DecodedToken>(token)
-    roles = decodedToken.roles || []
-    name = decodedToken.name || ''
-    image = decodedToken.image || ''
-  } catch (e) {
-    console.error('Invalid token', e)
-  }
-}
+import axiosWarderApiInstance from '@/utils/apiWarder'
 
 export const useUserStore = defineStore('user', {
-  state: () => {
-    return {
-      token: Cookies.get('token') || null,
-      roles: roles,
-      name: name,
-      image: image,
-    }
-  },
+  state: () => ({
+    token: Cookies.get('token') || null,
+    roles: [] as string[],
+    name: null as string | null,
+    image: null as string | null,
+  }),
   actions: {
+    async fetchUserData() {
+      const token = Cookies.get('token')
+      if (token) {
+        try {
+          const { data: response } = await axiosWarderApiInstance.get('user')
+          const { data } = response
+          this.roles = data.roles
+          this.name = data.name
+          this.image = data.image
+        } catch (e) {
+          console.error('Invalid token', e)
+          this.logout()
+        }
+      }
+    },
     setToken(token: string) {
       this.token = token
       Cookies.set('token', token)

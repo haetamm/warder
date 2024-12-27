@@ -19,13 +19,13 @@ const head = createHead()
 app.use(createPinia())
 app.directive('click-outside', clickOutside)
 app.directive('tooltip', Tooltip)
-app.use(ToastService)
 
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
   },
 })
+app.use(ToastService)
 
 app.use(head)
 app.use(router).mount('#app')

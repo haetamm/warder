@@ -2,12 +2,15 @@
 import { useUserStore } from '@/stores/user'
 import { urlPage } from '@/utils/constans'
 import Toast from 'primevue/toast'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()
 const router = useRouter()
 
-if (userStore.token) {
+const token = computed(() => userStore.token)
+
+if (token.value) {
   router.push(urlPage.HOME)
 }
 </script>

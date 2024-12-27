@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
 import { CiUser } from '@kalimahapps/vue-icons'
+import { computed } from 'vue'
 
-const { name, image } = useUserStore()
+const userStore = useUserStore()
+
+const name = computed(() => userStore.name)
+const image = computed(() => userStore.image)
 </script>
 
 <template>

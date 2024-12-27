@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { applyPrimaryPalette } from '@/mixins/themeMixin'
 import { onMounted } from 'vue'
+import { useUserStore } from './stores/user'
+
+const userStore = useUserStore()
+
+onMounted(async () => {
+  await userStore.fetchUserData()
+})
 
 onMounted(() => {
   applyPrimaryPalette()
@@ -29,9 +36,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="#app">
-    <RouterView />
-  </div>
+  <RouterView />
 </template>
 
 <style scoped></style>

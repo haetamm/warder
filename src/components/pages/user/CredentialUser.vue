@@ -1,21 +1,20 @@
 <script setup lang="ts">
 import { useGetProfile } from '@/stores/getProfile'
-import { fieldsProfile, genderOptions } from '@/utils/fields'
+import { fieldsProfile } from '@/utils/fields'
 import type { ProfileResponse, SelectedField } from '@/utils/interface'
-import { Button, DatePicker, Dialog, useToast } from 'primevue'
+import { Dialog, useToast } from 'primevue'
 import { computed, onMounted, ref } from 'vue'
-import { Field, ErrorMessage, useForm } from 'vee-validate'
 import Skeleton from 'primevue/skeleton'
-import { useUpdateProfile } from '@/stores/updateProfile'
 import { formatDate } from '@/utils/helper'
-import { updateUserSchema } from '@/utils/validation'
+import FormUpdateUser from './FormUpdateUser.vue'
 
 const visible = ref(false)
 const loaded = ref(false)
 const selectedField = ref<SelectedField | null>(null)
 const getProfileStore = useGetProfile()
-const updateProfileStore = useUpdateProfile()
 const toast = useToast()
+const temporaryDateField = ref<Date | null>(null)
+const temporaryField = ref<unknown>(null)
 
 const profile = ref<ProfileResponse | null>({
   name: null,
@@ -64,60 +63,22 @@ const groupedFields = computed(() => {
 
 const openDialog = (field: SelectedField) => {
   selectedField.value = field
+
+  if (field.value === 'birth_date') {
+    temporaryDateField.value =
+      profile.value?.birth_date instanceof Date
+        ? profile.value?.birth_date
+        : profile.value?.birth_date
+          ? new Date(profile.value?.birth_date)
+          : null
+  } else {
+    selectedField.value = field
+    temporaryField.value =
+      profile.value?.[field.value as keyof ProfileResponse] || null
+  }
+
   visible.value = true
 }
-
-const birthDate = computed({
-  get() {
-    return profile.value?.birth_date instanceof Date
-      ? profile.value?.birth_date
-      : profile.value?.birth_date
-        ? new Date(profile.value?.birth_date)
-        : null
-  },
-  set(value: Date | null) {
-    profile.value!.birth_date = value
-  },
-})
-
-const validationSchema = computed(() => {
-  return updateUserSchema(selectedField.value?.value || '')
-})
-
-const { handleSubmit, meta } = useForm({
-  validationSchema,
-})
-
-const handleUpdate = handleSubmit((values: Record<string, unknown>) => {
-  const fieldKey = selectedField.value?.value as keyof ProfileResponse
-
-  if (!fieldKey) {
-    console.error('Field key is missing')
-    return
-  }
-
-  const payload = {
-    [fieldKey]: values[fieldKey],
-  }
-
-  updateProfileStore
-    .updateProfile(toast, payload)
-    .then((response: ProfileResponse) => {
-      if (response.birth_date) {
-        response.birth_date = new Date(response.birth_date)
-      }
-      if (profile.value) {
-        profile.value = {
-          ...profile.value,
-          ...response,
-        }
-        visible.value = false
-      }
-    })
-    .catch((err: unknown) => {
-      console.error(err)
-    })
-})
 </script>
 
 <template>
@@ -171,79 +132,12 @@ const handleUpdate = handleSubmit((values: Record<string, unknown>) => {
     } ${selectedField?.label}`"
     :style="{ width: '21rem' }"
   >
-    <form @submit.prevent="handleUpdate">
-      <div class="mb-4">
-        <div class="text-sm mb-2 font-semibold">
-          {{ selectedField?.label }}
-        </div>
-        <div
-          v-if="selectedField?.inputType === 'radio'"
-          class="flex justify-center space-x-4"
-        >
-          <Field :name="selectedField.name" v-slot="{ field }">
-            <div class="flex justify-center space-x-4">
-              <div v-for="option in genderOptions" :key="option.value">
-                <input
-                  v-bind="field"
-                  :id="option.label"
-                  type="radio"
-                  :value="option.value"
-                  v-model="
-                    profile![selectedField.value as keyof ProfileResponse]
-                  "
-                  class="mr-2"
-                />
-                <label :for="option.label" class="cursor-pointer">
-                  {{ option.label }}
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              :name="selectedField?.name"
-              class="text-red-500 text-sm"
-            />
-          </Field>
-        </div>
-        <template v-else-if="selectedField?.inputType === 'date'">
-          <Field :name="selectedField.name" v-slot="{ field }">
-            <DatePicker
-              v-bind="field"
-              v-model="birthDate"
-              :placeholder="`Pilih ${selectedField?.label}`"
-              dateFormat="dd/mm/yy"
-              class="w-full"
-              showIcon
-            />
-            <ErrorMessage
-              :name="selectedField?.name ?? ''"
-              class="text-red-500 text-sm"
-            />
-          </Field>
-        </template>
-
-        <template v-else>
-          <Field
-            :name="selectedField?.name ?? ''"
-            :type="selectedField?.inputType ?? 'text'"
-            :placeholder="`Masukkan ${selectedField?.label}`"
-            v-model="profile![selectedField?.value as keyof ProfileResponse]"
-            class="w-full rounded-lg py-2.5 px-3 border-2 outline-none"
-            autocomplete="off"
-          />
-          <ErrorMessage
-            :name="selectedField?.name ?? ''"
-            class="text-red-500 text-sm"
-          />
-        </template>
-      </div>
-      <div class="w-full">
-        <Button
-          :disabled="!meta.valid"
-          type="submit"
-          :label="updateProfileStore.loading ? 'Loading' : 'Save'"
-          class="w-full"
-        />
-      </div>
-    </form>
+    <FormUpdateUser
+      :selectedField="selectedField"
+      :profile="profile"
+      v-model:visible="visible"
+      :temporaryField="temporaryField"
+      :temporaryDateField="temporaryDateField"
+    />
   </Dialog>
 </template>

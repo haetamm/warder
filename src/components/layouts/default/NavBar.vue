@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import { AkArrowLeft, AkTextAlignJustified } from '@kalimahapps/vue-icons'
 import { useRoute } from 'vue-router'
 import { useMediaQuery } from '@vueuse/core'
@@ -19,7 +19,10 @@ const route = useRoute()
 const showButton = ref(false)
 const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 const { isVisible } = useScrollVisibility()
-const { token, roles } = useUserStore()
+const userStore = useUserStore()
+
+const token = computed(() => userStore.token)
+const roles = computed(() => userStore.roles)
 
 const back = backHandle()
 const visibleBottom = ref(false)
