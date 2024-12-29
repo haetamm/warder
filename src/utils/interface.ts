@@ -47,9 +47,9 @@ export interface AddressResponse {
   phone_number: string | null
   label: string | null
   province: string | null
-  city: string | null
+  regencies: string | null
   district: string | null
-  subdistrict: string | null
+  villages: string | null
   street_name: string | null
   postal_code: string | null
   selected: boolean | null
