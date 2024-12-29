@@ -46,9 +46,16 @@ const address = computed(() => {
               </p>
               <p class="my-0.5 text-sm">{{ addres.phone_number }}</p>
               <small class="my-0.5">
-                {{
-                  `${capitalizeFirstLetterOnly(addres.street_name)}, ${capitalizeFirstLetterOnly(addres.villages)}, ${capitalizeFirstLetterOnly(addres.district)}, ${capitalizeFirstLetterOnly(addres.regencies)}, ${capitalizeFirstLetterOnly(addres.province)}, ${addres.postal_code}`
-                }}
+                <small class="my-0.5">
+                  {{
+                    `${capitalizeFirstLetterOnly(addres.street_name || '')},
+                    ${capitalizeFirstLetterOnly(addres.villages || '')},
+                    ${capitalizeFirstLetterOnly(addres.district || '')},
+                    ${capitalizeFirstLetterOnly(addres.regencies || '')},
+                    ${capitalizeFirstLetterOnly(addres.province || '')},
+                    ${addres.postal_code || ''}`
+                  }}
+                </small>
               </small>
             </div>
             <button
