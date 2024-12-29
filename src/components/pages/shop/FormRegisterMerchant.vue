@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { Button, FloatLabel, InputText, Select, StepItem } from 'primevue'
-import { onMounted, ref } from 'vue'
+import { Button, FloatLabel, InputText, StepItem } from 'primevue'
+import { ref } from 'vue'
 import Stepper from 'primevue/stepper'
 import Step from 'primevue/step'
 import StepPanel from 'primevue/steppanel'
-import axiosRegionInstance from '@/utils/apiRegion'
-import { capitalizeFirstLetterOnly, scrollTop } from '@/utils/helper'
+import { scrollTop } from '@/utils/helper'
 import { urlPage } from '@/utils/constans'
+import InputSelectRegion from '../user/InputSelectRegion.vue'
+import { fieldRegion } from '@/utils/fields'
 
 const phoneNumber = ref('')
 const storeName = ref('')
@@ -27,101 +28,6 @@ function handleStoreInfoSubmit(activateCallback: (step: string) => void) {
     activateCallback('3')
   }
 }
-
-interface Region {
-  id: string
-  name: string
-}
-
-const selectedProvinsi = ref<Region | null>(null)
-const provinsi = ref<Region[]>([])
-const selectedKab = ref<Region | null>(null)
-const kab = ref<Region[]>([])
-const selectedKec = ref<Region | null>(null)
-const kec = ref<Region[]>([])
-const selectedKel = ref<Region | null>(null)
-const kel = ref<Region[]>([])
-
-onMounted(async () => {
-  try {
-    const { data: response } = await axiosRegionInstance.get('provinces.json')
-    provinsi.value = response
-  } catch (error) {
-    console.error('Error fetching provinsi:', error)
-  }
-})
-
-async function fetchKabupaten() {
-  if (!selectedProvinsi.value) return
-  try {
-    const { data: response } = await axiosRegionInstance.get(
-      `regencies/${selectedProvinsi.value.id}.json`,
-    )
-    kab.value = await response
-    selectedKab.value = null
-    selectedKec.value = null
-    selectedKel.value = null
-    kec.value = []
-    kel.value = []
-  } catch (error) {
-    console.error('Error fetching kabupaten:', error)
-  }
-}
-
-async function fetchKecamatan() {
-  if (!selectedKab.value) return
-  try {
-    const { data: response } = await axiosRegionInstance.get(
-      `districts/${selectedKab.value.id}.json`,
-    )
-    kec.value = await response
-    selectedKec.value = null
-    selectedKel.value = null
-    kel.value = []
-  } catch (error) {
-    console.error('Error fetching kecamatan:', error)
-  }
-}
-
-async function fetchKelurahan() {
-  if (!selectedKec.value) return
-  try {
-    const { data: response } = await axiosRegionInstance.get(
-      `villages/${selectedKec.value.id}.json`,
-    )
-    kel.value = await response
-    selectedKel.value = null
-  } catch (error) {
-    console.error('Error fetching kelurahan:', error)
-  }
-}
-
-const fields = ref([
-  {
-    model: selectedProvinsi,
-    options: provinsi,
-    placeholder: 'Provinsi',
-    onChange: fetchKabupaten,
-  },
-  {
-    model: selectedKab,
-    options: kab,
-    placeholder: 'Kota/Kabupaten',
-    onChange: fetchKecamatan,
-  },
-  {
-    model: selectedKec,
-    options: kec,
-    placeholder: 'Kecamatan',
-    onChange: fetchKelurahan,
-  },
-  {
-    model: selectedKel,
-    options: kel,
-    placeholder: 'Kelurahan',
-    onChange: null,
-  },
-])
 </script>
 
 <template>
@@ -225,32 +131,15 @@ const fields = ref([
           <div class="font-bold text-lg">Masukkan Alamat Tokomu</div>
         </Step>
         <StepPanel class="w-full">
-          <div class="h-[240px]">
-            <div class="pt-[8px] pb-[24px]">
+          <div class="h-[260px]">
+            <div class="pb-[24px]">
               <div class="mt-2 mb-3 w-full">
-                <template v-for="(field, index) in fields" :key="index">
-                  <Select
-                    v-model="field.model"
-                    :options="field.options"
-                    filter
-                    optionLabel="name"
+                <div v-for="field in fieldRegion" :key="field.name">
+                  <InputSelectRegion
+                    :fieldName="field.name"
                     :placeholder="field.placeholder"
-                    class="w-full mb-3"
-                    @change="field.onChange && field.onChange()"
-                  >
-                    <template #value="slotProps">
-                      <div v-if="slotProps.value">
-                        <div>
-                          {{ capitalizeFirstLetterOnly(slotProps.value.name) }}
-                        </div>
-                      </div>
-                      <span v-else>{{ slotProps.placeholder }}</span>
-                    </template>
-                    <template #option="slotProps">
-                      <div>{{ slotProps.option.name }}</div>
-                    </template>
-                  </Select>
-                </template>
+                  />
+                </div>
               </div>
             </div>
           </div>

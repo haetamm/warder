@@ -45,3 +45,59 @@ export const genderOptions = [
   { label: 'Pria', value: 'pria' },
   { label: 'Wanita', value: 'wanita' },
 ]
+
+export const fieldAddress = [
+  { name: 'recipient_name', type: 'text', placeholder: 'Nama Penerima' },
+  { name: 'phone_number', type: 'text', placeholder: 'No.Hp' },
+  { name: 'label', type: 'text', placeholder: 'Label' },
+  {
+    name: 'province',
+    type: 'select',
+    placeholder: 'Provinsi',
+  },
+  {
+    name: 'regencies',
+    type: 'select',
+    placeholder: 'Kab./Kota',
+  },
+  {
+    name: 'district',
+    type: 'select',
+    placeholder: 'Kecamatan',
+  },
+  {
+    name: 'villages',
+    type: 'select',
+    placeholder: 'Kel./Desa',
+  },
+  { name: 'street_name', type: 'text', placeholder: 'Nama Jalan' },
+  { name: 'postal_code', type: 'text', placeholder: 'Kode Pos' },
+  {
+    name: 'selected',
+    type: 'checkbox',
+    placeholder: 'Jadikan alamat utama',
+  },
+]
+
+export const fieldRegion = [
+  {
+    name: 'province',
+    type: 'select',
+    placeholder: 'Provinsi',
+  },
+  {
+    name: 'regencies',
+    type: 'select',
+    placeholder: 'Kab./Kota',
+  },
+  {
+    name: 'district',
+    type: 'select',
+    placeholder: 'Kecamatan',
+  },
+  {
+    name: 'villages',
+    type: 'select',
+    placeholder: 'Kel./Desa',
+  },
+]

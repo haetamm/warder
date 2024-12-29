@@ -1,27 +1,33 @@
 <script setup lang="ts">
-import { useGetAddress } from '@/stores/getAddress'
-import type { AddressResponse } from '@/utils/interface'
 import { ChTickDouble } from '@kalimahapps/vue-icons'
-import { useToast } from 'primevue'
-import { onMounted, ref } from 'vue'
+import { computed } from 'vue'
 import Skeleton from 'primevue/skeleton'
 import AddressNotFound from './AddressNotFound.vue'
+import { useAddress } from '@/stores/address'
+import { capitalizeFirstLetterOnly } from '@/utils/helper'
 
-const getAddressStore = useGetAddress()
-const toast = useToast()
+const addressStore = useAddress()
 
-const address = ref<AddressResponse[]>([])
+const address = computed(() => {
+  const capitalizeFields = [
+    'street_name',
+    'villages',
+    'district',
+    'regencies',
+    'province',
+  ]
 
-onMounted(() => {
-  getAddressStore
-    .getAddress(toast)
-    .then((response: AddressResponse[]) => {
-      address.value = response.sort(
-        (a, b) => (b.selected ? 1 : 0) - (a.selected ? 1 : 0),
-      )
-    })
-    .catch((err: unknown) => {
-      console.error(err)
+  return [...addressStore.address]
+    .sort((a, b) =>
+      a.selected && !b.selected ? -1 : !a.selected && b.selected ? 1 : 0,
+    )
+    .map(address => {
+      capitalizeFields.forEach(field => {
+        if (address[field]) {
+          address[field] = capitalizeFirstLetterOnly(address[field])
+        }
+      })
+      return address
     })
 })
 </script>
@@ -30,7 +36,7 @@ onMounted(() => {
   <div
     class="mt-2 md:max-h-[380px] xl:max-h-[450px] overflow-scroll no-scrollbar"
   >
-    <template v-if="getAddressStore.loading">
+    <template v-if="addressStore.loading">
       <Skeleton width="100%" height="200px"></Skeleton>
     </template>
     <template v-else>
@@ -58,7 +64,7 @@ onMounted(() => {
               <p class="my-0.5 text-sm">{{ addres.phone_number }}</p>
               <small class="my-0.5">
                 {{
-                  `${addres.street_name}, ${addres.subdistrict}, ${addres.district}, ${addres.city}, ${addres.province}, ${addres.postal_code}`
+                  `${addres.street_name}, ${addres.villages}, ${addres.district}, ${addres.regencies}, ${addres.province}, ${addres.postal_code}`
                 }}
               </small>
             </div>

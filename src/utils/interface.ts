@@ -55,6 +55,19 @@ export interface AddressResponse {
   selected: boolean | null
 }
 
+export interface AddressForm {
+  recipient_name: string | null
+  phone_number: string | null
+  label: string | null
+  province: string | null
+  regencies: string | null
+  district: string | null
+  villages: string | null
+  street_name: string | null
+  postal_code: string | null
+  selected: boolean | null
+}
+
 export interface UserStore {
   token: string | null
 }
@@ -78,4 +91,9 @@ export interface UpdateProfilePayload {
   gender?: 'pria' | 'wanita'
   email?: string
   phone_number?: string
+}
+
+export interface Region {
+  id: string
+  name: string
 }

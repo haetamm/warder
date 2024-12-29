@@ -3,6 +3,8 @@
     <img
       src="https://assets.tokopedia.net/assets-tokopedia-lite/v2/zeus/kratos/41499bbe.png"
       alt="not-found"
+      width="192"
+      height="144"
     />
   </div>
   <div class="text-xl md:text-3xl mt-5 font-bold text-center">
