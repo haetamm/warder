@@ -18,18 +18,14 @@ const address = computed(() => {
     'province',
   ]
 
-  return [...addressStore.address]
-    .sort((a, b) =>
-      a.selected && !b.selected ? -1 : !a.selected && b.selected ? 1 : 0,
-    )
-    .map(address => {
-      capitalizeFields.forEach(field => {
-        if (address[field]) {
-          address[field] = capitalizeFirstLetterOnly(address[field])
-        }
-      })
-      return address
+  return [...addressStore.address].map(address => {
+    capitalizeFields.forEach(field => {
+      if (address[field]) {
+        address[field] = capitalizeFirstLetterOnly(address[field] as string)
+      }
     })
+    return address
+  })
 })
 </script>
 
