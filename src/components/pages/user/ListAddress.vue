@@ -5,11 +5,12 @@ import Skeleton from 'primevue/skeleton'
 import AddressNotFound from './AddressNotFound.vue'
 import { useAddress } from '@/stores/address'
 import { capitalizeFirstLetterOnly } from '@/utils/helper'
+import type { Address } from '@/utils/type'
 
 const addressStore = useAddress()
 
 const address = computed(() => {
-  const capitalizeFields = [
+  const capitalizeFields: (keyof Address)[] = [
     'street_name',
     'villages',
     'district',
