@@ -5,27 +5,13 @@ import Skeleton from 'primevue/skeleton'
 import AddressNotFound from './AddressNotFound.vue'
 import { useAddress } from '@/stores/address'
 import { capitalizeFirstLetterOnly } from '@/utils/helper'
-import type { Address } from '@/utils/type'
 
 const addressStore = useAddress()
 
 const address = computed(() => {
-  const capitalizeFields: (keyof Address)[] = [
-    'street_name',
-    'villages',
-    'district',
-    'regencies',
-    'province',
-  ]
-
-  return [...addressStore.address].map(address => {
-    capitalizeFields.forEach(field => {
-      if (address[field]) {
-        address[field] = capitalizeFirstLetterOnly(address[field] as string)
-      }
-    })
-    return address
-  })
+  return [...addressStore.address].sort((a, b) =>
+    a.selected && !b.selected ? -1 : !a.selected && b.selected ? 1 : 0,
+  )
 })
 </script>
 
@@ -61,7 +47,7 @@ const address = computed(() => {
               <p class="my-0.5 text-sm">{{ addres.phone_number }}</p>
               <small class="my-0.5">
                 {{
-                  `${addres.street_name}, ${addres.villages}, ${addres.district}, ${addres.regencies}, ${addres.province}, ${addres.postal_code}`
+                  `${capitalizeFirstLetterOnly(addres.street_name)}, ${capitalizeFirstLetterOnly(addres.villages)}, ${capitalizeFirstLetterOnly(addres.district)}, ${capitalizeFirstLetterOnly(addres.regencies)}, ${capitalizeFirstLetterOnly(addres.province)}, ${addres.postal_code}`
                 }}
               </small>
             </div>
