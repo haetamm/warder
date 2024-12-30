@@ -58,8 +58,15 @@ onMounted(() => {
     if (selectedAddress) {
       Object.keys(selectedAddress).forEach(key => {
         if (key in form) {
-          form[key as keyof AddressForm] =
-            selectedAddress[key as keyof AddressResponse]
+          const value = selectedAddress[key as keyof AddressResponse]
+
+          if (
+            value === null ||
+            typeof value === 'string' ||
+            typeof value === 'boolean'
+          ) {
+            form[key as keyof AddressForm] = value
+          }
         }
       })
     }

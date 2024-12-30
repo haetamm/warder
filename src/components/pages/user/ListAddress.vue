@@ -34,10 +34,12 @@ const handleSelect = (address: AddressResponse) => {
     ...addressWithoutId,
     selected: true,
   }
-  addressStore
-    .putAddress(toast, payload, address.id, setErrors)
-    .then(() => {})
-    .catch((err: unknown) => console.error(err))
+  if (address.id) {
+    addressStore
+      .putAddress(toast, payload, address.id, setErrors)
+      .then(() => {})
+      .catch((err: unknown) => console.error(err))
+  }
 }
 
 const handleDelete = () => {
@@ -112,7 +114,7 @@ const handleDelete = () => {
             <div
               @click="
                 (visible = true),
-                  (dialogState = { id: addressItem.id, type: 'edit' })
+                  (dialogState = { id: addressItem.id ?? '', type: 'edit' })
               "
               class="text-purple-600 cursor-pointer"
             >
@@ -121,7 +123,7 @@ const handleDelete = () => {
             <div
               @click="
                 (visible = true),
-                  (dialogState = { id: addressItem.id, type: 'delete' })
+                  (dialogState = { id: addressItem.id ?? '', type: 'delete' })
               "
               v-if="!addressItem.selected"
               class="text-purple-600 cursor-pointer"
