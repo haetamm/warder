@@ -58,7 +58,8 @@ onMounted(() => {
     if (selectedAddress) {
       Object.keys(selectedAddress).forEach(key => {
         if (key in form) {
-          form[key as keyof AddressForm] = selectedAddress[key]
+          form[key as keyof AddressForm] =
+            selectedAddress[key as keyof AddressResponse]
         }
       })
     }
@@ -94,6 +95,11 @@ const onChange: Record<FieldNames, (e: Event) => void> = {
   label: handleLabelChange,
   street_name: handleStreetNameChange,
   postal_code: handlePostalCodeChange,
+  province: () => {},
+  regencies: () => {},
+  district: () => {},
+  villages: () => {},
+  selected: () => {},
 }
 
 const onSubmit = handleSubmit(() => {
@@ -104,9 +110,8 @@ const onSubmit = handleSubmit(() => {
   form.villages = regionStore.selectedVillage?.name ?? null
 
   if (props.id) {
-    const updatedForm = { ...form, id: props.id }
     addressStore
-      .putAddress(toast, updatedForm, setErrors)
+      .putAddress(toast, form, props.id, setErrors)
       .then((response: AddressResponse) => {
         if (response) {
           emit('update:visible', false)
@@ -146,7 +151,7 @@ const onSubmit = handleSubmit(() => {
           :name="field.name"
           :type="field.type"
           :placeholder="field.placeholder"
-          @input="onChange[field.name]?.($event)"
+          @input="onChange[field.name as keyof AddressForm]?.($event)"
           :disabled="
             ['province', 'regencies', 'district', 'villages'].includes(
               field.name,
