@@ -35,15 +35,15 @@ const regionStore = useRegionStore()
 const toast = useToast()
 
 const form = reactive<AddressForm>({
-  recipient_name: null,
-  phone_number: null,
-  label: null,
-  street_name: null,
-  province: null,
-  regencies: null,
-  district: null,
-  villages: null,
-  postal_code: null,
+  recipient_name: '',
+  phone_number: '',
+  label: '',
+  street_name: '',
+  province: '',
+  regencies: '',
+  district: '',
+  villages: '',
+  postal_code: '',
   selected: false,
 })
 
@@ -58,15 +58,8 @@ onMounted(() => {
     if (selectedAddress) {
       Object.keys(selectedAddress).forEach(key => {
         if (key in form) {
-          const value = selectedAddress[key as keyof AddressResponse]
-
-          if (
-            value === null ||
-            typeof value === 'string' ||
-            typeof value === 'boolean'
-          ) {
-            form[key as keyof AddressForm] = value
-          }
+          form[key as keyof AddressForm] =
+            selectedAddress[key as keyof AddressResponse]
         }
       })
     }

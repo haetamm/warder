@@ -68,6 +68,20 @@ export interface AddressForm {
   selected: boolean | null
 }
 
+export interface AddressFormModal {
+  id: string | null
+  recipient_name: string | null
+  phone_number: string | null
+  label: string | null
+  province: string | null
+  regencies: string | null
+  district: string | null
+  villages: string | null
+  street_name: string | null
+  postal_code: string | null
+  selected: boolean
+}
+
 export interface RegSellerForm {
   phone_number: string | null
   shop_name: string | null

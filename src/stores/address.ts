@@ -18,7 +18,10 @@ export const useAddress = defineStore('address', {
         const { data: response } =
           await axiosWarderApiInstance.get('user/address')
         const { data } = response
-        this.address = data
+        this.address = data.map((address: AddressResponse) => ({
+          ...address,
+          selected: Boolean(address.selected),
+        }))
         return data
       } catch (error: unknown) {
         handleApiError(error, toast)
