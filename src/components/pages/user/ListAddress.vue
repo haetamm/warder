@@ -88,12 +88,12 @@ const handleDelete = () => {
               <p class="my-0.5 text-sm">{{ addressItem.phone_number }}</p>
               <p class="my-0.5">
                 {{
-                  `${capitalizeFirstLetterOnly(addressItem?.street_name || '')},
-                    ${capitalizeFirstLetterOnly(addressItem?.villages || '')},
-                    ${capitalizeFirstLetterOnly(addressItem?.district || '')},
-                    ${capitalizeFirstLetterOnly(addressItem?.regencies || '')},
-                    ${capitalizeFirstLetterOnly(addressItem?.province || '')},
-                    ${addressItem?.postal_code || ''}`
+                  `${capitalizeFirstLetterOnly(addressItem?.street_name ?? '')},
+                  ${capitalizeFirstLetterOnly(addressItem?.villages ?? '')},
+                  ${capitalizeFirstLetterOnly(addressItem?.district ?? '')},
+                  ${capitalizeFirstLetterOnly(addressItem?.regencies ?? '')},
+                  ${capitalizeFirstLetterOnly(addressItem?.province ?? '')},
+                  ${addressItem?.postal_code ?? ''}`
                 }}
               </p>
             </div>
