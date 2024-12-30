@@ -62,7 +62,7 @@ export const useAddress = defineStore('address', {
     },
     async putAddress(
       toast: Toast,
-      payload: AddressResponse,
+      payload: AddressForm,
       id: string,
       setErrors: (errors: ValidationErrors) => void,
     ) {

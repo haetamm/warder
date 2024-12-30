@@ -4,6 +4,8 @@ import { scrollTop } from '@/utils/helper'
 import type { RegSellerForm } from '@/utils/interface'
 import { districtSchema } from '@/utils/validation'
 import { useForm } from 'vee-validate'
+import InputSelectRegion from '../user/InputSelectRegion.vue'
+import { Button } from 'primevue'
 
 const { handleSubmit } = useForm<RegSellerForm>({
   validationSchema: districtSchema,

@@ -14,7 +14,7 @@ const addressStore = useAddress()
 const visible = ref(false)
 const dialogState = ref({
   id: '',
-  type: '' as 'edit' | 'delete' | '',
+  type: '' as 'edit' | 'delete' | 'select' | '',
 })
 
 const toast = useToast()
@@ -28,8 +28,10 @@ const address = computed(() => {
 const { setErrors } = useForm<AddressForm>({})
 
 const handleSelect = (address: AddressResponse) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { id: _, ...addressWithoutId } = address
   const payload = {
-    ...address,
+    ...addressWithoutId,
     selected: true,
   }
   addressStore
