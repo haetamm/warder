@@ -151,7 +151,6 @@ const handleUpdate = handleSubmit(() => {
             class="w-full"
             showIcon
           />
-
           <ErrorMessage
             :name="selectedField?.name ?? ''"
             class="text-red-500 text-sm"
@@ -168,7 +167,6 @@ const handleUpdate = handleSubmit(() => {
           class="w-full rounded-lg py-2.5 px-3 border-2 outline-none"
           autocomplete="off"
         />
-
         <ErrorMessage
           :name="selectedField?.name ?? ''"
           class="text-red-500 text-sm"

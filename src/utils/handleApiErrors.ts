@@ -16,6 +16,7 @@ export function handleApiError(
     const errorData = error.response?.data
 
     if (error.response?.status === 422 && setErrors) {
+      console.log(errorData.message)
       setErrors(errorData.message)
     }
     if (error.response?.status === 401) {

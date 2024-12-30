@@ -1,28 +1,31 @@
 <script setup lang="ts">
 import { Button, FloatLabel, InputText, StepItem } from 'primevue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Stepper from 'primevue/stepper'
 import Step from 'primevue/step'
 import StepPanel from 'primevue/steppanel'
-import { scrollTop } from '@/utils/helper'
-import { urlPage } from '@/utils/constans'
-import InputSelectRegion from '../user/InputSelectRegion.vue'
-import { fieldRegion } from '@/utils/fields'
+import { useRegionStore } from '@/stores/region'
+import FormDistrict from './FormDistrict.vue'
 
 const phoneNumber = ref('')
 const storeName = ref('')
 const domainName = ref('')
 const isPhoneNumberSubmitted = ref(false)
 const isStoreInfoSubmitted = ref(false)
+const regionStore = useRegionStore()
 
-function handlePhoneNumberSubmit(activateCallback: (step: string) => void) {
+onMounted(() => {
+  regionStore.fetchProvinces()
+})
+
+const handlePhoneNumberSubmit = (activateCallback: (step: string) => void) => {
   if (phoneNumber.value) {
     isPhoneNumberSubmitted.value = true
     activateCallback('2')
   }
 }
 
-function handleStoreInfoSubmit(activateCallback: (step: string) => void) {
+const handleStoreInfoSubmit = (activateCallback: (step: string) => void) => {
   if (storeName.value && domainName.value) {
     isStoreInfoSubmitted.value = true
     activateCallback('3')
@@ -131,26 +134,7 @@ function handleStoreInfoSubmit(activateCallback: (step: string) => void) {
           <div class="font-bold text-lg">Masukkan Alamat Tokomu</div>
         </Step>
         <StepPanel class="w-full">
-          <div class="h-[260px]">
-            <div class="pb-[24px]">
-              <div class="mt-2 mb-3 w-full">
-                <div v-for="field in fieldRegion" :key="field.name">
-                  <InputSelectRegion
-                    :fieldName="field.name"
-                    :placeholder="field.placeholder"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <Button
-            v-on:click="scrollTop"
-            as="router-link"
-            :to="urlPage.SELLER_HOME"
-            class="w-full xl:w-[144px] py-3 xl:py-2 font-bold"
-            label="Selesai"
-            severity="secondary"
-          />
+          <FormDistrict />
         </StepPanel>
       </StepItem>
     </Stepper>

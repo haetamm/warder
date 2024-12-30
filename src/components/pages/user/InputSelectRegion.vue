@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, onUnmounted } from 'vue'
+import { Field, ErrorMessage, useFormContext } from 'vee-validate'
 import { useRegionStore } from '@/stores/region'
-import { Field, ErrorMessage } from 'vee-validate'
 import type { Region } from '@/utils/interface'
 import { capitalizeFirstLetterOnly } from '@/utils/helper'
 
@@ -18,6 +18,10 @@ defineProps({
 
 const regionStore = useRegionStore()
 
+onUnmounted(() => {
+  regionStore.resetData()
+})
+
 const getSelectOptions = (fieldName: string) => {
   switch (fieldName) {
     case 'province':
@@ -33,6 +37,23 @@ const getSelectOptions = (fieldName: string) => {
   }
 }
 
+const { setFieldValue } = useFormContext()
+
+const resetSelectField = (fieldName: string) => {
+  setFieldValue(fieldName, '')
+
+  if (fieldName === 'regencies') {
+    regionStore.selectedRegency = null
+    regionStore.regencies = []
+  } else if (fieldName === 'district') {
+    regionStore.selectedDistrict = null
+    regionStore.districts = []
+  } else if (fieldName === 'villages') {
+    regionStore.selectedVillage = null
+    regionStore.villages = []
+  }
+}
+
 const handleSelectChange = (fieldName: string, event: Event) => {
   const selectedValue = (event.target as HTMLSelectElement).value
 
@@ -44,6 +65,9 @@ const handleSelectChange = (fieldName: string, event: Event) => {
     if (province) {
       regionStore.selectedProvince = province
       regionStore.fetchRegencies()
+      resetSelectField('regencies')
+      resetSelectField('district')
+      resetSelectField('villages')
     }
   } else if (fieldName === 'regencies') {
     const regency = regionStore.regencies.find(
@@ -53,6 +77,8 @@ const handleSelectChange = (fieldName: string, event: Event) => {
     if (regency) {
       regionStore.selectedRegency = regency
       regionStore.fetchDistricts()
+      resetSelectField('district')
+      resetSelectField('villages')
     }
   } else if (fieldName === 'district') {
     const district = regionStore.districts.find(
@@ -62,6 +88,7 @@ const handleSelectChange = (fieldName: string, event: Event) => {
     if (district) {
       regionStore.selectedDistrict = district
       regionStore.fetchVillages()
+      resetSelectField('villages')
     }
   } else if (fieldName === 'villages') {
     const village = regionStore.villages.find(
@@ -76,26 +103,25 @@ const handleSelectChange = (fieldName: string, event: Event) => {
 </script>
 
 <template>
-  <Field :name="fieldName" v-slot="{ field: FieldBindingObject }">
-    <div>
-      <select
-        v-bind="FieldBindingObject"
-        class="w-full rounded-lg mt-3 py-2.5 px-2 border-2 outline-none"
-        @change="handleSelectChange(fieldName, $event)"
-        :disabled="regionStore.loading"
+  <Field :name="fieldName" v-slot="{ field }">
+    <select
+      v-bind="field"
+      :id="fieldName"
+      class="w-full rounded-lg mt-3 py-2.5 px-2 border-2 outline-none"
+      @change="handleSelectChange(fieldName, $event)"
+      :disabled="regionStore.loading"
+    >
+      <option class="text-gray-400" value="" disabled selected>
+        {{ regionStore.loading ? 'Loading..' : placeholder }}
+      </option>
+      <option
+        v-for="option in getSelectOptions(fieldName)"
+        :key="option.id"
+        :value="option.id"
       >
-        <option class="text-gray-400" value="" disabled selected>
-          {{ regionStore.loading ? 'Loading..' : placeholder }}
-        </option>
-        <option
-          v-for="option in getSelectOptions(fieldName)"
-          :key="option.id"
-          :value="option.id"
-        >
-          {{ capitalizeFirstLetterOnly(option.name) }}
-        </option>
-      </select>
-      <ErrorMessage :name="fieldName" class="text-red-500 text-sm mb-3 px-2" />
-    </div>
+        {{ capitalizeFirstLetterOnly(option.name) }}
+      </option>
+    </select>
+    <ErrorMessage :name="fieldName" class="text-red-500 text-sm mt-1" />
   </Field>
 </template>

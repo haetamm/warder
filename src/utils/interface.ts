@@ -56,6 +56,7 @@ export interface AddressResponse {
 }
 
 export interface AddressForm {
+  [key: string]: string | boolean | null
   recipient_name: string | null
   phone_number: string | null
   label: string | null
@@ -66,6 +67,15 @@ export interface AddressForm {
   street_name: string | null
   postal_code: string | null
   selected: boolean | null
+}
+
+export interface RegSellerForm {
+  phone_number: string | null
+  shop_name: string | null
+  shop_domain: string | null
+  regencies: string | null
+  district: string | null
+  villages: string | null
 }
 
 export interface UserStore {

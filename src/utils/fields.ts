@@ -50,6 +50,13 @@ export const fieldAddress = [
   { name: 'recipient_name', type: 'text', placeholder: 'Nama Penerima' },
   { name: 'phone_number', type: 'text', placeholder: 'No.Hp' },
   { name: 'label', type: 'text', placeholder: 'Label' },
+  { name: 'street_name', type: 'text', placeholder: 'Nama Jalan' },
+  { name: 'postal_code', type: 'text', placeholder: 'Kode Pos' },
+  {
+    name: 'selected',
+    type: 'checkbox',
+    placeholder: 'Jadikan alamat utama',
+  },
   {
     name: 'province',
     type: 'select',
@@ -70,16 +77,9 @@ export const fieldAddress = [
     type: 'select',
     placeholder: 'Kel./Desa',
   },
-  { name: 'street_name', type: 'text', placeholder: 'Nama Jalan' },
-  { name: 'postal_code', type: 'text', placeholder: 'Kode Pos' },
-  {
-    name: 'selected',
-    type: 'checkbox',
-    placeholder: 'Jadikan alamat utama',
-  },
 ]
 
-export const fieldRegion = [
+export const fieldRegionPost = [
   {
     name: 'province',
     type: 'select',

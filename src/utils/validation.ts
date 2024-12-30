@@ -39,16 +39,53 @@ export const label = string()
 
 export const province = string().required('Provinsi wajib diisi.')
 
+export const provinceUpdate = string()
+  .nullable()
+  .max(255, 'Provinsi tidak boleh lebih dari 255 karakter.')
+
 export const regencies = string()
   .required('Kota wajib diisi.')
   .max(255, 'Kota tidak boleh lebih dari 255 karakter.')
+
+export const regenciesUpdate = string()
+  .nullable()
+  .max(255, 'Kota tidak boleh lebih dari 255 karakter.')
+  .test(
+    'regencies-required',
+    'Kota wajib diisi karena provinsi diupdate.',
+    function (value) {
+      return !this.parent.province || !!value
+    },
+  )
 
 export const district = string()
   .required('Kecamatan wajib diisi.')
   .max(255, 'Kecamatan tidak boleh lebih dari 255 karakter.')
 
+export const districtUpdate = string()
+  .nullable()
+  .max(255, 'Kecamatan tidak boleh lebih dari 255 karakter.')
+  .test(
+    'district-required',
+    'Kecamatan wajib diisi karena kota diupdate.',
+    function (value) {
+      return !this.parent.regencies || !!value
+    },
+  )
+
+export const villagesUpdate = string()
+  .nullable()
+  .max(255, 'Kelurahan tidak boleh lebih dari 255 karakter.')
+  .test(
+    'villages-required',
+    'Kelurahan wajib diisi karena kecamatan diupdate.',
+    function (value) {
+      return !this.parent.district || !!value
+    },
+  )
+
 export const villages = string()
-  .required('Kelurahan wajib diisi.')
+  .nullable()
   .max(255, 'Kelurahan tidak boleh lebih dari 255 karakter.')
 
 export const streetName = string()
@@ -106,6 +143,19 @@ export const addressSchema = object({
   regencies: regencies,
   district: district,
   villages: villages,
+  street_name: streetName,
+  postal_code: postalCode,
+  selected: selected,
+})
+
+export const addressUpdateSchema = object({
+  recipient_name: recipientName,
+  phone_number: phoneNumber,
+  label: label,
+  province: provinceUpdate,
+  regencies: regenciesUpdate,
+  district: districtUpdate,
+  villages: villagesUpdate,
   street_name: streetName,
   postal_code: postalCode,
   selected: selected,
