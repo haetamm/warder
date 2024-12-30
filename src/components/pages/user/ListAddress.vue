@@ -7,12 +7,13 @@ import { useAddress } from '@/stores/address'
 import { capitalizeFirstLetterOnly } from '@/utils/helper'
 import { Button, Dialog, useToast } from 'primevue'
 import FormAddress from './FormAddress.vue'
-import type { AddressResponse } from '@/utils/interface'
+import type { AddressForm, AddressResponse } from '@/utils/interface'
+import { useForm } from 'vee-validate'
 
 const addressStore = useAddress()
 const visible = ref(false)
 const dialogState = ref({
-  id: undefined as string | undefined,
+  id: '',
   type: '' as 'edit' | 'delete' | '',
 })
 
@@ -24,27 +25,31 @@ const address = computed(() => {
   )
 })
 
+const { setErrors } = useForm<AddressForm>({})
+
 const handleSelect = (address: AddressResponse) => {
   const payload = {
     ...address,
     selected: true,
   }
   addressStore
-    .putAddress(toast, payload, address.id)
+    .putAddress(toast, payload, address.id, setErrors)
     .then(() => {})
     .catch((err: unknown) => console.error(err))
 }
 
 const handleDelete = () => {
-  addressStore
-    .deleteAddress(toast, dialogState.value.id)
-    .then((response: AddressResponse) => {
-      if (response) {
-        dialogState.value.type = ''
-        visible.value = false
-      }
-    })
-    .catch((err: unknown) => console.error(err))
+  if (dialogState.value.id) {
+    addressStore
+      .deleteAddress(toast, dialogState.value.id)
+      .then((response: AddressResponse) => {
+        if (response) {
+          dialogState.value.type = ''
+          visible.value = false
+        }
+      })
+      .catch((err: unknown) => console.error(err))
+  }
 }
 </script>
 

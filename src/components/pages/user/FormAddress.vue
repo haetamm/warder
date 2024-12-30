@@ -98,14 +98,15 @@ const onChange: Record<FieldNames, (e: Event) => void> = {
 
 const onSubmit = handleSubmit(() => {
   form.selected = Boolean(form.selected)
-  form.province = regionStore.selectedProvince?.name || ''
-  form.regencies = regionStore.selectedRegency?.name || ''
-  form.district = regionStore.selectedDistrict?.name || ''
-  form.villages = regionStore.selectedVillage?.name || ''
+  form.province = regionStore.selectedProvince?.name ?? null
+  form.regencies = regionStore.selectedRegency?.name ?? null
+  form.district = regionStore.selectedDistrict?.name ?? null
+  form.villages = regionStore.selectedVillage?.name ?? null
 
   if (props.id) {
+    const updatedForm = { ...form, id: props.id }
     addressStore
-      .putAddress(toast, form, props.id, setErrors)
+      .putAddress(toast, updatedForm, setErrors)
       .then((response: AddressResponse) => {
         if (response) {
           emit('update:visible', false)
@@ -141,7 +142,7 @@ const onSubmit = handleSubmit(() => {
 
       <div v-else-if="field.type === 'text'" class="mb-0">
         <Field
-          v-model="form[field.name]"
+          v-model="form[field.name as keyof AddressForm]"
           :name="field.name"
           :type="field.type"
           :placeholder="field.placeholder"
