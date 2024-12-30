@@ -52,7 +52,7 @@ export interface AddressResponse {
   villages: string | null
   street_name: string | null
   postal_code: string | null
-  selected: boolean
+  selected: boolean | null
 }
 
 export interface AddressForm {
@@ -80,6 +80,7 @@ export interface AddressFormModal {
   street_name: string | null
   postal_code: string | null
   selected: boolean
+  [key: string]: string | boolean | null
 }
 
 export interface RegSellerForm {

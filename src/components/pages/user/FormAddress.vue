@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { useAddress } from '@/stores/address'
 import { useRegionStore } from '@/stores/region' // Import region store
-import type { AddressForm, AddressResponse } from '@/utils/interface'
+import type {
+  AddressForm,
+  AddressFormModal,
+  AddressResponse,
+} from '@/utils/interface'
 import {
   addressSchema,
   addressUpdateSchema,
@@ -13,7 +17,7 @@ import {
 } from '@/utils/validation'
 import { Button, useToast } from 'primevue'
 import { ErrorMessage, Field, useField, useForm } from 'vee-validate'
-import { defineEmits, defineProps, onMounted, reactive } from 'vue'
+import { defineEmits, defineProps, onMounted } from 'vue'
 import InputSelectRegion from './InputSelectRegion.vue'
 import type { FieldNames } from '@/utils/type'
 import { fieldAddress } from '@/utils/fields'
@@ -34,31 +38,35 @@ const addressStore = useAddress()
 const regionStore = useRegionStore()
 const toast = useToast()
 
-const form = reactive<AddressForm>({
-  recipient_name: '',
-  phone_number: '',
-  label: '',
-  street_name: '',
-  province: '',
-  regencies: '',
-  district: '',
-  villages: '',
-  postal_code: '',
+const form: AddressFormModal = {
+  id: null,
+  recipient_name: null,
+  phone_number: null,
+  label: null,
+  province: null,
+  regencies: null,
+  district: null,
+  villages: null,
+  street_name: null,
+  postal_code: null,
   selected: false,
-})
+}
 
 onMounted(() => {
   regionStore.fetchProvinces()
 
   if (props.id) {
-    const selectedAddress = addressStore.address.find(
-      (address: AddressResponse) => address.id === props.id,
-    )
+    console.log(addressStore.address)
+    const selectedAddress: AddressResponse | undefined =
+      addressStore.address.find(
+        (address: AddressResponse) => address.id === props.id,
+      )
 
     if (selectedAddress) {
-      Object.keys(selectedAddress).forEach(key => {
+      Object.keys(selectedAddress).forEach((key: string) => {
+        // Pastikan key adalah salah satu kunci dalam AddressFormModal
         if (key in form) {
-          form[key as keyof AddressForm] =
+          form[key as keyof AddressFormModal] =
             selectedAddress[key as keyof AddressResponse]
         }
       })
@@ -147,7 +155,7 @@ const onSubmit = handleSubmit(() => {
 
       <div v-else-if="field.type === 'text'" class="mb-0">
         <Field
-          v-model="form[field.name as keyof AddressForm]"
+          v-model="form[field.name as keyof AddressFormModal]"
           :name="field.name"
           :type="field.type"
           :placeholder="field.placeholder"
