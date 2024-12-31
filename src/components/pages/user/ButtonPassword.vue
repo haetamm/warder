@@ -64,7 +64,7 @@ const onSubmit = handleSubmit((values: ChangePasswordForm) => {
       :isSubmitting="changePasswordStore.loading"
       :meta="meta"
       :onChange="onChange"
-      buttonName="Ganti Password"
+      buttonName="Ubah Password"
     />
   </Dialog>
 </template>

@@ -4,9 +4,12 @@ import axiosWarderApiInstance from '@/utils/apiWarder'
 import type { GuestForm } from '@/utils/interface'
 import type { Toast } from '@/utils/type'
 import { handleApiError } from '@/utils/handleApiErrors'
+import { AxiosError } from 'axios'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
+    loading: false,
+    error: null as string | null,
     token: Cookies.get('token') || null,
     roles: [] as string[],
     name: null as string | null,
@@ -23,8 +26,16 @@ export const useUserStore = defineStore('user', {
           this.name = data.name
           this.image = data.image
         } catch (e) {
-          console.error('Invalid token', e)
-          this.logout()
+          if (e instanceof AxiosError) {
+            if (e.response?.status === 401) {
+              console.error('Invalid token', e)
+              this.token = null
+              this.roles = []
+              this.name = null
+              this.image = null
+              Cookies.remove('token')
+            }
+          }
         }
       }
     },
