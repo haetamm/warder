@@ -2,6 +2,10 @@ export const fieldsGuest = [
   { name: 'email', type: 'text', placeholder: 'Email' },
   { name: 'password', type: 'password', placeholder: 'Password' },
 ]
+export const fieldsChangePassword = [
+  { name: 'password', type: 'password', placeholder: 'Password' },
+  { name: 'newPassword', type: 'password', placeholder: 'New Password' },
+]
 
 export const fieldsProfile = [
   {

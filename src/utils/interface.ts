@@ -101,6 +101,11 @@ export interface GuestForm {
   password: string
 }
 
+export interface ChangePasswordForm {
+  password: string
+  newPassword: string
+}
+
 export interface SelectedField {
   label: string
   value: string

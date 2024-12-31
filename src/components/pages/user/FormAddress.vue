@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAddress } from '@/stores/address'
-import { useRegionStore } from '@/stores/region' // Import region store
+import { useRegionStore } from '@/stores/region'
 import type {
   AddressForm,
   AddressFormModal,
@@ -56,7 +56,6 @@ onMounted(() => {
   regionStore.fetchProvinces()
 
   if (props.id) {
-    console.log(addressStore.address)
     const selectedAddress: AddressResponse | undefined =
       addressStore.address.find(
         (address: AddressResponse) => address.id === props.id,
@@ -64,7 +63,6 @@ onMounted(() => {
 
     if (selectedAddress) {
       Object.keys(selectedAddress).forEach((key: string) => {
-        // Pastikan key adalah salah satu kunci dalam AddressFormModal
         if (key in form) {
           form[key as keyof AddressFormModal] =
             selectedAddress[key as keyof AddressResponse]

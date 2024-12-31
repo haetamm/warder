@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia'
 import Cookies from 'js-cookie'
 import axiosWarderApiInstance from '@/utils/apiWarder'
+import type { GuestForm } from '@/utils/interface'
+import type { Toast } from '@/utils/type'
+import { handleApiError } from '@/utils/handleApiErrors'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -25,6 +28,29 @@ export const useUserStore = defineStore('user', {
         }
       }
     },
+    async loginUser(formData: GuestForm, toast: Toast) {
+      this.loading = true
+      this.error = null
+      try {
+        const { data: response } = await axiosWarderApiInstance.post(
+          'login',
+          formData,
+        )
+        const { data } = response
+        const { token, roles, name, image } = data
+        this.token = token
+        this.roles = roles
+        this.name = name
+        this.image = image
+
+        Cookies.set('token', token, { expires: 10080 })
+        return data
+      } catch (error: unknown) {
+        handleApiError(error, toast)
+      } finally {
+        this.loading = false
+      }
+    },
     setToken(token: string) {
       this.token = token
       Cookies.set('token', token)
@@ -38,12 +64,50 @@ export const useUserStore = defineStore('user', {
     setImage(image: string) {
       this.image = image
     },
-    logout() {
-      this.token = null
-      this.roles = []
-      this.name = null
-      this.image = null
-      Cookies.remove('token')
+    async getGoogleAuth(toast: Toast, code: string) {
+      this.loading = true
+      this.error = null
+      try {
+        const { data: response } = await axiosWarderApiInstance.get(
+          `login/google/callback?code=${code}`,
+        )
+        const { data } = response
+        const { token, roles, name, image } = data
+        this.token = token
+        this.roles = roles
+        this.name = name
+        this.image = image
+
+        Cookies.set('token', token, { expires: 10080 })
+        return data
+      } catch (error: unknown) {
+        handleApiError(error, toast)
+      } finally {
+        this.loading = false
+      }
+    },
+    async logoutUser(toast: Toast) {
+      this.loading = true
+      this.error = null
+      try {
+        const { data: response } = await axiosWarderApiInstance.delete('logout')
+        this.token = null
+        this.roles = []
+        this.name = null
+        this.image = null
+        Cookies.remove('token')
+        toast.add({
+          severity: 'info',
+          summary: 'Logout',
+          detail: response.message,
+          life: 3000,
+        })
+        return response
+      } catch (error: unknown) {
+        handleApiError(error, toast)
+      } finally {
+        this.loading = false
+      }
     },
   },
 })

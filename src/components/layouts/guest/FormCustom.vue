@@ -52,7 +52,7 @@ defineProps({
       :disabled="!meta.valid"
       class="py-2.5 px-2 bg-purple-600 disabled:bg-purple-400 text-white border-2 w-full mt-3 rounded-lg mb-6 text-sm font-bold md:font-normal"
     >
-      {{ isSubmitting ? 'Loading...' : buttonName }}
+      {{ isSubmitting ? 'Loading..' : buttonName }}
     </button>
   </form>
 </template>

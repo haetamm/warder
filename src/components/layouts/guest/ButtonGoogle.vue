@@ -6,15 +6,13 @@ import { useUserStore } from '@/stores/user'
 import { urlPage } from '@/utils/constans'
 import { useLoginWithGoogleStore } from '@/stores/loginWithGoogle'
 import { useToast } from 'primevue'
-import { useGetAuth } from '@/stores/getAuth'
 import type { LoginResponse } from '@/utils/interface'
 
 const loginWithGoogleStore = useLoginWithGoogleStore()
-const getAuthStore = useGetAuth()
 const toast = useToast()
 const route = useRoute()
 const router = useRouter()
-const { setToken, setRoles, setImage, setName } = useUserStore()
+const userStore = useUserStore()
 
 const onSubmit = () => {
   try {
@@ -25,15 +23,10 @@ const onSubmit = () => {
 }
 
 const getAuth = (code: string) => {
-  getAuthStore
-    .getAuth(toast, code)
+  userStore
+    .getGoogleAuth(toast, code)
     .then((response: LoginResponse) => {
       if (response) {
-        const { token, roles, name, image } = response
-        setToken(token)
-        setRoles(roles)
-        setName(name)
-        setImage(image)
         router.push(urlPage.HOME)
       }
     })
@@ -66,7 +59,7 @@ watch(
         <DeGoogleOriginal class="w-5 h-5" />
         <div class="text-slate-700 text-sm font-bold md:font-normal">
           {{
-            loginWithGoogleStore.loading || getAuthStore.loading
+            loginWithGoogleStore.loading || userStore.loading
               ? 'Loading..'
               : 'Google'
           }}

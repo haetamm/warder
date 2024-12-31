@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import ButtonPassword from '@/components/pages/user/ButtonPassword.vue'
 import CredentialUser from '@/components/pages/user/CredentialUser.vue'
 import { useUserStore } from '@/stores/user'
 import FileUpload from 'primevue/fileupload'
+import { computed } from 'vue'
 
-const { image } = useUserStore()
+const userStore = useUserStore()
+const image = computed(() => userStore.image)
 const onUpload = () => {
   //
 }
@@ -21,7 +24,7 @@ const onUpload = () => {
                   : 'https://images.tokopedia.net/img/cache/300/tPxBYm/2023/1/20/757f728e-d320-4f75-91ac-cedc5f1edc42.jpg.webp?ect=3g'
               "
               alt="profile-img"
-              class="h-[258px] w-[255px]"
+              class="h-[255px] w-[255px]"
             />
             <FileUpload
               class="w-full px-3 mt-3"
@@ -36,11 +39,7 @@ const onUpload = () => {
               uploadIcon="false"
             />
           </div>
-          <button
-            class="px-4 py-1.5 w-full border-2 rounded-lg text-md mt-3 mb-6"
-          >
-            Ubah Kata Sandi
-          </button>
+          <ButtonPassword />
         </div>
       </div>
       <CredentialUser />

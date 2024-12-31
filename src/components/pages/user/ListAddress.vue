@@ -14,7 +14,7 @@ const addressStore = useAddress()
 const visible = ref(false)
 const dialogState = ref({
   id: '',
-  type: '' as 'edit' | 'delete' | 'select' | '',
+  type: '' as 'edit' | 'delete' | '',
 })
 
 const toast = useToast()

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { urlPage } from '@/utils/constans'
 import { backHandleGuest } from '@/utils/helper'
-import { useLoginStore } from '@/stores/login'
 import { email, loginSchema, passwordLogin } from '@/utils/validation'
 import { AkArrowLeft } from '@kalimahapps/vue-icons'
 import { useField, useForm } from 'vee-validate'
@@ -16,9 +15,8 @@ import { useRouter } from 'vue-router'
 import type { GuestForm, LoginResponse } from '@/utils/interface'
 
 const toast = useToast()
-const loginStore = useLoginStore()
-const { setToken, setRoles, setImage, setName } = useUserStore()
 const router = useRouter()
+const userStore = useUserStore()
 
 const back = backHandleGuest()
 
@@ -46,15 +44,10 @@ const onChange: Record<string, (e: Event) => void> = {
 }
 
 const onSubmit = handleSubmit((values: GuestForm) => {
-  loginStore
+  userStore
     .loginUser(values, toast)
     .then((response: LoginResponse) => {
       if (response) {
-        const { token, roles, name, image } = response
-        setToken(token)
-        setRoles(roles)
-        setName(name)
-        setImage(image)
         router.push(urlPage.HOME)
       }
     })
@@ -96,7 +89,7 @@ const onSubmit = handleSubmit((values: GuestForm) => {
         <FormCustom
           :fields="fieldsGuest"
           :onSubmit="onSubmit"
-          :isSubmitting="loginStore.loading"
+          :isSubmitting="userStore.loading"
           :meta="meta"
           :onChange="onChange"
           buttonName="Login"

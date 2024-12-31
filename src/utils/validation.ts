@@ -108,6 +108,11 @@ export const registerUserSchema = object({
   password: password,
 })
 
+export const changePassworrdSchema = object({
+  password: passwordLogin,
+  newPassword: password,
+})
+
 export const updateUserSchema = (field: string) => {
   switch (field) {
     case 'name':
