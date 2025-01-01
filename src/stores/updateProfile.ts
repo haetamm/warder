@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axiosWarderApiInstance from '@/utils/apiWarder'
 import { handleApiError } from '@/utils/handleApiErrors'
-import type { Toast } from '@/utils/type'
+import type { Toast, ValidationErrors } from '@/utils/type'
 import type { UpdateProfilePayload } from '@/utils/interface'
 
 export const useUpdateProfile = defineStore('updateProfile', {
@@ -10,7 +10,11 @@ export const useUpdateProfile = defineStore('updateProfile', {
     error: null as string | null,
   }),
   actions: {
-    async updateProfile(toast: Toast, payload: UpdateProfilePayload) {
+    async updateProfile(
+      toast: Toast,
+      payload: UpdateProfilePayload,
+      setErrors: (errors: ValidationErrors) => void,
+    ) {
       this.loading = true
       this.error = null
       try {
@@ -22,13 +26,12 @@ export const useUpdateProfile = defineStore('updateProfile', {
         toast.add({
           severity: 'info',
           summary: 'Success',
-          detail: 'Profile berhasil diupdate!!',
+          detail: 'Data berhasil diupdate!!',
           life: 3000,
         })
-        console.log(data)
         return data
       } catch (error: unknown) {
-        handleApiError(error, toast)
+        handleApiError(error, toast, setErrors)
       } finally {
         this.loading = false
       }

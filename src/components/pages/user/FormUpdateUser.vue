@@ -30,11 +30,11 @@ const props = defineProps({
   },
   temporaryField: {
     type: [Object, String] as PropType<unknown>,
-    required: true,
+    required: false,
   },
   temporaryDateField: {
     type: Object as PropType<Date | null>,
-    required: true,
+    required: false,
   },
 })
 
@@ -63,7 +63,7 @@ const validationSchema = computed(() => {
   return updateUserSchema(props.selectedField?.value || '')
 })
 
-const { handleSubmit, meta } = useForm({
+const { handleSubmit, meta, setErrors } = useForm({
   validationSchema,
 })
 
@@ -89,9 +89,8 @@ const handleUpdate = handleSubmit(() => {
   }
 
   updateProfileStore
-    .updateProfile(toast, payload)
+    .updateProfile(toast, payload, setErrors)
     .then((response: ProfileResponse) => {
-      console.log(response)
       if (response.birth_date) {
         response.birth_date = new Date(response.birth_date)
       }

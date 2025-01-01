@@ -83,7 +83,7 @@ export const fieldAddress = [
   },
 ]
 
-export const fieldRegionPost = [
+export const fieldRegisRegionSeller = [
   {
     name: 'province',
     type: 'select',
@@ -103,5 +103,43 @@ export const fieldRegionPost = [
     name: 'villages',
     type: 'select',
     placeholder: 'Kel./Desa',
+  },
+  {
+    name: 'street_name',
+    type: 'text',
+    placeholder: 'Nama Jalan',
+    value: 'street_name',
+    maxLength: 100,
+  },
+  {
+    name: 'postal_code',
+    type: 'text',
+    placeholder: 'Kode Pos',
+    value: 'postal_code',
+    maxLength: 10,
+  },
+]
+
+export const fieldsPhoneNumber = [
+  {
+    name: 'phone_number',
+    placeholder: 'Nomor Handphone',
+    type: 'text',
+    value: 'phone_number',
+  },
+]
+
+export const fieldsCredentialShop = [
+  {
+    name: 'shop_name',
+    placeholder: 'Nama Toko',
+    value: 'shop_name',
+    type: 'text',
+  },
+  {
+    name: 'shop_domain',
+    placeholder: 'Nama Domain',
+    value: 'domain',
+    type: 'text',
   },
 ]

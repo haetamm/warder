@@ -16,12 +16,12 @@ export function handleApiError(
     const errorData = error.response?.data
 
     if (error.response?.status === 422 && setErrors) {
-      console.log(errorData.message)
       setErrors(errorData.message)
     }
     if (error.response?.status === 401) {
       window.location.reload()
-    } else {
+    }
+    if (error.response?.status !== 422 && error.response?.status !== 401) {
       toast.add({
         severity: 'error',
         summary: 'Failed',

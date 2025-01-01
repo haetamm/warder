@@ -27,6 +27,7 @@ export const gender = string()
 export const phoneNumber = string()
   .required('Nomor telepon harus diisi')
   .max(15, 'Nomor telepon maksimal 15 karakter')
+  .matches(/^\d+$/, 'Hanya karakter numerik')
 
 // user address
 export const recipientName = string()
@@ -85,16 +86,26 @@ export const villagesUpdate = string()
   )
 
 export const villages = string()
-  .nullable()
+  .required()
   .max(255, 'Kelurahan tidak boleh lebih dari 255 karakter.')
 
 export const streetName = string()
   .required('Nama jalan wajib diisi.')
-  .max(255, 'Nama jalan tidak boleh lebih dari 255 karakter.')
+  .max(100, 'Nama jalan tidak boleh lebih dari 255 karakter.')
 
 export const postalCode = string()
   .required('Kode pos wajib diisi.')
   .max(10, 'Kode pos tidak boleh lebih dari 10 karakter.')
+
+export const shopName = string()
+  .required('Nama toko wajib diisi')
+  .max(28, 'Nama toko harus maksimal 28 karakter')
+
+export const shopDomain = string()
+  .required('Domain wajib diisi')
+  .min(6, 'Minimal 6 karakter')
+  .max(20, 'Maksimal 20 karakter')
+  .matches(/^[a-zA-Z0-9]+$/, 'Hanya karakter alfanumerik')
 
 export const selected = boolean().default(false)
 
@@ -167,8 +178,19 @@ export const addressUpdateSchema = object({
 })
 
 export const districtSchema = object({
+  street_name: streetName,
+  postal_code: postalCode,
   province: province,
   regencies: regencies,
   district: district,
   villages: villages,
+})
+
+export const phoneNumberSchema = object({
+  phone_number: phoneNumber,
+})
+
+export const regCredentialShopSchema = object({
+  shop_name: shopName,
+  shop_domain: shopDomain,
 })

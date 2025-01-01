@@ -14,17 +14,27 @@ export const useUserStore = defineStore('user', {
     roles: [] as string[],
     name: null as string | null,
     image: null as string | null,
+    phoneNumber: null as string | null,
+    shopName: null as string | null,
+    shopDomain: null as string | null,
   }),
   actions: {
     async fetchUserData() {
       const token = Cookies.get('token')
       if (token) {
+        this.loading = true
+        this.error = null
         try {
           const { data: response } = await axiosWarderApiInstance.get('user')
           const { data } = response
-          this.roles = data.roles
-          this.name = data.name
-          this.image = data.image
+          const { roles, name, image, phone_number, shop_name, shop_domain } =
+            data
+          this.roles = roles
+          this.name = name
+          this.image = image
+          this.phoneNumber = phone_number
+          this.shopName = shop_name
+          this.shopDomain = shop_domain
         } catch (e) {
           if (e instanceof AxiosError) {
             if (e.response?.status === 401) {
@@ -36,6 +46,8 @@ export const useUserStore = defineStore('user', {
               Cookies.remove('token')
             }
           }
+        } finally {
+          this.loading = false
         }
       }
     },
@@ -48,11 +60,22 @@ export const useUserStore = defineStore('user', {
           formData,
         )
         const { data } = response
-        const { token, roles, name, image } = data
+        const {
+          token,
+          roles,
+          name,
+          image,
+          phone_number,
+          shop_name,
+          shop_domain,
+        } = data
         this.token = token
         this.roles = roles
         this.name = name
         this.image = image
+        this.phoneNumber = phone_number
+        this.shopName = shop_name
+        this.shopDomain = shop_domain
 
         Cookies.set('token', token, { expires: 10080 })
         return data
@@ -75,6 +98,12 @@ export const useUserStore = defineStore('user', {
     setImage(image: string) {
       this.image = image
     },
+    setPhoneNumber(phoneNumber: string) {
+      this.phoneNumber = phoneNumber
+    },
+    setShopName(shopName: string) {
+      this.shopName = shopName
+    },
     async getGoogleAuth(toast: Toast, code: string) {
       this.loading = true
       this.error = null
@@ -83,11 +112,22 @@ export const useUserStore = defineStore('user', {
           `login/google/callback?code=${code}`,
         )
         const { data } = response
-        const { token, roles, name, image } = data
+        const {
+          token,
+          roles,
+          name,
+          image,
+          phone_number,
+          shop_name,
+          shop_domain,
+        } = data
         this.token = token
         this.roles = roles
         this.name = name
         this.image = image
+        this.phoneNumber = phone_number
+        this.shopName = shop_name
+        this.shopDomain = shop_domain
 
         Cookies.set('token', token, { expires: 10080 })
         return data
@@ -106,6 +146,9 @@ export const useUserStore = defineStore('user', {
         this.roles = []
         this.name = null
         this.image = null
+        this.phoneNumber = null
+        this.shopName = null
+        this.shopDomain = null
         Cookies.remove('token')
         toast.add({
           severity: 'info',

@@ -83,13 +83,18 @@ export interface AddressFormModal {
   [key: string]: string | boolean | null
 }
 
-export interface RegSellerForm {
-  phone_number: string | null
-  shop_name: string | null
-  shop_domain: string | null
+export interface RegRegionSellerForm {
+  street_name: string | null
+  postal_code: string | null
+  province: string | null
   regencies: string | null
   district: string | null
   villages: string | null
+}
+
+export interface RegCredentialShopResponse {
+  shop_name: string
+  shop_domain: string
 }
 
 export interface UserStore {
@@ -99,6 +104,15 @@ export interface UserStore {
 export interface GuestForm {
   email: string
   password: string
+}
+
+export interface PhoneNumberForm {
+  phoneNumber: string
+}
+
+export interface RegCredentialShopForm {
+  shopName: string
+  shopDomain: string
 }
 
 export interface ChangePasswordForm {
@@ -125,4 +139,23 @@ export interface UpdateProfilePayload {
 export interface Region {
   id: string
   name: string
+}
+
+export interface Seller {
+  id: string
+  shop_name: string
+  shop_domain: string
+  province: string
+  regencies: string
+  district: string
+  villages: string
+  street_name: string
+  postal_code: string
+  created_at: string
+  updated_at: string
+}
+
+export interface RegSellerResponse {
+  seller: Seller
+  roles: string[]
 }

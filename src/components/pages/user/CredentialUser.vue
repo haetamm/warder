@@ -74,7 +74,7 @@ const openDialog = (field: SelectedField) => {
   } else {
     selectedField.value = field
     temporaryField.value =
-      profile.value?.[field.value as keyof ProfileResponse] || null
+      profile.value?.[field.value as keyof ProfileResponse] ?? ''
   }
 
   visible.value = true
