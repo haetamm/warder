@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useUpdateProfile } from '@/stores/updateProfile'
 import { useUserStore } from '@/stores/user'
-import type { PhoneNumberForm, ProfileResponse } from '@/utils/interface'
+import type { ProfileResponse, UpdateProfilePayload } from '@/utils/interface'
 import { phoneNumberSchema } from '@/utils/validation'
 import { Button, useToast } from 'primevue'
 import { useForm } from 'vee-validate'
@@ -12,17 +12,16 @@ const profileStore = useUpdateProfile()
 const { setPhoneNumber } = useUserStore()
 const toast = useToast()
 
-const { handleSubmit, meta, setErrors } = useForm<PhoneNumberForm>({
+const { handleSubmit, meta, setErrors } = useForm<UpdateProfilePayload>({
   validationSchema: phoneNumberSchema,
 })
 
-const onSubmit = handleSubmit((values: PhoneNumberForm) => {
+const onSubmit = handleSubmit((values: UpdateProfilePayload) => {
   profileStore
     .updateProfile(toast, values, setErrors)
     .then((response: ProfileResponse) => {
       if (response) {
-        const { phone_number } = response
-        setPhoneNumber(phone_number)
+        setPhoneNumber(response.phone_number)
       }
     })
     .catch((err: unknown) => {
