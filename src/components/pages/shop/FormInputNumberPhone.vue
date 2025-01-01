@@ -21,7 +21,7 @@ const onSubmit = handleSubmit((values: UpdateProfilePayload) => {
     .updateProfile(toast, values, setErrors)
     .then((response: ProfileResponse) => {
       if (response) {
-        setPhoneNumber(response.phone_number)
+        setPhoneNumber(response.phone_number ?? '')
       }
     })
     .catch((err: unknown) => {
