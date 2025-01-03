@@ -23,14 +23,14 @@ const products = ref(productPopular)
         <Column
           :style="{
             padding: '4px 8px 4px 8px',
-            width: '60px',
+            width: '80px',
           }"
         >
           <template #body="slotProps">
             <img
               :src="slotProps.data.image"
               :alt="slotProps.data.image"
-              class="w-[46px] h-[46px] md:w-[55px] md:h-[55px] rounded-md"
+              class="w-[46px] h-[46px] md:w-[55px] md:h-[55px] rounded-md flex-shrink-0"
             />
           </template>
         </Column>

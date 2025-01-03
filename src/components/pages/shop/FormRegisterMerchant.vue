@@ -37,7 +37,9 @@ watch([phoneNumber, shopName], () => {
 </script>
 
 <template>
-  <div class="px-0 pt-4 xs:pt-0 md:pt-4 lg:pt-6 pb-6 lg:pb-12 w-full">
+  <div
+    class="px-0 pt-4 xs:pt-0 md:pt-4 lg:pt-6 pb-6 lg:pb-12 w-full h-full lg:h-[calc(100vh-32px)] no-scrollbar overflow-auto mb-4"
+  >
     <Stepper
       :value="activeStep"
       :linear="true"

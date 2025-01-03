@@ -5,10 +5,16 @@ import { AnFilledSetting } from '@kalimahapps/vue-icons'
 import { navItems } from '@/utils/data'
 import { urlPage } from '@/utils/constans'
 import NavItem from './NavItem.vue'
+import { computed } from 'vue'
+import { useSellerStore } from '@/stores/seller'
+import type { CurrentSellerResponse } from '@/utils/interface'
+
+const sellerStore = useSellerStore()
+const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 </script>
 
 <template>
-  <div class="px-0 md:px-3 z-50">
+  <div class="px-0 md:px-3">
     <div
       class="flex items-center justify-center xl:justify-start pb-3 space-x-0 md:space-x-3 space-y-0 shadow-custom"
     >
@@ -19,7 +25,9 @@ import NavItem from './NavItem.vue'
       />
       <div class="hidden xl:block">
         <div class="font-bold text-md hover:text-purple-600">
-          <router-link to="/serbaseratus"> Toko Serba Seratus </router-link>
+          <router-link :to="`/${seller?.shop_domain}`">
+            {{ seller?.shop_name }}</router-link
+          >
         </div>
         <small>Regular Merchant</small>
       </div>
@@ -43,6 +51,8 @@ import NavItem from './NavItem.vue'
       :route="urlPage.SELLER_SETTING"
       :icon="AnFilledSetting"
       label="Pengaturan"
+      size="w-7 h-7"
+      :onClick="scrollTop"
     />
   </div>
 </template>

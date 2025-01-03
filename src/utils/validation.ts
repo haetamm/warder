@@ -96,6 +96,7 @@ export const streetName = string()
 export const postalCode = string()
   .required('Kode pos wajib diisi.')
   .max(10, 'Kode pos tidak boleh lebih dari 10 karakter.')
+  .matches(/^\d+$/, 'Hanya karakter numerik')
 
 export const shopName = string()
   .required('Nama toko wajib diisi')
@@ -106,6 +107,14 @@ export const shopDomain = string()
   .min(6, 'Minimal 6 karakter')
   .max(20, 'Maksimal 20 karakter')
   .matches(/^[a-zA-Z0-9]+$/, 'Hanya karakter alfanumerik')
+
+export const slogan = string().max(
+  48,
+  'Slogan tidak boleh lebih dari 45 karakter.',
+)
+export const desc = string()
+  .nullable()
+  .max(140, 'Deskripsi tidak boleh lebih dari 140 karakter.')
 
 export const selected = boolean().default(false)
 
@@ -177,13 +186,27 @@ export const addressUpdateSchema = object({
   selected: selected,
 })
 
-export const districtSchema = object({
+export const regionSchema = object({
   street_name: streetName,
   postal_code: postalCode,
   province: province,
   regencies: regencies,
   district: district,
   villages: villages,
+})
+
+export const updateRegionSchema = object({
+  street_name: streetName,
+  postal_code: postalCode,
+  province: provinceUpdate,
+  regencies: regenciesUpdate,
+  district: districtUpdate,
+  villages: villagesUpdate,
+})
+
+export const descSellerSchema = object({
+  slogan: slogan,
+  desc: desc,
 })
 
 export const phoneNumberSchema = object({

@@ -12,6 +12,21 @@ import { ref } from 'vue'
 import type { Product, Slide } from './interface'
 import { urlPage } from './constans'
 
+export const listImg = [
+  {
+    img: 'https://via.placeholder.com/200x300?text=Free',
+    desc: 'Buka toko gratis tanpa biaya apapun',
+  },
+  {
+    img: 'https://via.placeholder.com/200x300?text=90 Juta',
+    desc: 'Lebih dari 90 juta pengguna aktif setiap bulan',
+  },
+  {
+    img: 'https://via.placeholder.com/200x300?text=Map',
+    desc: 'Menjangkau pembeli potensial di 97% di wilayah indonesia',
+  },
+]
+
 export const slides = ref<Slide[]>([
   {
     image:

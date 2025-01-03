@@ -6,13 +6,41 @@ import { useUserStore } from '@/stores/user'
 import { urlPage } from '@/utils/constans'
 import { useRouter } from 'vue-router'
 import Toast from 'primevue/toast'
+import { useSellerStore } from '@/stores/seller'
+import { useToast } from 'primevue'
+import { computed, onMounted, watch, ref } from 'vue'
 
-const { roles } = useUserStore()
+const sellerStore = useSellerStore()
+const toast = useToast()
+
+const userStore = useUserStore()
+const roles = computed(() => userStore.roles)
 const router = useRouter()
 
-if (!roles.includes('SELLER') || roles.includes('ADMIN')) {
-  router.push(urlPage.MY_SHOP)
-}
+const dataLoaded = ref(false)
+
+onMounted(() => {
+  dataLoaded.value = true
+  sellerStore
+    .getSeller(toast)
+    .then(() => {})
+    .catch((err: unknown) => {
+      console.error(err)
+    })
+})
+
+watch(
+  roles,
+  newRoles => {
+    if (dataLoaded.value) {
+      if (!newRoles.includes('SELLER') || newRoles.includes('ADMIN')) {
+        console.log('kocak')
+        router.push(urlPage.MY_SHOP)
+      }
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -21,6 +49,14 @@ if (!roles.includes('SELLER') || roles.includes('ADMIN')) {
     :style="{ width: '320px', fontSize: '10px' }"
     warn-icon="true"
   />
+  <template v-if="userStore.loading">
+    <div
+      class="h-screen fixed inset-0 z-[9999] flex items-center justify-center bg-white"
+    >
+      <div class="text-xl">Loading</div>
+    </div>
+  </template>
+
   <div class="bg-custom">
     <SellerNavBar />
     <div class="kontenir mx-auto">

@@ -21,8 +21,8 @@ const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 const { isVisible } = useScrollVisibility()
 const userStore = useUserStore()
 
-const token = computed(() => userStore.token)
-const roles = computed(() => userStore.roles)
+const token = computed<string | null>(() => userStore.token)
+const roles = computed<string[]>(() => userStore.roles)
 
 const back = backHandle()
 const visibleBottom = ref(false)

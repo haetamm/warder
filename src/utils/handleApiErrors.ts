@@ -19,7 +19,7 @@ export function handleApiError(
       setErrors(errorData.message)
     }
     if (error.response?.status === 401) {
-      window.location.reload()
+      window.location.assign('/guest/login')
     }
     if (error.response?.status !== 422 && error.response?.status !== 401) {
       toast.add({

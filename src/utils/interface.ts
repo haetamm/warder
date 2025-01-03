@@ -92,6 +92,11 @@ export interface RegRegionSellerForm {
   villages: string | null
 }
 
+export interface UpdateDescSellerForm {
+  desc: string | null
+  slogan: string | null
+}
+
 export interface RegCredentialShopResponse {
   shop_name: string
   shop_domain: string
@@ -155,7 +160,36 @@ export interface Seller {
   updated_at: string
 }
 
+export interface CurrentSellerResponse {
+  id: string
+  shop_name: string
+  shop_domain: string
+  province: string
+  regencies: string
+  district: string
+  villages: string
+  street_name: string
+  postal_code: string
+  slogan: string | null
+  desc: string | null
+  created_at: string
+  updated_at: string
+}
+
 export interface RegSellerResponse {
   seller: Seller
   roles: string[]
+}
+
+export interface UpdateSellerPayload {
+  shop_name?: string
+  shop_domain?: string
+  province?: string
+  regencies?: string
+  district?: string
+  villages?: string
+  street_name?: string
+  postal_code?: string
+  slogan?: string
+  desc?: string
 }

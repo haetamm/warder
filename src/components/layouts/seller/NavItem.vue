@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { defineProps } from 'vue'
 import { isActive } from '@/utils/helper'
 
 defineProps({
@@ -7,7 +8,7 @@ defineProps({
     required: true,
   },
   icon: {
-    type: Object,
+    type: [Object, Function],
     required: true,
   },
   label: {

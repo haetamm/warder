@@ -143,3 +143,18 @@ export const fieldsCredentialShop = [
     type: 'text',
   },
 ]
+
+export const fieldsDescSeller = [
+  {
+    name: 'slogan',
+    placeholder: 'Slogan',
+    value: 'slogan',
+    type: 'text',
+  },
+  {
+    name: 'desc',
+    placeholder: 'Deskripsi',
+    value: 'desc',
+    type: 'textarea',
+  },
+]

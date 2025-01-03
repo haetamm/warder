@@ -1,6 +1,29 @@
 <script setup lang="ts">
-import { storeLocation } from '@/utils/data'
-import { Button, Column, DataTable } from 'primevue'
+import FormRegion from '@/components/pages/shop/FormRegion.vue'
+import { useSellerStore } from '@/stores/seller'
+import { capitalizeFirstLetterOnly } from '@/utils/helper'
+import type { CurrentSellerResponse } from '@/utils/interface'
+import { Button, Column, DataTable, Dialog } from 'primevue'
+import { computed, ref } from 'vue'
+
+const visible = ref(false)
+const sellerStore = useSellerStore()
+const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
+
+const shopLocations = computed(() => {
+  if (!seller.value) {
+    return []
+  }
+
+  return [
+    {
+      address: `${capitalizeFirstLetterOnly(seller.value.street_name ?? '')}, ${capitalizeFirstLetterOnly(seller.value.villages ?? '')}, ${capitalizeFirstLetterOnly(seller.value.district ?? '')}, ${capitalizeFirstLetterOnly(seller.value.regencies ?? '')}, ${capitalizeFirstLetterOnly(seller.value.province ?? '')}`,
+      city: `${capitalizeFirstLetterOnly(seller.value.district ?? '')}, ${capitalizeFirstLetterOnly(seller.value.regencies ?? '')}`,
+      postcode: `${seller.value.postal_code ?? ''}`,
+      status: true,
+    },
+  ]
+})
 </script>
 
 <template>
@@ -9,7 +32,7 @@ import { Button, Column, DataTable } from 'primevue'
 
     <div class="w-full mt-3">
       <div class="text-md">
-        <DataTable :value="storeLocation" tableStyle="min-width: 360px ">
+        <DataTable :value="shopLocations" tableStyle="min-width: 360px">
           <Column
             field="address"
             header="Alamat"
@@ -37,6 +60,7 @@ import { Button, Column, DataTable } from 'primevue'
                   <span class="slider round"></span>
                 </label>
                 <Button
+                  @click="visible = true"
                   label="Ubah"
                   class="w-[80px]"
                   :style="{ padding: '3px' }"
@@ -49,4 +73,12 @@ import { Button, Column, DataTable } from 'primevue'
       </div>
     </div>
   </div>
+  <Dialog
+    v-model:visible="visible"
+    modal
+    header="Ubah alamat toko"
+    :style="{ width: '27rem' }"
+  >
+    <FormRegion v-model:visible="visible" />
+  </Dialog>
 </template>

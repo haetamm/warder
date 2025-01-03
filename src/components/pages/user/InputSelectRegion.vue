@@ -56,6 +56,7 @@ const resetSelectField = (fieldName: string) => {
 
 const handleSelectChange = (fieldName: string, event: Event) => {
   const selectedValue = (event.target as HTMLSelectElement).value
+  console.log(selectedValue)
 
   if (fieldName === 'province') {
     const province = regionStore.provinces.find(

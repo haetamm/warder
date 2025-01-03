@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
+import { urlPage } from '@/utils/constans'
 import { MdLogout } from '@kalimahapps/vue-icons'
 import { Button, Dialog, useToast } from 'primevue'
 import { ref } from 'vue'
@@ -15,7 +16,7 @@ const onSubmit = () => {
     .logoutUser(toast)
     .then((response: string) => {
       if (response) {
-        router.go(0)
+        router.push(urlPage.LOGIN)
       }
     })
     .catch((err: unknown) => {

@@ -2,12 +2,27 @@
 import { useUserStore } from '@/stores/user'
 import { urlPage } from '@/utils/constans'
 import { scrollTop } from '@/utils/helper'
+import { ProgressSpinner } from 'primevue'
+import { computed } from 'vue'
 
-const { roles } = useUserStore()
+const userStore = useUserStore()
+const loading = computed<boolean | null>(() => userStore.loading)
+const roles = computed(() => userStore.roles)
+const shopName = computed(() => userStore.shopName)
 </script>
 
 <template>
+  <template v-if="loading">
+    <ProgressSpinner
+      style="width: 20px; height: 20px"
+      strokeWidth="8"
+      fill="transparent"
+      animationDuration=".5s"
+      aria-label="Custom ProgressSpinner"
+    />
+  </template>
   <router-link
+    v-else
     :to="roles.includes('SELLER') ? urlPage.SELLER_HOME : urlPage.MY_SHOP"
     v-on:click="scrollTop"
     class="hidden md:flex items-center"
@@ -21,7 +36,7 @@ const { roles } = useUserStore()
         alt="profile-img"
         class="h-8 w-8 rounded-full"
       />
-      <div class="ml-1 line-clamp-1">Toko Serba Seratus</div>
+      <div class="ml-1 line-clamp-1">{{ shopName }}</div>
     </div>
     <div
       v-else

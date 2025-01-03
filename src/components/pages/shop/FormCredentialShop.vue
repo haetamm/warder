@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { fieldsCredentialShop } from '@/utils/fields'
 import type {
+  CurrentSellerResponse,
   RegCredentialShopForm,
   RegCredentialShopResponse,
 } from '@/utils/interface'
@@ -10,53 +11,95 @@ import { useForm } from 'vee-validate'
 import InputCustomCredential from './InputCustomCredential.vue'
 import { useSellerStore } from '@/stores/seller'
 import { useUserStore } from '@/stores/user'
+import { computed, ref, watchEffect, defineProps, defineEmits } from 'vue'
+
+defineProps({
+  visible: {
+    type: Boolean,
+    required: false,
+  },
+})
 
 const sellerStore = useSellerStore()
 const toast = useToast()
 const { setShopName } = useUserStore()
+const emit = defineEmits(['update:visible'])
+
+const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 
 const { handleSubmit, meta, setErrors } = useForm<RegCredentialShopForm>({
   validationSchema: regCredentialShopSchema,
 })
 
+const formData = ref<RegCredentialShopForm>({
+  shopName: seller.value?.shop_name || '',
+  shopDomain: seller.value?.shop_domain || '',
+})
+
+watchEffect(() => {
+  if (seller.value) {
+    formData.value.shopName = seller.value.shop_name
+    formData.value.shopDomain = seller.value.shop_domain
+  }
+})
+
 const onSubmit = handleSubmit((values: RegCredentialShopForm) => {
-  sellerStore
-    .postSeller(toast, values, setErrors)
-    .then((response: RegCredentialShopResponse) => {
-      if (response) {
-        setShopName(response.shop_name)
-      }
-    })
-    .catch((err: unknown) => {
-      console.error(err)
-    })
+  if (seller.value) {
+    sellerStore
+      .updateSeller(toast, values, setErrors)
+      .then((response: CurrentSellerResponse) => {
+        if (response) {
+          emit('update:visible', false)
+        }
+      })
+      .catch((err: unknown) => {
+        console.error(err)
+      })
+  } else {
+    sellerStore
+      .postSeller(toast, values, setErrors)
+      .then((response: RegCredentialShopResponse) => {
+        if (response) {
+          setShopName(response.shop_name)
+        }
+      })
+      .catch((err: unknown) => {
+        console.error(err)
+      })
+  }
 })
 </script>
 
 <template>
   <form @submit.prevent="onSubmit" class="w-full">
-    <div class="h-[182px]">
+    <div class="h-[157px]">
       <div class="pb-[20px]">
         <div
           v-for="field in fieldsCredentialShop.slice(0, 1)"
           :key="field.name"
         >
-          <InputCustomCredential :field="field" :maxLength="28" />
+          <InputCustomCredential
+            :field="field"
+            :maxLength="28"
+            v-model="formData.shopName"
+          />
         </div>
 
         <div class="mb-6">
           <div
             class="inline space-x-0 xs:flex items-center xs:space-x-2 w-full"
           >
-            <div class="hidden xs:block text-gray-500 text-xl">
-              warderrr.com/
-            </div>
             <div
               v-for="field in fieldsCredentialShop.slice(1)"
               :key="field.name"
               class="w-full"
             >
-              <InputCustomCredential :field="field" :maxLength="20" />
+              <!-- Gunakan v-model langsung untuk binding -->
+              <InputCustomCredential
+                :field="field"
+                :maxLength="20"
+                v-model="formData.shopDomain"
+              />
             </div>
           </div>
         </div>
@@ -65,7 +108,7 @@ const onSubmit = handleSubmit((values: RegCredentialShopForm) => {
     <Button
       type="submit"
       class="w-full lg:w-[144px] py-3 lg:py-2 font-bold"
-      :label="sellerStore.loading ? 'Loading' : 'Lanjut'"
+      :label="sellerStore.loading ? 'Loading' : seller ? 'Simpan' : 'Lanjut'"
       :disabled="sellerStore.loading || !meta.valid"
     />
   </form>
