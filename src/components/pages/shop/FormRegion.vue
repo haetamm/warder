@@ -83,7 +83,7 @@ const onSubmit = handleSubmit((values: RegRegionSellerForm) => {
       })
   } else {
     sellerStore
-      .postRegionSeller(toast, values as UpdateSellerPayload, setErrors)
+      .postRegionSeller(toast, values as RegRegionSellerForm, setErrors)
       .then((response: RegSellerResponse) => {
         if (response) {
           setRoles(response.roles)

@@ -58,7 +58,7 @@ const onSubmit = handleSubmit((values: RegCredentialSellerForm) => {
       })
   } else {
     sellerStore
-      .postSeller(toast, values, setErrors)
+      .postSeller(toast, values as RegCredentialSellerForm, setErrors)
       .then((response: RegCredentialSellerResponse) => {
         if (response) {
           setShopName(response.shop_name)
