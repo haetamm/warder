@@ -112,9 +112,10 @@ export const slogan = string().max(
   48,
   'Slogan tidak boleh lebih dari 45 karakter.',
 )
-export const desc = string()
-  .nullable()
-  .max(140, 'Deskripsi tidak boleh lebih dari 140 karakter.')
+export const desc = string().max(
+  140,
+  'Deskripsi tidak boleh lebih dari 140 karakter.',
+)
 
 export const selected = boolean().default(false)
 

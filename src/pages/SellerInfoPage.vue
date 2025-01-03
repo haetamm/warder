@@ -8,6 +8,7 @@ import { fieldsDescSeller } from '@/utils/fields'
 import type {
   CurrentSellerResponse,
   UpdateDescSellerForm,
+  UpdateSellerPayload,
 } from '@/utils/interface'
 import InputCustomCredential from '@/components/pages/shop/InputCustomCredential.vue'
 import FormCredentialShop from '@/components/pages/shop/FormCredentialShop.vue'
@@ -17,11 +18,13 @@ const toast = useToast()
 const sellerStore = useSellerStore()
 const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 
-const { handleSubmit, setErrors } = useForm<UpdateDescSellerForm>({
+const { handleSubmit, setErrors } = useForm<
+  UpdateDescSellerForm | UpdateSellerPayload
+>({
   validationSchema: descSellerSchema,
 })
 
-const formData = ref<UpdateDescSellerForm>({
+const formData = ref<UpdateDescSellerForm | UpdateSellerPayload>({
   slogan: seller.value?.slogan || '',
   desc: seller.value?.desc || '',
 })
@@ -33,16 +36,18 @@ watchEffect(() => {
   }
 })
 
-const onSubmit = handleSubmit((values: UpdateDescSellerForm) => {
-  values.slogan = formData.value.slogan
-  values.desc = formData.value.desc
-  sellerStore
-    .updateSeller(toast, values, setErrors)
-    .then(() => {})
-    .catch((err: unknown) => {
-      console.error(err)
-    })
-})
+const onSubmit = handleSubmit(
+  (values: UpdateDescSellerForm | UpdateSellerPayload) => {
+    values.slogan = formData.value.slogan
+    values.desc = formData.value.desc
+    sellerStore
+      .updateSeller(toast, values, setErrors)
+      .then(() => {})
+      .catch((err: unknown) => {
+        console.error(err)
+      })
+  },
+)
 </script>
 
 <template>
@@ -81,8 +86,18 @@ const onSubmit = handleSubmit((values: UpdateDescSellerForm) => {
                 cols="30"
                 class="w-full mt-1"
               />
+              <div class="flex items-center mt-1 ml-0.5 mb-1">
+                <small class="w-[97%]">
+                  <ErrorMessage
+                    :name="field.name"
+                    class="text-red-500 text-sm"
+                  />
+                </small>
+                <small class="text-sm flex justify-end">
+                  {{ formData.desc?.length }}/140
+                </small>
+              </div>
             </Field>
-            <ErrorMessage :name="field.name" class="text-red-500 text-sm" />
           </div>
         </div>
       </div>

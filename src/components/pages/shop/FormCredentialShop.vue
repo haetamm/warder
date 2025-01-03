@@ -4,6 +4,7 @@ import type {
   CurrentSellerResponse,
   RegCredentialShopForm,
   RegCredentialShopResponse,
+  UpdateSellerPayload,
 } from '@/utils/interface'
 import { regCredentialShopSchema } from '@/utils/validation'
 import { Button, useToast } from 'primevue'
@@ -27,47 +28,51 @@ const emit = defineEmits(['update:visible'])
 
 const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 
-const { handleSubmit, meta, setErrors } = useForm<RegCredentialShopForm>({
+const { handleSubmit, meta, setErrors } = useForm<
+  RegCredentialShopForm | UpdateSellerPayload
+>({
   validationSchema: regCredentialShopSchema,
 })
 
-const formData = ref<RegCredentialShopForm>({
-  shopName: seller.value?.shop_name || '',
-  shopDomain: seller.value?.shop_domain || '',
+const formData = ref<RegCredentialShopForm | UpdateSellerPayload>({
+  shop_name: seller.value?.shop_name || '',
+  shop_domain: seller.value?.shop_domain || '',
 })
 
 watchEffect(() => {
   if (seller.value) {
-    formData.value.shopName = seller.value.shop_name
-    formData.value.shopDomain = seller.value.shop_domain
+    formData.value.shop_name = seller.value.shop_name
+    formData.value.shop_domain = seller.value.shop_domain
   }
 })
 
-const onSubmit = handleSubmit((values: RegCredentialShopForm) => {
-  if (seller.value) {
-    sellerStore
-      .updateSeller(toast, values, setErrors)
-      .then((response: CurrentSellerResponse) => {
-        if (response) {
-          emit('update:visible', false)
-        }
-      })
-      .catch((err: unknown) => {
-        console.error(err)
-      })
-  } else {
-    sellerStore
-      .postSeller(toast, values, setErrors)
-      .then((response: RegCredentialShopResponse) => {
-        if (response) {
-          setShopName(response.shop_name)
-        }
-      })
-      .catch((err: unknown) => {
-        console.error(err)
-      })
-  }
-})
+const onSubmit = handleSubmit(
+  (values: RegCredentialShopForm | UpdateSellerPayload) => {
+    if (seller.value) {
+      sellerStore
+        .updateSeller(toast, values, setErrors)
+        .then((response: CurrentSellerResponse) => {
+          if (response) {
+            emit('update:visible', false)
+          }
+        })
+        .catch((err: unknown) => {
+          console.error(err)
+        })
+    } else {
+      sellerStore
+        .postSeller(toast, values, setErrors)
+        .then((response: RegCredentialShopResponse) => {
+          if (response) {
+            setShopName(response.shop_name)
+          }
+        })
+        .catch((err: unknown) => {
+          console.error(err)
+        })
+    }
+  },
+)
 </script>
 
 <template>
@@ -81,7 +86,7 @@ const onSubmit = handleSubmit((values: RegCredentialShopForm) => {
           <InputCustomCredential
             :field="field"
             :maxLength="28"
-            v-model="formData.shopName"
+            v-model="formData.shop_name"
           />
         </div>
 
@@ -98,7 +103,7 @@ const onSubmit = handleSubmit((values: RegCredentialShopForm) => {
               <InputCustomCredential
                 :field="field"
                 :maxLength="20"
-                v-model="formData.shopDomain"
+                v-model="formData.shop_domain"
               />
             </div>
           </div>

@@ -116,8 +116,8 @@ export interface PhoneNumberForm {
 }
 
 export interface RegCredentialShopForm {
-  shopName: string
-  shopDomain: string
+  shop_name: string
+  shop_domain: string
 }
 
 export interface ChangePasswordForm {

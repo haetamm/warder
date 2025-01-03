@@ -4,6 +4,7 @@ import type {
   CurrentSellerResponse,
   RegRegionSellerForm,
   RegSellerResponse,
+  UpdateSellerPayload,
 } from '@/utils/interface'
 import { regionSchema, updateRegionSchema } from '@/utils/validation'
 import { useForm } from 'vee-validate'
@@ -38,11 +39,13 @@ const { setRoles } = useUserStore()
 const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 
 const schema = seller.value ? updateRegionSchema : regionSchema
-const { handleSubmit, meta, setErrors } = useForm<RegRegionSellerForm>({
+const { handleSubmit, meta, setErrors } = useForm<
+  RegRegionSellerForm | UpdateSellerPayload
+>({
   validationSchema: schema,
 })
 
-const formData = ref<RegRegionSellerForm>({
+const formData = ref<RegRegionSellerForm | UpdateSellerPayload>({
   province: seller.value?.province || '',
   regencies: seller.value?.regencies || '',
   district: seller.value?.district || '',
@@ -62,36 +65,38 @@ watchEffect(() => {
   }
 })
 
-const onSubmit = handleSubmit((values: RegRegionSellerForm) => {
-  values.province = regionStore.selectedProvince?.name ?? null
-  values.regencies = regionStore.selectedRegency?.name ?? null
-  values.district = regionStore.selectedDistrict?.name ?? null
-  values.villages = regionStore.selectedVillage?.name ?? null
+const onSubmit = handleSubmit(
+  (values: RegRegionSellerForm | UpdateSellerPayload) => {
+    values.province = regionStore.selectedProvince?.name ?? null
+    values.regencies = regionStore.selectedRegency?.name ?? null
+    values.district = regionStore.selectedDistrict?.name ?? null
+    values.villages = regionStore.selectedVillage?.name ?? null
 
-  if (seller.value) {
-    sellerStore
-      .updateSeller(toast, values, setErrors)
-      .then((response: CurrentSellerResponse) => {
-        if (response) {
-          emit('update:visible', false)
-        }
-      })
-      .catch((err: unknown) => {
-        console.error(err)
-      })
-  } else {
-    sellerStore
-      .postRegionSeller(toast, values, setErrors)
-      .then((response: RegSellerResponse) => {
-        if (response) {
-          setRoles(response.roles)
-        }
-      })
-      .catch((err: unknown) => {
-        console.error(err)
-      })
-  }
-})
+    if (seller.value) {
+      sellerStore
+        .updateSeller(toast, values, setErrors)
+        .then((response: CurrentSellerResponse) => {
+          if (response) {
+            emit('update:visible', false)
+          }
+        })
+        .catch((err: unknown) => {
+          console.error(err)
+        })
+    } else {
+      sellerStore
+        .postRegionSeller(toast, values, setErrors)
+        .then((response: RegSellerResponse) => {
+          if (response) {
+            setRoles(response.roles)
+          }
+        })
+        .catch((err: unknown) => {
+          console.error(err)
+        })
+    }
+  },
+)
 </script>
 
 <template>
