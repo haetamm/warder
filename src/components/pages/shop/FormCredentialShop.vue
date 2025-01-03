@@ -4,6 +4,7 @@ import type {
   CurrentSellerResponse,
   RegCredentialSellerForm,
   RegCredentialSellerResponse,
+  UpdateSellerPayload,
 } from '@/utils/interface'
 import { regCredentialShopSchema } from '@/utils/validation'
 import { Button, useToast } from 'primevue'
@@ -46,7 +47,7 @@ const { handleSubmit, meta, setErrors } = useForm<RegCredentialSellerForm>({
 const onSubmit = handleSubmit((values: RegCredentialSellerForm) => {
   if (seller.value) {
     sellerStore
-      .updateSeller(toast, values, setErrors)
+      .updateSeller(toast, values as UpdateSellerPayload, setErrors)
       .then((response: CurrentSellerResponse) => {
         if (response) {
           emit('update:visible', false)

@@ -8,6 +8,7 @@ import { fieldsDescSeller } from '@/utils/fields'
 import type {
   CurrentSellerResponse,
   UpdateDescSellerForm,
+  UpdateSellerPayload,
 } from '@/utils/interface'
 import InputCustomCredential from '@/components/pages/shop/InputCustomCredential.vue'
 import FormCredentialShop from '@/components/pages/shop/FormCredentialShop.vue'
@@ -37,7 +38,7 @@ const onSubmit = handleSubmit((values: UpdateDescSellerForm) => {
   values.slogan = formData.value.slogan
   values.desc = formData.value.desc
   sellerStore
-    .updateSeller(toast, values, setErrors)
+    .updateSeller(toast, values as UpdateSellerPayload, setErrors)
     .then(() => {})
     .catch((err: unknown) => {
       console.error(err)

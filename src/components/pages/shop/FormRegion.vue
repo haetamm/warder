@@ -4,6 +4,7 @@ import type {
   CurrentSellerResponse,
   RegRegionSellerForm,
   RegSellerResponse,
+  UpdateSellerPayload,
 } from '@/utils/interface'
 import { regionSchema, updateRegionSchema } from '@/utils/validation'
 import { useForm } from 'vee-validate'
@@ -71,7 +72,7 @@ const onSubmit = handleSubmit((values: RegRegionSellerForm) => {
 
   if (seller.value) {
     sellerStore
-      .updateSeller(toast, values, setErrors)
+      .updateSeller(toast, values as UpdateSellerPayload, setErrors)
       .then((response: CurrentSellerResponse) => {
         if (response) {
           emit('update:visible', false)
@@ -82,7 +83,7 @@ const onSubmit = handleSubmit((values: RegRegionSellerForm) => {
       })
   } else {
     sellerStore
-      .postRegionSeller(toast, values, setErrors)
+      .postRegionSeller(toast, values as UpdateSellerPayload, setErrors)
       .then((response: RegSellerResponse) => {
         if (response) {
           setRoles(response.roles)

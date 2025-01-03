@@ -182,14 +182,14 @@ export interface RegRegionSellerForm {
 }
 
 export interface UpdateSellerPayload {
-  shop_name: string | null
-  shop_domain: string | null
-  province: string | null
-  regencies: string | null
-  district: string | null
-  villages: string | null
-  street_name: string | null
-  postal_code: string | null
-  slogan: string | null
-  desc: string | null
+  shop_name?: string | null
+  shop_domain?: string | null
+  province?: string | null
+  regencies?: string | null
+  district?: string | null
+  villages?: string | null
+  street_name?: string | null
+  postal_code?: string | null
+  slogan?: string | null
+  desc?: string | null
 }
