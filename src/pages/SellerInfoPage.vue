@@ -18,13 +18,7 @@ const toast = useToast()
 const sellerStore = useSellerStore()
 const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 
-const { handleSubmit, setErrors } = useForm<
-  UpdateDescSellerForm | UpdateSellerPayload
->({
-  validationSchema: descSellerSchema,
-})
-
-const formData = ref<UpdateDescSellerForm | UpdateSellerPayload>({
+const formData = ref<UpdateDescSellerForm & Partial<UpdateSellerPayload>>({
   slogan: seller.value?.slogan || '',
   desc: seller.value?.desc || '',
 })
@@ -34,6 +28,10 @@ watchEffect(() => {
     formData.value.slogan = seller.value.slogan || ''
     formData.value.desc = seller.value.desc || ''
   }
+})
+
+const { handleSubmit, setErrors } = useForm({
+  validationSchema: descSellerSchema,
 })
 
 const onSubmit = handleSubmit(

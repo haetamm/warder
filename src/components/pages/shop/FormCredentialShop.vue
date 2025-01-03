@@ -28,22 +28,20 @@ const emit = defineEmits(['update:visible'])
 
 const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 
-const { handleSubmit, meta, setErrors } = useForm<
-  RegCredentialShopForm | UpdateSellerPayload
->({
-  validationSchema: regCredentialShopSchema,
-})
-
-const formData = ref<RegCredentialShopForm | UpdateSellerPayload>({
+const formData = ref<RegCredentialShopForm & Partial<UpdateSellerPayload>>({
   shop_name: seller.value?.shop_name || '',
   shop_domain: seller.value?.shop_domain || '',
 })
 
 watchEffect(() => {
   if (seller.value) {
-    formData.value.shop_name = seller.value.shop_name
-    formData.value.shop_domain = seller.value.shop_domain
+    formData.value.shop_name = seller.value.shop_name || ''
+    formData.value.shop_domain = seller.value.shop_domain || ''
   }
+})
+
+const { handleSubmit, meta, setErrors } = useForm({
+  validationSchema: regCredentialShopSchema,
 })
 
 const onSubmit = handleSubmit(

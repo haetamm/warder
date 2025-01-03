@@ -39,13 +39,8 @@ const { setRoles } = useUserStore()
 const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 
 const schema = seller.value ? updateRegionSchema : regionSchema
-const { handleSubmit, meta, setErrors } = useForm<
-  RegRegionSellerForm | UpdateSellerPayload
->({
-  validationSchema: schema,
-})
 
-const formData = ref<RegRegionSellerForm | UpdateSellerPayload>({
+const formData = ref<RegRegionSellerForm & Partial<UpdateSellerPayload>>({
   province: seller.value?.province || '',
   regencies: seller.value?.regencies || '',
   district: seller.value?.district || '',
@@ -63,6 +58,10 @@ watchEffect(() => {
     formData.value.street_name = seller.value.street_name
     formData.value.postal_code = seller.value.postal_code
   }
+})
+
+const { handleSubmit, meta, setErrors } = useForm({
+  validationSchema: schema,
 })
 
 const onSubmit = handleSubmit(
