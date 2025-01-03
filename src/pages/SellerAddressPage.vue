@@ -77,7 +77,7 @@ const shopLocations = computed(() => {
     v-model:visible="visible"
     modal
     header="Ubah alamat toko"
-    :style="{ width: '27rem' }"
+    :style="{ width: '21rem' }"
   >
     <FormRegion v-model:visible="visible" />
   </Dialog>

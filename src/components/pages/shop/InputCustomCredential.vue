@@ -43,9 +43,9 @@ const onChange = (_name: string, event: Event) => {
     </div>
     <div class="flex items-center mt-1 ml-0.5 mb-1">
       <small class="w-[97%]">
-        <ErrorMessage :name="field.name" class="text-red-500 text-sm" />
+        <ErrorMessage :name="field.name" class="text-red-500" />
       </small>
-      <small class="text-sm flex justify-end">
+      <small class="flex justify-end">
         {{ FieldBindingObject?.value?.length }}/{{ maxLength }}
       </small>
     </div>

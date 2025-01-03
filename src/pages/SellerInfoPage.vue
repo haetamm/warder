@@ -8,7 +8,6 @@ import { fieldsDescSeller } from '@/utils/fields'
 import type {
   CurrentSellerResponse,
   UpdateDescSellerForm,
-  UpdateSellerPayload,
 } from '@/utils/interface'
 import InputCustomCredential from '@/components/pages/shop/InputCustomCredential.vue'
 import FormCredentialShop from '@/components/pages/shop/FormCredentialShop.vue'
@@ -18,7 +17,7 @@ const toast = useToast()
 const sellerStore = useSellerStore()
 const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 
-const formData = ref<UpdateDescSellerForm & Partial<UpdateSellerPayload>>({
+const formData = ref<UpdateDescSellerForm>({
   slogan: seller.value?.slogan || '',
   desc: seller.value?.desc || '',
 })
@@ -30,22 +29,20 @@ watchEffect(() => {
   }
 })
 
-const { handleSubmit, setErrors } = useForm({
+const { handleSubmit, setErrors } = useForm<UpdateDescSellerForm>({
   validationSchema: descSellerSchema,
 })
 
-const onSubmit = handleSubmit(
-  (values: UpdateDescSellerForm | UpdateSellerPayload) => {
-    values.slogan = formData.value.slogan
-    values.desc = formData.value.desc
-    sellerStore
-      .updateSeller(toast, values, setErrors)
-      .then(() => {})
-      .catch((err: unknown) => {
-        console.error(err)
-      })
-  },
-)
+const onSubmit = handleSubmit((values: UpdateDescSellerForm) => {
+  values.slogan = formData.value.slogan
+  values.desc = formData.value.desc
+  sellerStore
+    .updateSeller(toast, values, setErrors)
+    .then(() => {})
+    .catch((err: unknown) => {
+      console.error(err)
+    })
+})
 </script>
 
 <template>
@@ -91,7 +88,7 @@ const onSubmit = handleSubmit(
                     class="text-red-500 text-sm"
                   />
                 </small>
-                <small class="text-sm flex justify-end">
+                <small class="flex justify-end">
                   {{ formData.desc?.length }}/140
                 </small>
               </div>
@@ -99,11 +96,11 @@ const onSubmit = handleSubmit(
           </div>
         </div>
       </div>
-      <div class="flex justify-end px-0 lg:px-5 mt-2">
+      <div class="flex justify-end px-0 lg:px-5 mt-1">
         <Button
           type="submit"
           :label="sellerStore.loading ? 'Loading' : 'Simpan'"
-          class="w-[120px] mt-2"
+          class="w-[120px]"
           :style="{ padding: '5px' }"
         />
       </div>

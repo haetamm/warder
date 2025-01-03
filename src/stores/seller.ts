@@ -4,7 +4,7 @@ import { handleApiError } from '@/utils/handleApiErrors'
 import type { Toast, ValidationErrors } from '@/utils/type'
 import type {
   CurrentSellerResponse,
-  RegCredentialShopForm,
+  RegCredentialSellerForm,
   RegRegionSellerForm,
   UpdateSellerPayload,
 } from '@/utils/interface'
@@ -33,7 +33,7 @@ export const useSellerStore = defineStore('seller', {
     },
     async postSeller(
       toast: Toast,
-      payload: RegCredentialShopForm,
+      payload: RegCredentialSellerForm,
       setErrors: (errors: ValidationErrors) => void,
     ) {
       this.loading = true

@@ -83,25 +83,6 @@ export interface AddressFormModal {
   [key: string]: string | boolean | null
 }
 
-export interface RegRegionSellerForm {
-  street_name: string | null
-  postal_code: string | null
-  province: string | null
-  regencies: string | null
-  district: string | null
-  villages: string | null
-}
-
-export interface UpdateDescSellerForm {
-  desc: string | null
-  slogan: string | null
-}
-
-export interface RegCredentialShopResponse {
-  shop_name: string
-  shop_domain: string
-}
-
 export interface UserStore {
   token: string | null
 }
@@ -113,11 +94,6 @@ export interface GuestForm {
 
 export interface PhoneNumberForm {
   phoneNumber: string
-}
-
-export interface RegCredentialShopForm {
-  shop_name: string
-  shop_domain: string
 }
 
 export interface ChangePasswordForm {
@@ -176,20 +152,44 @@ export interface CurrentSellerResponse {
   updated_at: string
 }
 
+export interface UpdateDescSellerForm {
+  desc: string | null
+  slogan: string | null
+}
+
+export interface RegCredentialSellerResponse {
+  shop_name: string | null
+  shop_domain: string | null
+}
+
+export interface RegCredentialSellerForm {
+  shop_name: string | null
+  shop_domain: string | null
+}
+
 export interface RegSellerResponse {
   seller: Seller
   roles: string[]
 }
 
+export interface RegRegionSellerForm {
+  street_name: string | null
+  postal_code: string | null
+  province: string | null
+  regencies: string | null
+  district: string | null
+  villages: string | null
+}
+
 export interface UpdateSellerPayload {
-  shop_name?: string
-  shop_domain?: string
-  province?: string
-  regencies?: string
-  district?: string
-  villages?: string
-  street_name?: string
-  postal_code?: string
-  slogan?: string
-  desc?: string
+  shop_name: string | null
+  shop_domain: string | null
+  province: string | null
+  regencies: string | null
+  district: string | null
+  villages: string | null
+  street_name: string | null
+  postal_code: string | null
+  slogan: string | null
+  desc: string | null
 }

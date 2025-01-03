@@ -2,9 +2,8 @@
 import { fieldsCredentialShop } from '@/utils/fields'
 import type {
   CurrentSellerResponse,
-  RegCredentialShopForm,
-  RegCredentialShopResponse,
-  UpdateSellerPayload,
+  RegCredentialSellerForm,
+  RegCredentialSellerResponse,
 } from '@/utils/interface'
 import { regCredentialShopSchema } from '@/utils/validation'
 import { Button, useToast } from 'primevue'
@@ -28,7 +27,7 @@ const emit = defineEmits(['update:visible'])
 
 const seller = computed<CurrentSellerResponse | null>(() => sellerStore.seller)
 
-const formData = ref<RegCredentialShopForm & Partial<UpdateSellerPayload>>({
+const formData = ref<RegCredentialSellerForm>({
   shop_name: seller.value?.shop_name || '',
   shop_domain: seller.value?.shop_domain || '',
 })
@@ -40,37 +39,35 @@ watchEffect(() => {
   }
 })
 
-const { handleSubmit, meta, setErrors } = useForm({
+const { handleSubmit, meta, setErrors } = useForm<RegCredentialSellerForm>({
   validationSchema: regCredentialShopSchema,
 })
 
-const onSubmit = handleSubmit(
-  (values: RegCredentialShopForm | UpdateSellerPayload) => {
-    if (seller.value) {
-      sellerStore
-        .updateSeller(toast, values, setErrors)
-        .then((response: CurrentSellerResponse) => {
-          if (response) {
-            emit('update:visible', false)
-          }
-        })
-        .catch((err: unknown) => {
-          console.error(err)
-        })
-    } else {
-      sellerStore
-        .postSeller(toast, values, setErrors)
-        .then((response: RegCredentialShopResponse) => {
-          if (response) {
-            setShopName(response.shop_name)
-          }
-        })
-        .catch((err: unknown) => {
-          console.error(err)
-        })
-    }
-  },
-)
+const onSubmit = handleSubmit((values: RegCredentialSellerForm) => {
+  if (seller.value) {
+    sellerStore
+      .updateSeller(toast, values, setErrors)
+      .then((response: CurrentSellerResponse) => {
+        if (response) {
+          emit('update:visible', false)
+        }
+      })
+      .catch((err: unknown) => {
+        console.error(err)
+      })
+  } else {
+    sellerStore
+      .postSeller(toast, values, setErrors)
+      .then((response: RegCredentialSellerResponse) => {
+        if (response) {
+          setShopName(response.shop_name)
+        }
+      })
+      .catch((err: unknown) => {
+        console.error(err)
+      })
+  }
+})
 </script>
 
 <template>
