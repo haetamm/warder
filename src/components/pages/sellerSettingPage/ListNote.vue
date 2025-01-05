@@ -13,14 +13,14 @@ const toast = useToast()
 const loading = ref(true)
 const visible = ref(false)
 const dialogState = ref({
-  id: '',
+  id: 0,
   type: '' as 'edit' | 'delete' | '',
 })
 
 onMounted(() => {
   noteStore
     .getNotes(toast)
-    .then((response: NoteResponse) => {
+    .then((response: NoteResponse[]) => {
       noteStore.setNotes(response)
       loading.value = false
     })
@@ -82,7 +82,7 @@ const handleDelete = () => {
                   @click="
                     (visible = true),
                       (dialogState = {
-                        id: slotProps.data.id ?? '',
+                        id: slotProps.data.id ?? 0,
                         type: 'edit',
                       })
                   "
@@ -95,7 +95,7 @@ const handleDelete = () => {
                   @click="
                     (visible = true),
                       (dialogState = {
-                        id: slotProps.data.id ?? '',
+                        id: slotProps.data.id ?? 0,
                         type: 'delete',
                       })
                   "
@@ -131,7 +131,7 @@ const handleDelete = () => {
     "
   >
     <template v-if="dialogState.type === 'edit'">
-      <FormNote v-model:visible="visible" :id="Number(dialogState.id)" />
+      <FormNote v-model:visible="visible" :id="dialogState.id" />
     </template>
     <template v-else-if="dialogState.type === 'delete'">
       <h1>Yakin dihapus??</h1>
