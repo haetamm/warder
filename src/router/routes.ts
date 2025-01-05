@@ -23,6 +23,7 @@ import SellerInfoPage from '@/pages/SellerInfoPage.vue'
 import SellerOperationalPage from '@/pages/SellerOperationalPage.vue'
 import SellerAddressPage from '@/pages/SellerAddressPage.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
+import SellerNotePage from '@/pages/SellerNotePage.vue'
 
 export const routes = [
   {
@@ -130,6 +131,10 @@ export const routes = [
           {
             path: 'operational-hour',
             component: SellerOperationalPage,
+          },
+          {
+            path: 'note',
+            component: SellerNotePage,
           },
           {
             path: 'address',

@@ -20,4 +20,5 @@ export const urlPage = {
   SELLER_SETTING_INFO: '/seller/settings/info',
   SELLER_SETTING_OPERATIONAL: '/seller/settings/operational-hour',
   SELLER_SETTING_ADDRESS: '/seller/settings/address',
+  SELLER_SETTING_NOTE: '/seller/settings/note',
 }

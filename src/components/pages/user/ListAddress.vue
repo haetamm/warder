@@ -144,7 +144,9 @@ const handleDelete = () => {
     v-model:visible="visible"
     modal
     :header="dialogState.type === 'edit' ? 'Ubah Alamat' : 'Hapus Alamat'"
-    :style="{ width: '23rem' }"
+    :style="
+      dialogState.type === 'edit' ? { width: '23rem' } : { width: '20rem' }
+    "
   >
     <template v-if="dialogState.type === 'edit'">
       <FormAddress v-model:visible="visible" :id="dialogState.id" />

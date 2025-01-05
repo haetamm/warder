@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { onMounted, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { DeGoogleOriginal } from '@kalimahapps/vue-icons'
 import { useUserStore } from '@/stores/user'
-import { urlPage } from '@/utils/constans'
 import { useLoginWithGoogleStore } from '@/stores/loginWithGoogle'
 import { useToast } from 'primevue'
-import type { LoginResponse } from '@/utils/interface'
 
 const loginWithGoogleStore = useLoginWithGoogleStore()
 const toast = useToast()
 const route = useRoute()
-const router = useRouter()
 const userStore = useUserStore()
 
 const onSubmit = () => {
@@ -25,11 +22,7 @@ const onSubmit = () => {
 const getAuth = (code: string) => {
   userStore
     .getGoogleAuth(toast, code)
-    .then((response: LoginResponse) => {
-      if (response) {
-        router.push(urlPage.HOME)
-      }
-    })
+    .then(() => {})
     .catch((err: unknown) => {
       console.error(err)
     })

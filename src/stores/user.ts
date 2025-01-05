@@ -60,24 +60,8 @@ export const useUserStore = defineStore('user', {
           formData,
         )
         const { data } = response
-        const {
-          token,
-          roles,
-          name,
-          image,
-          phone_number,
-          shop_name,
-          shop_domain,
-        } = data
-        this.token = token
-        this.roles = roles
-        this.name = name
-        this.image = image
-        this.phoneNumber = phone_number
-        this.shopName = shop_name
-        this.shopDomain = shop_domain
-
-        Cookies.set('token', token, { expires: 10080 })
+        Cookies.set('token', data.token, { expires: 10080 })
+        window.location.assign('/')
         return data
       } catch (error: unknown) {
         handleApiError(error, toast)
@@ -112,24 +96,8 @@ export const useUserStore = defineStore('user', {
           `login/google/callback?code=${code}`,
         )
         const { data } = response
-        const {
-          token,
-          roles,
-          name,
-          image,
-          phone_number,
-          shop_name,
-          shop_domain,
-        } = data
-        this.token = token
-        this.roles = roles
-        this.name = name
-        this.image = image
-        this.phoneNumber = phone_number
-        this.shopName = shop_name
-        this.shopDomain = shop_domain
-
-        Cookies.set('token', token, { expires: 10080 })
+        Cookies.set('token', data.token, { expires: 10080 })
+        window.location.assign('/')
         return data
       } catch (error: unknown) {
         handleApiError(error, toast)

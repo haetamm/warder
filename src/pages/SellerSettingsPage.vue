@@ -5,10 +5,19 @@ import { useRoute } from 'vue-router'
 import Tabs from 'primevue/tabs'
 import Tab from 'primevue/tab'
 import { TabList } from 'primevue'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Settings | Warder Seller',
+  meta: [
+    { name: 'description', content: 'Seller dashboard settings' },
+    { name: 'keywords', content: 'dashboard, settings, vue' },
+  ],
+})
 
 const tabs = ref([
   { route: urlPage.SELLER_SETTING_INFO, label: 'Informasi' },
-  { route: urlPage.SELLER_SETTING_OPERATIONAL, label: 'Jadwal ' },
+  { route: urlPage.SELLER_SETTING_NOTE, label: 'Catatan ' },
   { route: urlPage.SELLER_SETTING_ADDRESS, label: 'Lokasi' },
 ])
 
@@ -25,7 +34,7 @@ watch(
 
 <template>
   <div class="m-1 xs:mx-2 md:mt-2 xl:mt-4 border-[1px] bg-white rounded-lg">
-    <Tabs :value="selectedTab" class="">
+    <Tabs :value="selectedTab" class="overflow-auto">
       <TabList class="w-full py-0">
         <div class="flex justify-between xs:inline-block w-full">
           <Tab v-for="tab in tabs" :key="tab.label" :value="tab.route">

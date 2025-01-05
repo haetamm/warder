@@ -50,6 +50,7 @@ const onSubmit = handleSubmit((values: RegCredentialSellerForm) => {
       .updateSeller(toast, values as UpdateSellerPayload, setErrors)
       .then((response: CurrentSellerResponse) => {
         if (response) {
+          setShopName(response.shop_name ?? '')
           emit('update:visible', false)
         }
       })

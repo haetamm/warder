@@ -3,9 +3,10 @@ import { object, string, date, boolean } from 'yup'
 const alphanumericRegex = /^[a-zA-Z0-9]*$/
 
 // Authentication
-export const email = string().email().required()
-export const passwordLogin = string().required()
+export const email = string().trim().email().required()
+export const passwordLogin = string().trim().required()
 export const password = string()
+  .trim()
   .min(6)
   .max(12)
   .matches(alphanumericRegex, 'password must only contain alphanumeric')
@@ -13,6 +14,7 @@ export const password = string()
 
 // user profile
 export const name = string()
+  .trim()
   .required('Nama harus diisi')
   .max(16, 'Nama maksimal 16 karakter')
 
@@ -25,6 +27,7 @@ export const gender = string()
   .oneOf(['pria', 'wanita'], 'Jenis kelamin tidak valid')
 
 export const phoneNumber = string()
+  .trim()
   .required('Nomor telepon harus diisi')
   .max(15, 'Nomor telepon maksimal 15 karakter')
   .matches(/^\d+$/, 'Hanya karakter numerik')
@@ -34,7 +37,10 @@ export const recipientName = string()
   .required('Nama penerima wajib diisi.')
   .max(50, 'Nama penerima tidak boleh lebih dari 50 karakter.')
 
+export const selected = boolean().default(false)
+
 export const label = string()
+  .trim()
   .required('Label wajib diisi.')
   .max(20, 'Label tidak boleh lebih dari 20 karakter.')
 
@@ -90,19 +96,23 @@ export const villages = string()
   .max(255, 'Kelurahan tidak boleh lebih dari 255 karakter.')
 
 export const streetName = string()
+  .trim()
   .required('Nama jalan wajib diisi.')
   .max(100, 'Nama jalan tidak boleh lebih dari 255 karakter.')
 
 export const postalCode = string()
+  .trim()
   .required('Kode pos wajib diisi.')
   .max(10, 'Kode pos tidak boleh lebih dari 10 karakter.')
   .matches(/^\d+$/, 'Hanya karakter numerik')
 
 export const shopName = string()
+  .trim()
   .required('Nama toko wajib diisi')
   .max(28, 'Nama toko harus maksimal 28 karakter')
 
 export const shopDomain = string()
+  .trim()
   .required('Domain wajib diisi')
   .min(6, 'Minimal 6 karakter')
   .max(20, 'Maksimal 20 karakter')
@@ -117,7 +127,15 @@ export const desc = string().max(
   'Deskripsi tidak boleh lebih dari 140 karakter.',
 )
 
-export const selected = boolean().default(false)
+export const title = string()
+  .trim()
+  .required('Judul wajib diisi')
+  .max(128, 'Maksimal 128 karakter')
+
+export const body = string()
+  .trim()
+  .required('Catatan wajib diisi')
+  .max(6000, 'Maksimal 6000 karakter')
 
 export const loginSchema = object({
   email: email,
@@ -217,4 +235,9 @@ export const phoneNumberSchema = object({
 export const regCredentialShopSchema = object({
   shop_name: shopName,
   shop_domain: shopDomain,
+})
+
+export const noteSchema = object({
+  title: title,
+  body: body,
 })

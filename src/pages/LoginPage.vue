@@ -11,11 +11,9 @@ import { fieldsGuest } from '@/utils/fields'
 import ButtonGoogle from '@/components/layouts/guest/ButtonGoogle.vue'
 import BorderLine from '@/components/layouts/guest/BorderLine.vue'
 import { useUserStore } from '@/stores/user'
-import { useRouter } from 'vue-router'
-import type { GuestForm, LoginResponse } from '@/utils/interface'
+import type { GuestForm } from '@/utils/interface'
 
 const toast = useToast()
-const router = useRouter()
 const userStore = useUserStore()
 
 const back = backHandleGuest()
@@ -46,11 +44,7 @@ const onChange: Record<string, (e: Event) => void> = {
 const onSubmit = handleSubmit((values: GuestForm) => {
   userStore
     .loginUser(values, toast)
-    .then((response: LoginResponse) => {
-      if (response) {
-        router.push(urlPage.HOME)
-      }
-    })
+    .then(() => {})
     .catch((err: unknown) => {
       console.error(err)
     })

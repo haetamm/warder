@@ -15,11 +15,11 @@
   "dependencies": {
     "@kalimahapps/vue-icons": "^1.7.1",
     "@primevue/themes": "^4.2.1",
+    "@tinymce/tinymce-vue": "^6.1.0",
     "@vueuse/core": "^11.1.0",
     "@vueuse/head": "^2.0.0",
     "axios": "^1.7.7",
     "js-cookie": "^3.0.5",
-    "jwt-decode": "^4.0.0",
     "pinia": "^2.2.4",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.1",

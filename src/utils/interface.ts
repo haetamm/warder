@@ -193,3 +193,15 @@ export interface UpdateSellerPayload {
   slogan?: string | null
   desc?: string | null
 }
+
+export interface NoteResponse {
+  id: number
+  title: string
+  body: string
+  updated_at: string
+}
+
+export interface NoteForm {
+  title: string | null
+  body: string | null
+}
