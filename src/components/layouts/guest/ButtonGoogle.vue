@@ -12,20 +12,11 @@ const route = useRoute()
 const userStore = useUserStore()
 
 const onSubmit = () => {
-  try {
-    loginWithGoogleStore.loginWithGoogle(toast)
-  } catch (err) {
-    console.error(err)
-  }
+  loginWithGoogleStore.loginWithGoogle(toast)
 }
 
 const getAuth = (code: string) => {
-  userStore
-    .getGoogleAuth(toast, code)
-    .then(() => {})
-    .catch((err: unknown) => {
-      console.error(err)
-    })
+  userStore.getGoogleAuth(toast, code)
 }
 
 onMounted(() => {

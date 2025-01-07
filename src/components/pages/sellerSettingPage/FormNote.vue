@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, onMounted, ref } from 'vue'
 import Editor from '@tinymce/tinymce-vue'
-import { Button, InputText, useToast } from 'primevue'
+import { Button, FloatLabel, InputText, useToast } from 'primevue'
 import { noteSchema } from '@/utils/validation'
 import type { NoteForm, NoteResponse } from '@/utils/interface'
 import { useNoteStore } from '@/stores/note'
@@ -75,8 +75,10 @@ const onSubmit = async () => {
 <template>
   <form @submit.prevent="onSubmit" class="my-2 w-full">
     <div class="w-full mb-2">
-      <label for="title">Judul Catatan</label>
-      <InputText id="title" v-model="title" class="p-inputtext" />
+      <FloatLabel variant="on">
+        <label for="title">Judul Catatan</label>
+        <InputText id="title" v-model="title" class="p-inputtext" />
+      </FloatLabel>
       <small v-if="errors.title" class="text-red-500">
         {{ errors.title }}
       </small>

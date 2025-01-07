@@ -15,8 +15,7 @@ export const useAddress = defineStore('address', {
       this.loading = true
       this.error = null
       try {
-        const { data: response } =
-          await axiosWarderApiInstance.get('user/address')
+        const { data: response } = await axiosWarderApiInstance.get('address')
         const { data } = response
         this.address = data.map((address: AddressResponse) => ({
           ...address,
@@ -38,7 +37,7 @@ export const useAddress = defineStore('address', {
       this.error = null
       try {
         const { data: response } = await axiosWarderApiInstance.post(
-          'user/address',
+          'address',
           payload,
         )
         const { data } = response
@@ -73,7 +72,7 @@ export const useAddress = defineStore('address', {
       this.error = null
       try {
         const { data: response } = await axiosWarderApiInstance.put(
-          `user/address/${id}`,
+          `address/${id}`,
           payload,
         )
         const { data } = response
@@ -108,7 +107,7 @@ export const useAddress = defineStore('address', {
       this.error = null
       try {
         const { data: response } = await axiosWarderApiInstance.delete(
-          `user/address/${id}`,
+          `address/${id}`,
         )
         const { data } = response
         this.address = this.address.filter(

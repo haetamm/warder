@@ -54,6 +54,11 @@ export const isActive = (targetPrefix: string): boolean => {
   return route.path.startsWith(targetPrefix)
 }
 
+export const isActiveSubLink = (targetPrefix: string): boolean => {
+  const route: RouteLocationNormalizedLoaded = useRoute()
+  return route.path === targetPrefix
+}
+
 const date = new Date()
 
 export const currentDate = date.toLocaleDateString('id-ID', {

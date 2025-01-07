@@ -37,12 +37,7 @@ const { handleSubmit, setErrors } = useForm<UpdateDescSellerForm>({
 const onSubmit = handleSubmit((values: UpdateDescSellerForm) => {
   values.slogan = formData.value.slogan
   values.desc = formData.value.desc
-  sellerStore
-    .updateSeller(toast, values as UpdateSellerPayload, setErrors)
-    .then(() => {})
-    .catch((err: unknown) => {
-      console.error(err)
-    })
+  sellerStore.updateSeller(toast, values as UpdateSellerPayload, setErrors)
 })
 </script>
 

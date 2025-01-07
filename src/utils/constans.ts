@@ -16,6 +16,7 @@ export const urlPage = {
   SELLER: '/seller',
   SELLER_HOME: '/seller/home',
   SELLER_PRODUCT: '/seller/product',
+  SELLER_CREATE_PRODUCT: '/seller/product/create',
   SELLER_SETTING: '/seller/settings',
   SELLER_SETTING_INFO: '/seller/settings/info',
   SELLER_SETTING_OPERATIONAL: '/seller/settings/operational-hour',

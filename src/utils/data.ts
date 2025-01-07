@@ -2,7 +2,9 @@ import {
   AnFilledInstagram,
   AnFilledSetting,
   BsFacebook,
+  CaAddFilled,
   CaPlayOutlineFilled,
+  ChLayoutList,
   FaBandsSquareTwitter,
   FlFilledClipboardText,
   HiSolidHome,
@@ -398,7 +400,7 @@ export const navItems = [
   {
     name: 'produk',
     label: 'Produk',
-    route: urlPage.SELLER_PRODUCT,
+    route: '#',
     icon: PhFillPackage,
     size: 'h-7 w-7',
   },
@@ -414,6 +416,23 @@ export const navItems = [
     label: 'Pengaturan',
     route: urlPage.SELLER_SETTING,
     icon: AnFilledSetting,
+    size: 'h-7 w-7',
+  },
+]
+
+export const subNavItems = [
+  {
+    name: 'add-produk',
+    label: 'Tambah Produk',
+    route: urlPage.SELLER_CREATE_PRODUCT,
+    icon: CaAddFilled,
+    size: 'h-7 w-7',
+  },
+  {
+    name: 'produk',
+    label: 'Daftar Produk',
+    route: urlPage.SELLER_PRODUCT,
+    icon: ChLayoutList,
     size: 'h-7 w-7',
   },
 ]

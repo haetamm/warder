@@ -24,6 +24,8 @@ import SellerOperationalPage from '@/pages/SellerOperationalPage.vue'
 import SellerAddressPage from '@/pages/SellerAddressPage.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import SellerNotePage from '@/pages/SellerNotePage.vue'
+import SellerCreateProductPage from '@/pages/SellerCreateProductPage.vue'
+import SellerUpdateProductPage from '@/pages/SellerUpdateProductPage.vue'
 
 export const routes = [
   {
@@ -114,7 +116,17 @@ export const routes = [
       {
         path: 'product',
         component: SellerProductPage,
-        name: 'Produk',
+        name: 'Daftar Produk',
+      },
+      {
+        path: 'product/create',
+        component: SellerCreateProductPage,
+        name: 'Tambah Produk',
+      },
+      {
+        path: 'product/:id/update',
+        component: SellerUpdateProductPage,
+        name: 'Edit Produk',
       },
       {
         path: urlPage.SELLER_SETTING,

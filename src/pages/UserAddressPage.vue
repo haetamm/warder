@@ -10,12 +10,7 @@ const toast = useToast()
 const visible = ref(false)
 
 onMounted(() => {
-  addressStore
-    .getAddress(toast)
-    .then(() => {})
-    .catch((err: unknown) => {
-      console.error(err)
-    })
+  addressStore.getAddress(toast)
 })
 </script>
 

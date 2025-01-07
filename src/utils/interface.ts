@@ -205,3 +205,38 @@ export interface NoteForm {
   title: string | null
   body: string | null
 }
+
+export interface ProductForm {
+  name: string
+  image_url: string | null
+  condition: string
+  description: string
+  warranty_type: string
+  warranty_period: string | null
+  price: number
+  stock: number
+  sku: string | null
+  product_weight: number
+  shipping_insurance: string
+  deleted_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface ProductResponse {
+  id: string
+  name: string
+  image_url: string | null
+  condition: string
+  description: string
+  warranty_type: string
+  warranty_period: string | null
+  price: number
+  stock: number
+  sku: string | null
+  product_weight: number
+  shipping_insurance: string
+  deleted_at: string | null
+  created_at: string
+  updated_at: string
+}
