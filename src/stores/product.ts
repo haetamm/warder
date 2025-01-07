@@ -21,7 +21,7 @@ export const useProductStore = defineStore('products', {
         const { data: response } =
           await axiosWarderApiInstance.get('my-products')
         const { data } = response
-        this.notes = data
+        this.products = data
         return data
       } catch (error: unknown) {
         handleApiError(error, toast)

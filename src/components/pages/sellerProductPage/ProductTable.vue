@@ -62,23 +62,15 @@ const filteredProducts = computed(() => {
   )
 })
 
-const handleStatus = (id: string, status: boolean) => {
-  productStore
-    .updateStatusProduct(toast, id, status)
-    .then((response: ProductResponse) => {
-      console.log(response)
-    })
-    .catch((err: unknown) => {
-      console.error(err)
-    })
+const handleStatus = (id: string) => {
+  productStore.updateStatusProduct(toast, id)
 }
 
-const handleChange = (id: string, currentStatus: boolean) => {
-  handleStatus(id, !currentStatus)
+const handleChange = (id: string) => {
+  handleStatus(id)
 }
 
 const handleDelete = () => {
-  console.log(productId)
   productStore.deleteProduct(toast, productId.value)
   visible.value = false
 }
@@ -205,12 +197,7 @@ const exportCSV = () => {
                 type="checkbox"
                 class="hidden"
                 :checked="slotProps.data.deleted_at === null"
-                @change="
-                  handleChange(
-                    slotProps.data.id,
-                    slotProps.data.deleted_at === null,
-                  )
-                "
+                @change="handleChange(slotProps.data.id)"
               />
               <span class="slider round"></span>
             </label>
