@@ -1,4 +1,4 @@
-import { object, string, date, boolean } from 'yup'
+import { object, string, date, boolean, number } from 'yup'
 
 const alphanumericRegex = /^[a-zA-Z0-9]*$/
 
@@ -137,6 +137,49 @@ export const body = string()
   .required('Catatan wajib diisi')
   .max(6000, 'Maksimal 6000 karakter')
 
+// product
+export const nameProduct = string()
+  .trim()
+  .required('Nama produk wajib diisi')
+  .min(25, 'Minimal 25 karakter')
+  .max(255, 'Maksimal 255 karakter')
+
+export const imageUrl = string()
+  .nullable()
+  .url('URL gambar harus berupa URL yang valid')
+
+export const condition = string()
+  .trim()
+  .required('Kondisi produk wajib diisi')
+  .oneOf(['baru', 'bekas'], 'Kondisi produk harus "baru" atau "bekas"')
+
+export const description = string()
+  .trim()
+  .required('Deskripsi produk wajib diisi')
+  .min(260, 'Minimal 260 karakter')
+  .max(5000, 'Maksimal 5000 karakter')
+
+export const price = number()
+  .required('Harga produk wajib diisi')
+  .min(100, 'Harga produk minimal adalah 100')
+  .max(100000000000000, 'Harga Maksimal 100.000.000.000.000')
+
+export const stock = number().required('Stok produk wajib diisi').min(0)
+
+export const sku = string().trim().nullable()
+
+export const productWeight = number()
+  .required('Berat produk wajib diisi')
+  .min(1, 'Berat produk minimal adalah 1 gram')
+  .max(500000, 'Berat produk maksimal adalah 500.000 gram')
+
+export const shippingInsurance = string()
+  .required('Asuransi pengiriman wajib diisi')
+  .oneOf(
+    ['wajib', 'opsional'],
+    'Asuransi pengiriman harus "wajib" atau "opsional"',
+  )
+
 export const loginSchema = object({
   email: email,
   password: passwordLogin,
@@ -240,4 +283,16 @@ export const regCredentialShopSchema = object({
 export const noteSchema = object({
   title: title,
   body: body,
+})
+
+export const productSchema = object().shape({
+  name: nameProduct,
+  image_url: imageUrl,
+  condition: condition,
+  description: description,
+  price: price,
+  stock: stock,
+  sku: sku,
+  product_weight: productWeight,
+  shipping_insurance: shippingInsurance,
 })

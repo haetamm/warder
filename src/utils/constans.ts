@@ -19,7 +19,6 @@ export const urlPage = {
   SELLER_CREATE_PRODUCT: '/seller/product/create',
   SELLER_SETTING: '/seller/settings',
   SELLER_SETTING_INFO: '/seller/settings/info',
-  SELLER_SETTING_OPERATIONAL: '/seller/settings/operational-hour',
   SELLER_SETTING_ADDRESS: '/seller/settings/address',
   SELLER_SETTING_NOTE: '/seller/settings/note',
 }

@@ -120,7 +120,11 @@ const handleUpdate = handleSubmit(() => {
       >
         <Field :name="selectedField.name" v-slot="{ field }">
           <div class="flex justify-center space-x-4">
-            <div v-for="option in genderOptions" :key="option.value">
+            <div
+              v-for="option in genderOptions"
+              :key="option.value"
+              class="space-x-2 flex"
+            >
               <input
                 v-bind="field"
                 :id="option.label"

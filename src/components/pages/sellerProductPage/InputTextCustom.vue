@@ -1,20 +1,21 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ErrorMessage, Field } from 'vee-validate'
+import { ref, onMounted, nextTick, defineProps } from 'vue'
 
-const inputText = ref('') // Terkait dengan nilai input
-const height = ref('auto') // Tinggi dinamis untuk textarea
+defineProps({
+  field: {
+    type: Object,
+    required: true,
+  },
+})
+
+const inputText = ref('')
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
 
 function adjustHeight() {
   if (textareaRef.value) {
-    // Reset tinggi ke auto untuk memungkinkan penyusutan
     textareaRef.value.style.height = 'auto'
-
-    // Ambil tinggi konten, mempertimbangkan padding dan border
-    const contentHeight = textareaRef.value.scrollHeight
-
-    // Set tinggi textarea agar sesuai dengan tinggi konten
-    textareaRef.value.style.height = `${contentHeight}px`
+    textareaRef.value.style.height = `${textareaRef.value.scrollHeight}px`
   }
 }
 
@@ -24,23 +25,32 @@ function preventNewLine(event: KeyboardEvent) {
   }
 }
 
-watch(inputText, adjustHeight)
-
-onMounted(adjustHeight)
+onMounted(() => {
+  nextTick(() => {
+    adjustHeight()
+  })
+})
 </script>
 
 <template>
-  <div class="dynamic-textarea-wrapper">
+  <Field
+    :name="field.name"
+    v-slot="{ field: FieldBindingObject }"
+    class="dynamic-textarea-wrapper"
+  >
     <textarea
       ref="textareaRef"
       v-model="inputText"
-      :style="{ height }"
+      v-bind="FieldBindingObject"
       class="dynamic-textarea"
-      placeholder="Ketik teks Anda di sini..."
+      placeholder="Contoh: Sepatu Pria (Jenis/Kategori Produk) + Tokostore (Merek) + Kanvas Hitam (Keterangan)"
       @input="adjustHeight"
       @keydown="preventNewLine"
-    ></textarea>
-  </div>
+    />
+    <small>
+      <ErrorMessage :name="field.name" class="text-red-500" />
+    </small>
+  </Field>
 </template>
 
 <style scoped>
@@ -51,24 +61,18 @@ onMounted(adjustHeight)
 
 .dynamic-textarea {
   width: 100%;
-  min-height: 5px; /* Tinggi minimum */
-  padding: 10px;
+  min-height: 5px;
+  padding: 5px 10px;
   box-sizing: border-box;
   font-family: inherit;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
-  overflow: hidden; /* Cegah scroll bar */
-  resize: none; /* Nonaktifkan resize manual */
-  white-space: normal; /* Izinkan pembungkus teks ke baris berikutnya */
-  word-wrap: break-word; /* Pastikan kata panjang terbungkus */
+  overflow: hidden;
+  resize: none;
+  white-space: normal;
+  word-wrap: break-word;
   transition: all 0.3s ease;
-}
-
-/* Sorot saat fokus */
-.dynamic-textarea:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 </style>

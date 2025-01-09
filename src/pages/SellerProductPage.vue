@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import ProductTable from '@/components/pages/sellerProductPage/ProductTable.vue'
-import { useProductStore } from '@/stores/product'
-import type { ProductResponse } from '@/utils/interface'
 import { useHead } from '@vueuse/head'
-import { useToast } from 'primevue'
-import { onMounted } from 'vue'
 
 useHead({
   title: 'Produk | Warder Seller',
@@ -12,20 +8,6 @@ useHead({
     { name: 'description', content: 'Seller dashboard product seller' },
     { name: 'keywords', content: 'product, details, vue' },
   ],
-})
-
-const productStore = useProductStore()
-const toast = useToast()
-
-onMounted(() => {
-  productStore
-    .getProducts(toast)
-    .then((response: ProductResponse[]) => {
-      productStore.setProducts(response)
-    })
-    .catch((err: unknown) => {
-      console.error(err)
-    })
 })
 </script>
 <template>

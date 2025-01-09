@@ -20,12 +20,10 @@ import SellerHomePage from '@/pages/SellerHomePage.vue'
 import SellerProductPage from '@/pages/SellerProductPage.vue'
 import SellerSettingsPage from '@/pages/SellerSettingsPage.vue'
 import SellerInfoPage from '@/pages/SellerInfoPage.vue'
-import SellerOperationalPage from '@/pages/SellerOperationalPage.vue'
 import SellerAddressPage from '@/pages/SellerAddressPage.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import SellerNotePage from '@/pages/SellerNotePage.vue'
 import SellerCreateProductPage from '@/pages/SellerCreateProductPage.vue'
-import SellerUpdateProductPage from '@/pages/SellerUpdateProductPage.vue'
 
 export const routes = [
   {
@@ -124,11 +122,6 @@ export const routes = [
         name: 'Tambah Produk',
       },
       {
-        path: 'product/:id/update',
-        component: SellerUpdateProductPage,
-        name: 'Edit Produk',
-      },
-      {
         path: urlPage.SELLER_SETTING,
         component: SellerSettingsPage,
         children: [
@@ -139,10 +132,6 @@ export const routes = [
           {
             path: 'info',
             component: SellerInfoPage,
-          },
-          {
-            path: 'operational-hour',
-            component: SellerOperationalPage,
           },
           {
             path: 'note',

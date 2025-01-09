@@ -158,3 +158,99 @@ export const fieldsDescSeller = [
     type: 'textarea',
   },
 ]
+
+export const fieldsProduct = [
+  {
+    name: 'name',
+    required: true,
+    descFirst:
+      ' Nama produk min. 25 karakter dengan memasukkan merek, jenis produk, warna, bahan, atau tipe.',
+    descLast:
+      'Disarankan untuk tidak menggunakan huruf kapital berlebih, memasukkan lebih dari 1 merek, dan kata-kata promosi.',
+    label: 'Nama Produk',
+    type: 'text',
+  },
+  {
+    name: 'condition',
+    required: true,
+    descFirst: '',
+    descLast: '',
+    label: 'Kondisi',
+    type: 'radio',
+  },
+  {
+    name: 'description',
+    required: true,
+    descFirst:
+      'Pastikan deskripsi produk memuat penjelasan detail terkait produkmu agar pembeli mudah mengerti dan menemukan produkmu.',
+    descLast:
+      'Disarankan untuk tidak memasukkan info nomor HP, e-mail, dsb. ke dalam deskripsi produk untuk melindungi data pribadimu.',
+    label: 'Deskripsi Produk',
+    type: 'radio',
+  },
+  {
+    name: 'price',
+    required: true,
+    descFirst: '',
+    descLast: '',
+    label: 'Harga Satuan',
+    type: 'number',
+  },
+  {
+    name: 'stock',
+    required: true,
+    descFirst: '',
+    descLast: '',
+    label: 'Stok Produk',
+    type: 'number',
+  },
+  {
+    name: 'sku',
+    required: false,
+    descFirst: 'Gunakan kode unik SKU jika kamu ingin menandai produkmu.',
+    descLast: '',
+    label: 'SKU (Stock Keeping Unit)',
+    type: 'text',
+  },
+  {
+    name: 'product_weight',
+    required: true,
+    descFirst:
+      'Masukkan berat dengan menimbang produk setelah dikemas. Pastikan berat sesuai agar tidak terjadi selisih ongkir dengan kurir.',
+    descLast: '',
+    label: 'Berat Produk',
+    type: 'number',
+  },
+  {
+    name: 'shipping_insurance',
+    required: true,
+    descFirst:
+      'Menanggung pengembalian dana produk & ongkir untuk penjual maupun pembeli jika terjadi kerusakan / kehilangan saat pengiriman.',
+    descLast: '',
+    label: 'Asuransi Pengiriman',
+    type: 'radio',
+  },
+]
+
+export const statusOptions = [
+  { label: 'Aktif', value: true },
+  { label: 'Non Aktif', value: false },
+]
+
+export const conditionOptions = [
+  { label: 'Baru', value: 'baru' },
+  { label: 'Bekas', value: 'bekas' },
+]
+
+export const shippingInsuranceOptions = [
+  {
+    label: 'Wajib',
+    value: 'wajib',
+    desc: 'Kamu mewajibkan pembeli untuk mengaktifkan asuransi pengiriman',
+  },
+  {
+    label: 'Opsional',
+    value: 'opsional',
+    desc: 'Kamu memberikan opsi kepada pembeli untuk mengaktifkan asuransi pengiriman',
+  },
+]

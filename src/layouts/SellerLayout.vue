@@ -9,11 +9,14 @@ import Toast from 'primevue/toast'
 import { useSellerStore } from '@/stores/seller'
 import { useToast } from 'primevue'
 import { computed, onMounted, watch, ref } from 'vue'
+import { useProductStore } from '@/stores/product'
+import type { ProductResponse } from '@/utils/interface'
 
 const sellerStore = useSellerStore()
 const toast = useToast()
 
 const userStore = useUserStore()
+const productStore = useProductStore()
 const roles = computed(() => userStore.roles)
 const router = useRouter()
 
@@ -21,12 +24,10 @@ const dataLoaded = ref(false)
 
 onMounted(() => {
   dataLoaded.value = true
-  sellerStore
-    .getSeller(toast)
-    .then(() => {})
-    .catch((err: unknown) => {
-      console.error(err)
-    })
+  sellerStore.getSeller(toast)
+  productStore.getProducts(toast).then((response: ProductResponse[]) => {
+    productStore.setProducts(response)
+  })
 })
 
 watch(

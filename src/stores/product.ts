@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axiosWarderApiInstance from '@/utils/apiWarder'
 import { handleApiError } from '@/utils/handleApiErrors'
-import type { Toast } from '@/utils/type'
+import type { Toast, ValidationErrors } from '@/utils/type'
 import type { ProductResponse, ProductForm } from '@/utils/interface'
 
 export const useProductStore = defineStore('products', {
@@ -29,7 +29,11 @@ export const useProductStore = defineStore('products', {
         this.loading = false
       }
     },
-    async postProduct(toast: Toast, payload: ProductForm) {
+    async postProduct(
+      toast: Toast,
+      payload: ProductForm,
+      setErrors: (errors: ValidationErrors) => void,
+    ) {
       this.loading = true
       this.error = null
       try {
@@ -48,12 +52,17 @@ export const useProductStore = defineStore('products', {
         })
         return data
       } catch (error: unknown) {
-        handleApiError(error, toast)
+        handleApiError(error, toast, setErrors)
       } finally {
         this.loading = false
       }
     },
-    async updateProduct(toast: Toast, payload: ProductForm, id: string) {
+    async updateProduct(
+      toast: Toast,
+      payload: ProductForm,
+      id: string,
+      setErrors: (errors: ValidationErrors) => void,
+    ) {
       this.loading = true
       this.error = null
       try {
@@ -75,7 +84,7 @@ export const useProductStore = defineStore('products', {
 
         return data
       } catch (error: unknown) {
-        handleApiError(error, toast)
+        handleApiError(error, toast, setErrors)
       } finally {
         this.loading = false
       }

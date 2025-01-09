@@ -23,7 +23,6 @@ export const useSellerStore = defineStore('seller', {
         const { data: response } = await axiosWarderApiInstance.get('seller')
         const { data } = response
         this.seller = data
-        console.log(this.seller)
         return data
       } catch (error: unknown) {
         handleApiError(error, toast)
@@ -70,7 +69,6 @@ export const useSellerStore = defineStore('seller', {
           payload,
         )
         const { data } = response
-        console.log(data)
         toast.add({
           severity: 'info',
           summary: 'Success',
@@ -104,7 +102,6 @@ export const useSellerStore = defineStore('seller', {
           life: 3000,
         })
         this.seller = data
-        console.log(this.seller)
         return data
       } catch (error: unknown) {
         handleApiError(error, toast, setErrors)

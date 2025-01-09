@@ -187,7 +187,7 @@ const onSubmit = handleSubmit(() => {
     <Button
       :disabled="!meta.valid"
       type="submit"
-      :label="addressStore.loading ? 'Loading' : 'Save'"
+      :label="addressStore.loading ? 'Loading' : 'Simpan'"
       class="w-full mt-3"
     />
   </form>

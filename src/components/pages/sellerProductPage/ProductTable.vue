@@ -13,18 +13,14 @@ import {
 } from 'primevue'
 import { useMediaQuery } from '@vueuse/core'
 import { ProgressSpinner } from 'primevue'
-import { urlPage } from '@/utils/constans'
 import { useProductStore } from '@/stores/product'
 import type { ProductResponse } from '@/utils/interface'
-
-const statusOptions = [
-  { label: 'Aktif', value: true },
-  { label: 'Non Aktif', value: false },
-]
+import { statusOptions } from '@/utils/fields'
+import FormProduct from './FormProduct.vue'
+import ButtonAndAction from './ButtonAndAction.vue'
 
 const toast = useToast()
 const visible = ref(false)
-const productId = ref('')
 const productStore = useProductStore()
 const products = computed(() => productStore.products)
 const loading = computed(() => productStore.loading)
@@ -33,6 +29,10 @@ const searchQuery = ref('')
 const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 const isMediumScreen = useMediaQuery('(min-width: 768px)')
 const dt = ref()
+const dialogState = ref({
+  id: '',
+  type: '' as 'edit' | 'delete' | '',
+})
 
 const filterByStatus = () => {
   if (selectedStatus.value === null) {
@@ -41,16 +41,15 @@ const filterByStatus = () => {
 
   return products.value.filter((product: ProductResponse) => {
     if (selectedStatus.value?.value === true) {
-      return product.deleted_at === null
+      return product.is_active === null
     } else {
-      return product.deleted_at !== null
+      return product.is_active !== null
     }
   })
 }
 
 const filteredProducts = computed(() => {
   const queryFilter = searchQuery.value.trim().toLowerCase()
-
   const searchFiltered = products.value.filter(
     (product: ProductResponse) =>
       product.name.toLowerCase().includes(queryFilter) ||
@@ -62,20 +61,16 @@ const filteredProducts = computed(() => {
   )
 })
 
-const handleStatus = (id: string) => {
+const handleChange = (id: string) => {
   productStore.updateStatusProduct(toast, id)
 }
 
-const handleChange = (id: string) => {
-  handleStatus(id)
-}
-
-const handleDelete = () => {
-  productStore.deleteProduct(toast, productId.value)
+const handleDelete = (id: string) => {
+  productStore.deleteProduct(toast, id)
   visible.value = false
 }
 
-const exportCSV = () => {
+const handleExportCSV = () => {
   dt.value.exportCSV()
 }
 </script>
@@ -98,7 +93,7 @@ const exportCSV = () => {
             : 'none'
       "
       paginator
-      class="text-black"
+      class="text-black p-1"
       :rows="isMediumScreen ? 20 : 7"
     >
       <div
@@ -130,25 +125,7 @@ const exportCSV = () => {
           />
         </div>
 
-        <div
-          class="flex justify-between md:justify-end space-x-2 items-center order-1 lg:order-2 w-full lg:w-[40%] xl:w-full"
-        >
-          <Button
-            icon="pi pi-external-link"
-            size="small"
-            :style="{ background: '#9333ea' }"
-            label="Export"
-            @click="exportCSV()"
-          />
-          <Button
-            as="router-link"
-            :to="urlPage.SELLER_CREATE_PRODUCT"
-            size="small"
-            :style="{ background: '#9333ea' }"
-            icon="pi pi-plus"
-            label="Tambah Produk"
-          />
-        </div>
+        <ButtonAndAction :handleExportCSV="handleExportCSV" />
       </div>
       <template #empty> Tidak ada data produk yang ditemukan. </template>
       <template #loadingicon>
@@ -170,13 +147,18 @@ const exportCSV = () => {
         <template #body="slotProps">
           <div class="flex space-x-2 items-center text-md">
             <img
-              :src="slotProps.data.image_url"
+              :src="
+                slotProps.data.image_url ||
+                'https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/11/25/927aaf.jpg'
+              "
               :alt="slotProps.data.image_url"
-              class="w-[56px] h-[56px] rounded-md flex-shrink-0"
+              class="w-[65px] h-[65px] rounded-md flex-shrink-0"
             />
             <div class="flex flex-col">
-              <p class="line-clamp-2 mb-1">{{ slotProps.data.name }}</p>
-              <small>SKU: {{ slotProps.data.sku }}</small>
+              <p class="line-clamp-2 mb-1 font-bold">
+                {{ slotProps.data.name }}
+              </p>
+              <small>SKU: {{ slotProps.data.sku || '-' }}</small>
             </div>
           </div>
         </template>
@@ -196,15 +178,20 @@ const exportCSV = () => {
               <input
                 type="checkbox"
                 class="hidden"
-                :checked="slotProps.data.deleted_at === null"
+                :checked="slotProps.data.is_active === null"
                 @change="handleChange(slotProps.data.id)"
               />
               <span class="slider round"></span>
             </label>
             <Button
               size="small"
-              as="router-link"
-              :to="`/seller/product/${slotProps.data.id}/update`"
+              @click="
+                (visible = true),
+                  (dialogState = {
+                    id: slotProps.data.id ?? 0,
+                    type: 'edit',
+                  })
+              "
               icon="pi pi-pencil"
               severity="warn"
               aria-label="Edit"
@@ -212,7 +199,13 @@ const exportCSV = () => {
               :style="{ padding: '2px' }"
             />
             <Button
-              @click="(visible = true), (productId = slotProps.data.id)"
+              @click="
+                (visible = true),
+                  (dialogState = {
+                    id: slotProps.data.id ?? 0,
+                    type: 'delete',
+                  })
+              "
               size="small"
               icon="pi pi-trash"
               severity="danger"
@@ -228,18 +221,32 @@ const exportCSV = () => {
   <Dialog
     v-model:visible="visible"
     modal
-    header="Hapus Produk"
-    :style="{ width: '20rem' }"
+    :header="dialogState.type === 'edit' ? 'Ubah Produk' : 'Hapus Produk'"
+    :style="
+      dialogState.type === 'edit'
+        ? {
+            width: '100vw',
+            height: '100vh',
+            maxHeight: '100vh',
+            borderRadius: '0',
+          }
+        : { width: '20rem' }
+    "
   >
-    <h1>Yakin dihapus??</h1>
-    <div class="flex justify-end">
-      <Button
-        :disabled="productStore.loading"
-        :label="productStore.loading ? 'Loading' : 'Hapus'"
-        class="w-[100px] mt-3"
-        @click="handleDelete"
-      />
-    </div>
+    <template v-if="dialogState.type === 'edit'">
+      <FormProduct v-model:visible="visible" :id="dialogState.id" />
+    </template>
+    <template v-if="dialogState.type === 'delete'">
+      <h1>Yakin dihapus??</h1>
+      <div class="flex justify-end">
+        <Button
+          :disabled="productStore.loading"
+          :label="productStore.loading ? 'Loading' : 'Hapus'"
+          class="w-[100px] mt-3"
+          @click="handleDelete(dialogState.id)"
+        />
+      </div>
+    </template>
   </Dialog>
 </template>
 

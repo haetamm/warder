@@ -12,16 +12,11 @@ const router = useRouter()
 const visible = ref(false)
 
 const onSubmit = () => {
-  userStore
-    .logoutUser(toast)
-    .then((response: string) => {
-      if (response) {
-        router.push(urlPage.LOGIN)
-      }
-    })
-    .catch((err: unknown) => {
-      console.error(err)
-    })
+  userStore.logoutUser(toast).then((response: string) => {
+    if (response) {
+      router.push(urlPage.LOGIN)
+    }
+  })
 }
 </script>
 

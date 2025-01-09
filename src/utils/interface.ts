@@ -211,16 +211,25 @@ export interface ProductForm {
   image_url: string | null
   condition: string
   description: string
-  warranty_type: string
-  warranty_period: string | null
   price: number
   stock: number
   sku: string | null
   product_weight: number
   shipping_insurance: string
-  deleted_at: string | null
-  created_at: string
-  updated_at: string
+}
+
+export interface ProductFormDinamic {
+  id: string | null
+  name: string | null
+  image_url: string | null
+  condition: string | null
+  description: string | null
+  price: number | null
+  stock: number | null
+  sku: string | null
+  product_weight: number | null
+  shipping_insurance: string | null
+  [key: string]: string | boolean | number | null
 }
 
 export interface ProductResponse {
@@ -229,14 +238,12 @@ export interface ProductResponse {
   image_url: string | null
   condition: string
   description: string
-  warranty_type: string
-  warranty_period: string | null
   price: number
   stock: number
   sku: string | null
   product_weight: number
   shipping_insurance: string
-  deleted_at: string | null
+  is_active: string | null
   created_at: string
   updated_at: string
 }
