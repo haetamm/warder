@@ -72,7 +72,7 @@ const { handleSubmit, setErrors } = useForm<ProductForm>({
 const onSubmit = handleSubmit(() => {
   if (props.id) {
     productStore
-      .updateProduct(toast, form, props.id, setErrors)
+      .updateProduct(toast, form as ProductForm, props.id, setErrors)
       .then((response: ProductResponse) => {
         if (response) {
           emit('update:visible', false)
@@ -80,7 +80,7 @@ const onSubmit = handleSubmit(() => {
       })
   } else {
     productStore
-      .postProduct(toast, form, setErrors)
+      .postProduct(toast, form as ProductForm, setErrors)
       .then((response: ProductResponse) => {
         if (response) {
           router.push(urlPage.SELLER_PRODUCT)
